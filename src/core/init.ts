@@ -6,7 +6,7 @@ import {
   initData,
   $debug,
   init as initSDK,
-} from '@telegram-apps/sdk-react';
+} from "@telegram-apps/sdk-react";
 
 /**
  * Initializes the application and configures its dependencies.
@@ -20,21 +20,29 @@ export function init(debug: boolean): void {
   initSDK();
 
   // Mount all components used in the project.
-  backButton.isSupported() && backButton.mount();
-  miniApp.mount();
-  themeParams.mount();
-  initData.restore();
-  void viewport.mount().catch(e => {
-    console.error('Something went wrong mounting the viewport', e);
-  });
+  if (backButton.isSupported()) {
+    backButton.mount();
+  }
 
   // Define components-related CSS variables.
-  viewport.bindCssVars();
-  miniApp.bindCssVars();
-  themeParams.bindCssVars();
+  if (!miniApp.isMounted()) {
+    miniApp.mount();
+    miniApp.bindCssVars();
+  }
+  if (!themeParams.isMounted()) {
+    themeParams.mount();
+    themeParams.bindCssVars();
+  }
 
-  // Add Eruda if needed.
-  debug && import('eruda')
-    .then((lib) => lib.default.init())
-    .catch(console.error);
+  initData.restore();
+
+  if (!viewport.isMounted() && !viewport.isMounting()) {
+    void viewport.mount().catch((e) => {
+      console.error("Something went wrong mounting the viewport", e);
+    });
+  }
+
+  if (viewport.isMounted()) {
+    viewport.bindCssVars();
+  }
 }
