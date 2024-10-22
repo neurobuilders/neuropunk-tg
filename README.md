@@ -1,4 +1,4 @@
-# Neuropunk Beta
+# Neuropunk Beta v1
 
 This template demonstrates how developers can implement a web application on the
 Telegram Mini Apps platform using the following technologies and libraries:
