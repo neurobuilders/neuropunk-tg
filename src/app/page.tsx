@@ -10,6 +10,7 @@ import { Page } from "@/components/Page";
 import tonSvg from "./_assets/ton.svg";
 import {NeuroWave} from "@/components/NeuroWave/NeuroWave";
 import {NeuropunkRive} from "@/components/NeuropunkRive";
+import {NeuroWaveSound} from "@/components/NeuroWaveSound";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -20,11 +21,12 @@ export default function Home() {
           <Section header="Welcome to Neuro Space">
               <NeuropunkRive />
               <NeuroWave />
+              <NeuroWaveSound />
           </Section>
 
           <Section
-              header="Home"
-              // footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
+              header="Coming"
+              footer="soon"
           >
               <Link href="/ton-connect">
                   <Cell
