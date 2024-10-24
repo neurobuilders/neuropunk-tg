@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabbar } from "@telegram-apps/telegram-ui";
-import { House, Info, User } from "lucide-react";
+import { House, Info, User, Settings } from "lucide-react";
 import {
   FC,
   MouseEvent,
@@ -28,17 +28,22 @@ const tabs: Tab[] = [
     Icon: House,
   },
   {
-    id: "profile",
-    text: "Profile",
-    href: "/profile",
+    id: "tasks",
+    text: "Tasks",
+    href: "/tasks",
     Icon: User,
   },
   {
-    id: "debug",
-    text: "TG Info",
-    href: "/tg-info",
+    id: "dev-info",
+    text: "Dev Info",
+    href: "/dev-info",
     Icon: Info,
-  },
+  }, {
+        id: "settings",
+        text: "Settings",
+        href: "/settings",
+        Icon: Settings,
+    },
 ];
 
 export const BottomNavigation: FC = () => {
