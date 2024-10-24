@@ -8,6 +8,7 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
 import tonSvg from "./_assets/ton.svg";
+import {NeuroWave} from "@/components/NeuroWave/NeuroWave";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -33,6 +34,9 @@ export default function Home() {
             </Cell>
           </Link>
         </Section>
+          <Section>
+              <NeuroWave />
+          </Section>
       </List>
     </Page>
   );
