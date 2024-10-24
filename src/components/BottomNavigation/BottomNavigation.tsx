@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabbar } from "@telegram-apps/telegram-ui";
-import { House, Info } from "lucide-react";
+import { House, Info, User } from "lucide-react";
 import {
   FC,
   MouseEvent,
@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import { openLink } from "@telegram-apps/sdk-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Tab {
   id: string;
@@ -28,6 +28,12 @@ const tabs: Tab[] = [
     Icon: House,
   },
   {
+    id: "profile",
+    text: "Profile",
+    href: "/profile",
+    Icon: User,
+  },
+  {
     id: "debug",
     text: "TG Info",
     href: "/tg-info",
@@ -38,6 +44,7 @@ const tabs: Tab[] = [
 export const BottomNavigation: FC = () => {
   const [currentTab, setCurrentTab] = useState(tabs[0].id);
   const router = useRouter();
+  const pathname = usePathname();
 
   const onClick = useCallback(
     (tab: Tab, e: MouseEvent<HTMLButtonElement>) => {
@@ -67,6 +74,13 @@ export const BottomNavigation: FC = () => {
     },
     [router]
   );
+
+  useEffect(() => {
+    const foundTab = tabs.find((v) => v.href === pathname);
+    if (foundTab) {
+      setCurrentTab(foundTab.id);
+    }
+  }, [pathname]);
 
   return (
     <Tabbar>
