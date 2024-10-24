@@ -8,6 +8,9 @@ dependencies:
   '@lottiefiles/dotlottie-react':
     specifier: ^0.9.1
     version: 0.9.1(react-dom@18.3.1)(react@18.3.1)
+  '@rive-app/react-canvas':
+    specifier: ^4.14.5
+    version: 4.14.5(react@18.3.1)
   '@telegram-apps/sdk-react':
     specifier: ^2.0.5
     version: 2.0.8(@types/react@18.3.11)(react@18.3.1)
@@ -638,6 +641,19 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.3.11
+      react: 18.3.1
+    dev: false
+
+  /@rive-app/canvas@2.21.6:
+    resolution: {integrity: sha512-4AKFgGCC38zmembwYzZVLAo2655caQrh+ju96SrAJWXHdAvO1mPgrDNDLv+FSNdlpoPhwBKivfESayIpWMls6g==}
+    dev: false
+
+  /@rive-app/react-canvas@4.14.5(react@18.3.1):
+    resolution: {integrity: sha512-KONFDp6yhq0sdHc4/GfQZcsb5h7plZElr3z++4HqTDh5Q5pVqsrVNaTyQmdV1RC2zRdpArDIoto+X5uQZq7K/A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@rive-app/canvas': 2.21.6
       react: 18.3.1
     dev: false
 
