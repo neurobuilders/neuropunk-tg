@@ -1,6 +1,6 @@
 "use client";
 
-import {Section, Cell, Image, List, Blockquote} from "@telegram-apps/telegram-ui";
+import {Section, Cell, Image, List, Blockquote, Placeholder} from "@telegram-apps/telegram-ui";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/components/Link/Link";
@@ -19,26 +19,18 @@ export default function Home() {
     <Page back={false}>
       <List>
           <Section header="Welcome to Neuro Space">
-              <NeuropunkRive />
-              <NeuroWave />
+              <NeuropunkRive/>
+
+              <div className="HIJtihMA8FHczS02iWF5">
+                  <Placeholder
+                      description="A day blazes bright, a new system ignites,
+NeuroPass – your pass to the future, takes flight!"
+                  >
+                      <NeuroWave/>
+                  </Placeholder>
+              </div>
           </Section>
 
-          <Section
-          >
-              <Link href="/ton-connect">
-                  <Cell
-                      before={
-                          <Image
-                              src={tonSvg.src}
-                              style={{ backgroundColor: "#007AFF" }}
-                          />
-                      }
-                      subtitle="Connect your TON wallet"
-                  >
-                      TON Connect
-                  </Cell>
-              </Link>
-          </Section>
       </List>
     </Page>
   );
