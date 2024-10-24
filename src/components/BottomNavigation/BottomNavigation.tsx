@@ -10,7 +10,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { openLink } from "@telegram-apps/sdk-react";
+import { openLink, hapticFeedback } from "@telegram-apps/sdk-react";
 import { usePathname, useRouter } from "next/navigation";
 
 interface Tab {
@@ -38,12 +38,13 @@ const tabs: Tab[] = [
     text: "Dev Info",
     href: "/dev-info",
     Icon: Info,
-  }, {
-        id: "settings",
-        text: "Settings",
-        href: "/settings",
-        Icon: Settings,
-    },
+  },
+  {
+    id: "settings",
+    text: "Settings",
+    href: "/settings",
+    Icon: Settings,
+  },
 ];
 
 export const BottomNavigation: FC = () => {
@@ -71,6 +72,7 @@ export const BottomNavigation: FC = () => {
         targetUrl.host !== currentUrl.host;
 
       e.preventDefault();
+      hapticFeedback.impactOccurred("light");
       if (isExternal) {
         openLink(targetUrl.toString());
       } else {

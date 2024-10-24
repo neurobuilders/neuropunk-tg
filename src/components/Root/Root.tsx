@@ -6,6 +6,8 @@ import {
   miniApp,
   useLaunchParams,
   useSignal,
+  isViewportExpanded,
+  expandViewport,
 } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
@@ -35,6 +37,9 @@ function RootInner({ children }: PropsWithChildren) {
 
   // Initialize the library.
   useClientOnce(() => {
+    if (!isViewportExpanded()) {
+      expandViewport();
+    }
     init(debug);
   });
 
