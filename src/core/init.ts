@@ -25,13 +25,14 @@ export function init(debug: boolean): void {
   }
 
   // Define components-related CSS variables.
-  if (!miniApp.isMounted()) {
-    miniApp.mount();
-    miniApp.bindCssVars();
-  }
   if (!themeParams.isMounted()) {
     themeParams.mount();
     themeParams.bindCssVars();
+  }
+
+  if (!miniApp.isMounted()) {
+    miniApp.mount();
+    miniApp.bindCssVars();
   }
 
   initData.restore();
