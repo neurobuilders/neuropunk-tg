@@ -9,6 +9,7 @@ import { Page } from "@/components/Page";
 
 import tonSvg from "./_assets/ton.svg";
 import {NeuroWave} from "@/components/NeuroWave/NeuroWave";
+import {NeuropunkRive} from "@/components/NeuropunkRive";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -16,26 +17,28 @@ export default function Home() {
   return (
     <Page back={false}>
       <List>
-        <Section
-          header="Home"
-          // footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
-        >
-          <Link href="/ton-connect">
-            <Cell
-              before={
-                <Image
-                  src={tonSvg.src}
-                  style={{ backgroundColor: "#007AFF" }}
-                />
-              }
-              subtitle="Connect your TON wallet"
-            >
-              TON Connect
-            </Cell>
-          </Link>
-        </Section>
-          <Section>
+          <Section header="Welcome to Neuro Space">
+              <NeuropunkRive />
               <NeuroWave />
+          </Section>
+
+          <Section
+              header="Home"
+              // footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
+          >
+              <Link href="/ton-connect">
+                  <Cell
+                      before={
+                          <Image
+                              src={tonSvg.src}
+                              style={{ backgroundColor: "#007AFF" }}
+                          />
+                      }
+                      subtitle="Connect your TON wallet"
+                  >
+                      TON Connect
+                  </Cell>
+              </Link>
           </Section>
       </List>
     </Page>
