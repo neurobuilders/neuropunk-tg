@@ -21,12 +21,9 @@ export default function Home() {
           <Section header="Welcome to Neuro Space">
               <NeuropunkRive />
               <NeuroWave />
-              <NeuroWaveSound />
           </Section>
 
           <Section
-              header="Coming"
-              footer="soon"
           >
               <Link href="/ton-connect">
                   <Cell
