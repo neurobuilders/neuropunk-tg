@@ -16,24 +16,6 @@ export default function Home() {
     <Page back={false}>
       <List>
         <Section
-          header="Telegram Info"
-          footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
-        >
-          <Link href="/ton-connect">
-            <Cell
-              before={
-                <Image
-                  src={tonSvg.src}
-                  style={{ backgroundColor: "#007AFF" }}
-                />
-              }
-              subtitle="Connect your TON wallet"
-            >
-              TON Connect
-            </Cell>
-          </Link>
-        </Section>
-        <Section
           header="Application Launch Data"
           footer="These pages help developer to learn more about current launch information"
         >
@@ -52,9 +34,6 @@ export default function Home() {
               Theme Parameters
             </Cell>
           </Link>
-        </Section>
-        <Section header={t("header")} footer={t("footer")}>
-          <LocaleSwitcher />
         </Section>
       </List>
     </Page>
