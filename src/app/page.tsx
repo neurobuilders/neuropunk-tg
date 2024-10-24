@@ -1,6 +1,6 @@
 "use client";
 
-import {Section, Cell, Image, List, Blockquote, Placeholder, Timeline} from "@telegram-apps/telegram-ui";
+import {Section, Cell, Image, List, Blockquote, Placeholder, Timeline, Button} from "@telegram-apps/telegram-ui";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/components/Link/Link";
@@ -14,6 +14,7 @@ import {NeuroWaveSound} from "@/components/NeuroWaveSound";
 import {
     TimelineItem
 } from "@telegram-apps/telegram-ui/dist/components/Blocks/Timeline/components/TimelineItem/TimelineItem";
+import {Icon20Copy} from "@telegram-apps/telegram-ui/dist/icons/20/copy";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -29,26 +30,14 @@ export default function Home() {
 
               <div>
                   <Placeholder
-                      description="A day blazes bright, a new system ignites,
-NeuroPass – your pass to the future, takes flight!"
+                      action={<Button size="l" stretched>Create NeuroPass</Button>}
+                      description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
                   >
                       <NeuroWave/>
                   </Placeholder>
               </div>
           </Section>
-          <Section>
-              <Timeline active={1}>
-              <TimelineItem header="Born">
-                      Yesterday
-                  </TimelineItem>
-                  <TimelineItem header="Boosted">
-                      Today
-                  </TimelineItem>
-                  <TimelineItem header="In transit">
-                      Tomorrow
-                  </TimelineItem>
-              </Timeline>
-          </Section>
+
       </List>
     </Page>
   );
