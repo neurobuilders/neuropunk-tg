@@ -23,9 +23,10 @@ export default function Tasks() {
                 marginBottom: '6px',
                 marginTop: '3px',
             }}
-            src="/cute_monster.riv"
-            stateMachines="IDLE"
+            src="/rives/loading_bar.riv"
+            stateMachines={['State Machine 1']}
         />
+
     </Page>
   );
 }
