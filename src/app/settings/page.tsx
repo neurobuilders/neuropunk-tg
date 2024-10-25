@@ -37,6 +37,20 @@ export default function Home() {
         <Section header={t("header")}>
           <LocaleSwitcher />
         </Section>
+
+        <Link href="/dev-info">
+          <Cell
+              before={
+                <Image
+                    src={"/logo.png"}
+                    style={{ backgroundColor: "#007AFF" }}
+                />
+              }
+              subtitle="Developer Information"
+          >
+            Dev Info
+          </Cell>
+        </Link>
       </List>
     </Page>
   );

@@ -14,6 +14,7 @@ import {
     Section
 } from "@telegram-apps/telegram-ui";
 import {Link} from "@/components/Link/Link";
+import tonSvg from "@/app/_assets/ton.svg";
 
 export default function Tasks() {
     const t = useTranslations("i18n");
@@ -38,6 +39,19 @@ export default function Tasks() {
                         before={<Avatar size={40}>
                             <Image src={"/logo.png"} size={24} />
                         </Avatar>}
+                    >
+                        Neuropunk App
+                    </Cell>
+                </Link>
+                <Link href="">
+                    <Cell
+                        before={
+                            <Image
+                                src={"/logo.png"}
+                                style={{ backgroundColor: "#007AFF" }}
+                            />
+                        }
+                        subtitle="Get Official App"
                     >
                         Neuropunk App
                     </Cell>
