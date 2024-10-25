@@ -30,7 +30,7 @@ export default function Home() {
 
               <div>
                   <Placeholder
-                      action={<Button size="l" stretched>Create NeuroPass</Button>}
+                      action={<Button Component="a" href="/start" size="l" stretched>Create Neuro Pass</Button>}
                       description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
                   >
                       <NeuroWave/>
