@@ -1,12 +1,14 @@
 "use client";
 
-import { Section, List, Placeholder, Button } from "@telegram-apps/telegram-ui";
+import {Section, List, Placeholder, Button, Avatar, Banner} from "@telegram-apps/telegram-ui";
 import { useTranslations } from "next-intl";
 
 import { Page } from "@/components/Page";
 
 import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
+import RiveComponent from "@rive-app/react-canvas";
+import React from "react";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -31,6 +33,30 @@ export default function Home() {
               <NeuroWave />
             </Placeholder>
           </div>
+        </Section>
+        <Section>
+          <Banner
+              before={<Avatar size={96}>
+                <div style={{width: '70px', height: '70px'}}>
+                  <RiveComponent
+                      src="/rives/loading.riv"
+                      stateMachines={"State Machine 1"}
+                      artboard={"Artboard"}
+                  />
+                </div>
+              </Avatar>}
+              callout="Welcome Neuropunkers!"
+              description="NeuroSpace is a unique digital ecosystem that unites drum and bass and tech enthusiasts within a dynamic virtual world"
+              header="Introducing Neuro Reactor"
+              type="section"
+          >
+            <React.Fragment key=".0">
+              <Button size="s">
+                Claim
+              </Button>
+
+            </React.Fragment>
+          </Banner>
         </Section>
       </List>
     </Page>

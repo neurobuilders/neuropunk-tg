@@ -6,7 +6,7 @@ import { Page } from "@/components/Page";
 import React from "react";
 import {
     Avatar, Badge,
-    Banner, Card,
+    Banner, Button, Card,
     Cell, Chip, IconButton,
     Image,
     Section
@@ -34,12 +34,65 @@ export default function Tasks() {
                     </div>
                 </Avatar>}
                 callout="Welcome Neuropunkers!"
-                description="NeuroSpace is a unique digital ecosystem that unites drum and bass and tech enthusiasts within a dynamic virtual world"
-                header="Introducing Neuro Space"
+                description="The NeuroReactor is the core of NeuroSpace, where energy flows and tasks unlock special rewards. Complete missions to harness dark energy and boost your rank."
+                header="Introducing Neuro Reactor"
                 type="section"
-            />
+            >
+                <React.Fragment key=".0">
+                    <Button size="s">
+                        Claim
+                    </Button>
+
+                </React.Fragment>
+            </Banner>
 
 
+            <Section header="⚡ Reactor Tasks">
+                <Cell
+                    before={
+                        <Avatar size={40}>
+                            ⚖️
+                        </Avatar>
+                    }
+                    after={<Badge type="number">+250</Badge>}
+                    subtitle="Balance energy flows."
+                >
+                    Stabilize the Reactor
+                </Cell>
+                <Cell
+                    before={
+                        <Avatar size={40}>
+                            🔐
+                        </Avatar>
+                    }
+                    after={<Badge type="number">+500</Badge>}
+                    subtitle="Unlock hidden energy by solving puzzles."
+                >
+                    Activate the Core
+                </Cell>
+                <Cell
+                    before={
+                        <Avatar size={40}>
+                            🛡️
+                        </Avatar>
+                    }
+                    after={<Badge type="number">+300</Badge>}
+                    subtitle="Protect the reactor from external threats."
+                >
+                    Shield the Reactor
+                </Cell>
+                <Cell
+                    before={
+                        <Avatar size={40}>
+                            ⚫
+                        </Avatar>
+                    }
+                    after={<Badge type="number">+1000</Badge>}
+                    subtitle="Control dark energy to unlock new abilities."
+                >
+                    Harness Dark Energy
+                </Cell>
+            </Section>
 
 
             <Section header="Tasks">
