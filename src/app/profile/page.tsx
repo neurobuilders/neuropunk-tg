@@ -13,7 +13,7 @@ export default function Profile() {
       <Page back={true}>
         <List>
           <Section header="Profile">
-            <Cell before={<Image size="48" src="/neo.jpg" />} subtitle="Wake up">Neo Morheus</Cell>
+            <Cell before={<Image size={48} src="/neo.jpg" />} subtitle="Wake up">Neo Morheus</Cell>
             {/*<Cell subtitle="User's unique identifier">NeuroID: 47A3-M0RPH</Cell>*/}
             <Cell subtitle="Current level of the user">Level: 12</Cell>
             <Cell subtitle="Access information if available">NeuroPass: Active</Cell>
