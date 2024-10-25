@@ -22,6 +22,8 @@ import { init } from "@/core/init";
 
 import "./styles.css";
 import { BottomNavigation } from "../BottomNavigation/BottomNavigation";
+import {computed} from "@telegram-apps/signals";
+import {backgroundColorRGB} from "@telegram-apps/sdk/src/scopes/components/mini-app/signals";
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === "development";
@@ -43,7 +45,7 @@ function RootInner({ children }: PropsWithChildren) {
     init(debug);
   });
 
-  const isDark = useSignal(miniApp.isDark);
+  const isDark = useSignal(computed(() => true));
   const initDataUser = useSignal(initData.user);
 
   // Set the user locale.
