@@ -3,18 +3,10 @@
 import {Section, Cell, Image, List, Blockquote, Placeholder, Timeline, Button} from "@telegram-apps/telegram-ui";
 import { useTranslations } from "next-intl";
 
-import { Link } from "@/components/Link/Link";
-import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
-import tonSvg from "./_assets/ton.svg";
 import {NeuroWave} from "@/components/NeuroWave/NeuroWave";
 import {NeuropunkRive} from "@/components/NeuropunkRive";
-import {NeuroWaveSound} from "@/components/NeuroWaveSound";
-import {
-    TimelineItem
-} from "@telegram-apps/telegram-ui/dist/components/Blocks/Timeline/components/TimelineItem/TimelineItem";
-import {Icon20Copy} from "@telegram-apps/telegram-ui/dist/icons/20/copy";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -31,7 +23,7 @@ export default function Home() {
               <div>
                   <Placeholder
                       action={<Button Component="a" href="/start" size="l" stretched>Create Neuro Pass</Button>}
-                      description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
+                      description="The Neuro Pass isn’t just a key to Neuro Space; it’s a gateway to the Multiverse of the Neuropunk creative drum and bass and tech community"
                   >
                       <NeuroWave/>
                   </Placeholder>
