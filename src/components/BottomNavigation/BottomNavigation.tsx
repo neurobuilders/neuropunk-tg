@@ -27,9 +27,9 @@ const tabs: Tab[] = [
     Icon: House,
   },
   {
-    id: "tasks",
-    text: "Tasks",
-    href: "/tasks",
+    id: "reactor",
+    text: "Reactor",
+    href: "/reactor",
     Icon: Atom,
   },
   {
