@@ -11,8 +11,7 @@ export default function Tasks() {
     const t = useTranslations("i18n");
 
     return (
-        <Page back={true} style={{
-        }}>
+        <Page back={true}>
             <div>
                 <Rive
                     style={{
