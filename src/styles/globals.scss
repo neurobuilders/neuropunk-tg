@@ -1,3 +1,10 @@
 body {
   background: var(--tg-theme-secondary-bg-color, white);
+  height: 100vh;
 }
+
+.app-root {
+  height: 100%;
+}
+
+@import "page";

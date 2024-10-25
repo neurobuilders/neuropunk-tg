@@ -61,6 +61,7 @@ function RootInner({ children }: PropsWithChildren) {
       <AppRoot
         appearance={isDark ? "dark" : "light"}
         platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
+        className="app-root"
       >
         {children}
         <BottomNavigation />
