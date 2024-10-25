@@ -11,6 +11,9 @@ importers:
       '@lottiefiles/dotlottie-react':
         specifier: ^0.9.1
         version: 0.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@rive-app/canvas':
+        specifier: ^2.21.6
+        version: 2.21.6
       '@rive-app/react-canvas':
         specifier: ^4.14.5
         version: 4.14.5(react@18.3.1)
