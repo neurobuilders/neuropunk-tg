@@ -16,12 +16,13 @@ export default function Tasks() {
   const t = useTranslations("i18n");
 
   return (
-    <Page back={false}>
+    <Page back={true} style={{
+        backgroundColor: 'black',
+    }}>
         <Rive
             style={{
-                minHeight: '900px',
-                marginBottom: '6px',
-                marginTop: '3px',
+                minHeight: '500px',
+                backgroundColor: 'black',
             }}
             src="/rives/happy_halloween.riv"
             stateMachines={['State Machine 1']}
