@@ -24,15 +24,28 @@ export default function Tasks() {
         <Page back={true}>
 
             <Banner
-                before={<Avatar size={96}>
-                    <div style={{width: '70px', height: '70px'}}>
-                        <RiveComponent
-                            src="/rives/loading.riv"
-                            stateMachines={"State Machine 1"}
-                            artboard={"Artboard"}
-                        />
+                before={<React.Fragment key=".0">
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Avatar size={96}>
+                            <div style={{ width: '70px', height: '70px' }}>
+                                <RiveComponent
+                                    src="/rives/loading.riv"
+                                    stateMachines={"State Machine 1"}
+                                    artboard={"Artboard"}
+                                />
+                            </div>
+                        </Avatar>
+
+                        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                            Your balance
+                            <div style={{ fontSize: '24px', fontWeight: 'bold' }}>2421 NP</div>
+                            {/*<div>XComplete tasks in NeuroReactor to earn NeuroPulse</div>*/}
+                            <a href="#">Hot it works</a>
+                        </div>
+
                     </div>
-                </Avatar>}
+                </React.Fragment>
+                }
                 callout="Welcome Neuropunkers!"
                 description="The NeuroReactor is the core of NeuroSpace, where energy flows and tasks unlock special rewards. Complete missions to harness dark energy and boost your rank."
                 header="Introducing Neuro Reactor"
@@ -40,7 +53,7 @@ export default function Tasks() {
             >
                 <React.Fragment key=".0">
                     <Button size="s">
-                        Claim
+                        Claim 12.7344 PX
                     </Button>
 
                 </React.Fragment>
