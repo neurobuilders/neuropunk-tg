@@ -16,9 +16,8 @@ export default function Profile() {
             <Cell before={<Image size={48} src="/neo.jpg" />} subtitle="Wake up">Neo Morheus</Cell>
             {/*<Cell subtitle="User's unique identifier">NeuroID: 47A3-M0RPH</Cell>*/}
             <Cell subtitle="Current level of the user">Level: 12</Cell>
+            <Cell subtitle="Premium">NeuroPremuim: Active</Cell>
             <Cell subtitle="Access information if available">NeuroPass: Active</Cell>
-            <Cell subtitle="Amount of tokens">NeuroToken Balance: 15,430</Cell>
-            <Cell subtitle="In-game currency amount">Neurospice: 7,800</Cell>
             <Cell subtitle="Current rank in the system">Rank: NeuroMaster</Cell>
           </Section>
 
