@@ -1,14 +1,15 @@
 "use client";
 
-import {Section, List, Placeholder, Button, Avatar, Banner} from "@telegram-apps/telegram-ui";
-import { useTranslations } from "next-intl";
+import {Button, Card, List, Placeholder, Section} from "@telegram-apps/telegram-ui";
+import {useTranslations} from "next-intl";
 
-import { Page } from "@/components/Page";
+import {Page} from "@/components/Page";
 
-import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
-import { NeuropunkRive } from "@/components/NeuropunkRive";
-import RiveComponent from "@rive-app/react-canvas";
+import {NeuroWave} from "@/components/NeuroWave/NeuroWave";
+import {NeuropunkRive} from "@/components/NeuropunkRive";
 import React from "react";
+import {CardChip} from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
+import {CardCell} from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 
 export default function Home() {
   const t = useTranslations("i18n");
@@ -17,7 +18,7 @@ export default function Home() {
     <Page back={false}>
       <List>
         <Section header="Welcome to Neuro Space">
-          <div style={{ padding: "20px" }}>
+            <div style={{padding: "20px", maxHeight: "100px", height: "100px"}}>
             <NeuropunkRive />
           </div>
 
@@ -34,30 +35,102 @@ export default function Home() {
             </Placeholder>
           </div>
         </Section>
-        <Section>
-          <Banner
-              before={<Avatar size={96}>
-                <div style={{width: '70px', height: '70px'}}>
-                  <RiveComponent
-                      src="/rives/loading.riv"
-                      stateMachines={"State Machine 1"}
-                      artboard={"Artboard"}
-                  />
-                </div>
-              </Avatar>}
-              callout="Welcome Neuropunkers!"
-              description="NeuroSpace is a unique digital ecosystem that unites drum and bass and tech enthusiasts within a dynamic virtual world"
-              header="Introducing Neuro Reactor"
-              type="section"
-          >
+          <Section header={"Releases"}>
+              <Card type="ambient">
             <React.Fragment key=".0">
-              <Button size="s">
-                Claim
-              </Button>
-
+                <CardChip readOnly>
+                    Hot place
+                </CardChip>
+                <img
+                    alt="Neuropunks LP 2"
+                    src="https://cdn.neurocdn.ru/covers/NRPNK063.jpg"
+                    style={{
+                        display: 'block',
+                        height: 308,
+                        objectFit: 'cover',
+                        width: 254
+                    }}
+                />
+                <CardCell
+                    readOnly
+                    subtitle="Various Artists"
+                >
+                    Neuropunks LP 2
+                </CardCell>
             </React.Fragment>
-          </Banner>
+              </Card>
+              <Card type="ambient">
+                  <React.Fragment key=".0">
+                      <CardChip readOnly>
+                          Hot place
+                      </CardChip>
+                      <img
+                          alt="Neuropunks LP 2"
+                          src="https://cdn.neurocdn.ru/covers/NRPNK063.jpg"
+                          style={{
+                              display: 'block',
+                              height: 308,
+                              objectFit: 'cover',
+                              width: 254
+                          }}
+                      />
+                      <CardCell
+                          readOnly
+                          subtitle="Various Artists"
+                      >
+                          Neuropunks LP 2
+                      </CardCell>
+                  </React.Fragment>
+              </Card>
         </Section>
+          <Section header={"Events"}>
+              <Card type="ambient">
+                  <React.Fragment key=".0">
+                      <CardChip readOnly>
+                          Hot place
+                      </CardChip>
+                      <img
+                          alt="Neuropunks LP 2"
+                          src="https://cdn.neurocdn.ru/covers/NRPNK063.jpg"
+                          style={{
+                              display: 'block',
+                              height: 308,
+                              objectFit: 'cover',
+                              width: 254
+                          }}
+                      />
+                      <CardCell
+                          readOnly
+                          subtitle="Various Artists"
+                      >
+                          Neuropunks LP 2
+                      </CardCell>
+                  </React.Fragment>
+              </Card>
+              <Card type="ambient">
+                  <React.Fragment key=".0">
+                      <CardChip readOnly>
+                          Hot place
+                      </CardChip>
+                      <img
+                          alt="Neuropunks LP 2"
+                          src="https://cdn.neurocdn.ru/covers/NRPNK063.jpg"
+                          style={{
+                              display: 'block',
+                              height: 308,
+                              objectFit: 'cover',
+                              width: 254
+                          }}
+                      />
+                      <CardCell
+                          readOnly
+                          subtitle="Various Artists"
+                      >
+                          Neuropunks LP 2
+                      </CardCell>
+                  </React.Fragment>
+              </Card>
+          </Section>
       </List>
     </Page>
   );
