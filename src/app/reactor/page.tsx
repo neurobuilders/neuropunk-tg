@@ -47,7 +47,7 @@ export default function Tasks() {
                 </React.Fragment>
                 }
                 callout="Welcome Neuropunkers!"
-                description="The NeuroReactor is the core of NeuroSpace, where energy flows and tasks unlock special rewards. Complete missions to harness dark energy and boost your rank."
+                description="The NeuroReactor is the core of NeuroSpace, where energy flows and tasks unlock special rewards. Complete missions to harness NeuroPulse and boost your rank"
                 header="Introducing Neuro Reactor"
                 type="section"
             >
