@@ -53,7 +53,7 @@ export default function Tasks() {
             >
                 <React.Fragment key=".0">
                     <Button size="s">
-                        Claim 12.7344 PX
+                        Claim 12.7344 NP
                     </Button>
 
                 </React.Fragment>
