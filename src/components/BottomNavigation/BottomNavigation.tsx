@@ -33,9 +33,9 @@ const tabs: Tab[] = [
     Icon: Atom,
   },
   {
-    id: "profile",
-    text: "Profile",
-    href: "/profile",
+    id: "pass",
+    text: "NeuroPass",
+    href: "/pass",
     Icon: User,
   },
   {
