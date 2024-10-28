@@ -11,4 +11,16 @@ body {
   height: 100%;
 }
 
+.badge {
+  @apply py-3 px-2 m-0;
+}
+
+.banner {
+  h6 {
+    &:first-of-type {
+      @apply text-lg;
+    }
+  }
+}
+
 @import "page";

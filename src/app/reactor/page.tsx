@@ -30,6 +30,7 @@ export default function Tasks() {
     <Page back={true}>
       <List>
         <Banner
+          className="banner"
           before={
             <React.Fragment key=".0">
               <div
@@ -66,35 +67,53 @@ export default function Tasks() {
           type="section"
         >
           <React.Fragment key=".0">
-            <Button size="s">Claim 12.7344 NP</Button>
+            <Button size="s" className="mt-1 mb-2">
+              Claim 12.7344 NP
+            </Button>
           </React.Fragment>
         </Banner>
 
         <Section className="tasks" header="⚡ Reactor Tasks">
           <Cell
             before={<Avatar size={40}>⚖️</Avatar>}
-            after={<Badge type="number">+250</Badge>}
+            after={
+              <Badge className="badge" type="number">
+                +250
+              </Badge>
+            }
             subtitle="Balance energy flows."
           >
             Stabilize the Reactor
           </Cell>
           <Cell
             before={<Avatar size={40}>🔐</Avatar>}
-            after={<Badge type="number">+500</Badge>}
+            after={
+              <Badge className="badge" type="number">
+                +500
+              </Badge>
+            }
             subtitle="Unlock hidden energy by solving puzzles."
           >
             Activate the Core
           </Cell>
           <Cell
             before={<Avatar size={40}>🛡️</Avatar>}
-            after={<Badge type="number">+300</Badge>}
+            after={
+              <Badge className="badge" type="number">
+                +300
+              </Badge>
+            }
             subtitle="Protect the reactor from external threats."
           >
             Shield the Reactor
           </Cell>
           <Cell
             before={<Avatar size={40}>⚫</Avatar>}
-            after={<Badge type="number">+1000</Badge>}
+            after={
+              <Badge className="badge" type="number">
+                +1000
+              </Badge>
+            }
             subtitle="Control dark energy to unlock new abilities."
           >
             Harness Dark Energy
@@ -109,7 +128,11 @@ export default function Tasks() {
                   <Image src={"/logo.png"} size={24} alt="Neuropunk App" />
                 </Avatar>
               }
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
             >
               Neuropunk App
             </Cell>
@@ -126,7 +149,11 @@ export default function Tasks() {
                   <Image src={"/logo.png"} size={24} alt="Neuropunk App" />
                 </Avatar>
               }
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
               subtitle="Get Official App"
             >
               Neuropunk App
@@ -141,8 +168,8 @@ export default function Tasks() {
                 </Avatar>
               }
               after={
-                <IconButton mode="outline" size="s" className="rounded-lg">
-                  <Check className="mr-2 ml-2" />
+                <IconButton mode="outline" size="s" className="rounded-lg p-1">
+                  <Check className="mx-1.5" />
                 </IconButton>
               }
             >
@@ -161,7 +188,11 @@ export default function Tasks() {
                   />
                 </Avatar>
               }
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
             >
               Neuropunk Channel
             </Cell>
@@ -177,7 +208,11 @@ export default function Tasks() {
                 </Avatar>
               }
               subtitle="Check our app in appstore and google play"
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
             >
               Neuropunk Chat
             </Cell>
@@ -191,7 +226,11 @@ export default function Tasks() {
                 </Avatar>
               }
               subtitle="Learn and co-create with us"
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
             >
               Neuropunk Academy
             </Cell>
@@ -208,7 +247,11 @@ export default function Tasks() {
                   />
                 </Avatar>
               }
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
               subtitle="Subscribe"
             >
               Neuropunk Youtube
@@ -226,7 +269,11 @@ export default function Tasks() {
                   />
                 </Avatar>
               }
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
               subtitle="Listen"
             >
               Neuropunk SoundCloud
@@ -244,7 +291,11 @@ export default function Tasks() {
                   />
                 </Avatar>
               }
-              after={<Badge type="number">+100</Badge>}
+              after={
+                <Badge className="badge" type="number">
+                  +100
+                </Badge>
+              }
               subtitle="coming soon"
             >
               Neuropunk Marketplace
