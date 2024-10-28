@@ -1,16 +1,12 @@
 "use client";
 
 import { Tabbar } from "@telegram-apps/telegram-ui";
-import {House, Info, User, Settings, CircleCheck, Atom} from "lucide-react";
-import {
-  FC,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { House, Info, User, Settings, CircleCheck, Atom } from "lucide-react";
+import { FC, MouseEvent, useCallback, useEffect, useState } from "react";
 import { openLink, hapticFeedback } from "@telegram-apps/sdk-react";
 import { usePathname, useRouter } from "next/navigation";
+
+import "./styles.scss";
 
 interface Tab {
   id: string;
@@ -89,7 +85,7 @@ export const BottomNavigation: FC = () => {
   }, [pathname]);
 
   return (
-    <Tabbar>
+    <Tabbar className="tabbar">
       {tabs.map((props) => {
         const { id, text, Icon } = props;
         return (
