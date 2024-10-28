@@ -8,17 +8,12 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
-import { useEffect } from "react";
 
 export default function Home() {
   const t = useTranslations("i18n");
 
-  useEffect(() => {
-    document.body.classList.add("page--settings");
-  }, []);
-
   return (
-    <Page back={false}>
+    <Page id="settings" back={false}>
       <List>
         <Section
           header="Settings"

@@ -35,6 +35,12 @@ export function Page({
     });
   }, [router]);
 
+  useEffect(() => {
+    if (id) {
+      document.body.classList.add(`page--${id}`);
+    }
+  }, [id]);
+
   return (
     <div
       className={clsx("page", {

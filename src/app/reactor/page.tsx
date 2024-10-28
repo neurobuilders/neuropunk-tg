@@ -18,10 +18,10 @@ import {
   Section,
 } from "@telegram-apps/telegram-ui";
 import { Link } from "@/components/Link/Link";
-import { Icon28Stats } from "@telegram-apps/telegram-ui/dist/icons/28/stats";
-import { IconCheckbox } from "@telegram-apps/telegram-ui/dist/components/Form/Checkbox/icons/checkbox";
 import { Check } from "lucide-react";
 import RiveComponent from "@rive-app/react-canvas";
+
+import "./styles.scss";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -70,7 +70,7 @@ export default function Tasks() {
           </React.Fragment>
         </Banner>
 
-        <Section header="⚡ Reactor Tasks">
+        <Section className="tasks" header="⚡ Reactor Tasks">
           <Cell
             before={<Avatar size={40}>⚖️</Avatar>}
             after={<Badge type="number">+250</Badge>}
@@ -101,12 +101,12 @@ export default function Tasks() {
           </Cell>
         </Section>
 
-        <Section header="Tasks">
+        <Section className="tasks" header="Tasks">
           <Link href="/tasks">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/logo.png"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image src={"/logo.png"} size={24} alt="Neuropunk App" />
                 </Avatar>
               }
               after={<Badge type="number">+100</Badge>}
@@ -118,10 +118,13 @@ export default function Tasks() {
           <Link href="">
             <Cell
               before={
-                <Image
-                  src={"/logo.png"}
+                <Avatar
+                  className="task__avatar"
+                  size={40}
                   style={{ backgroundColor: "#007AFF" }}
-                />
+                >
+                  <Image src={"/logo.png"} size={24} alt="Neuropunk App" />
+                </Avatar>
               }
               after={<Badge type="number">+100</Badge>}
               subtitle="Get Official App"
@@ -133,13 +136,13 @@ export default function Tasks() {
           <Link href="/launch-params">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/logo.png"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image src={"/logo.png"} size={24} alt="Neuropunk Premium" />
                 </Avatar>
               }
               after={
-                <IconButton mode="outline" size="s">
-                  <Check />
+                <IconButton mode="outline" size="s" className="rounded-lg">
+                  <Check className="mr-2 ml-2" />
                 </IconButton>
               }
             >
@@ -150,8 +153,12 @@ export default function Tasks() {
           <Link href="/theme-params">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/icons/telegram.svg"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image
+                    src={"/icons/telegram.svg"}
+                    size={24}
+                    alt="Neuropunk Channel"
+                  />
                 </Avatar>
               }
               after={<Badge type="number">+100</Badge>}
@@ -161,12 +168,12 @@ export default function Tasks() {
           </Link>
         </Section>
 
-        <Section header="Social">
-          <Link href="">
+        <Section className="tasks" header="Social">
+          <Link href="#">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/logo.png"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image src={"/logo.png"} size={24} alt="Neuropunk Chat" />
                 </Avatar>
               }
               subtitle="Check our app in appstore and google play"
@@ -176,11 +183,11 @@ export default function Tasks() {
             </Cell>
           </Link>
 
-          <Link href="">
+          <Link href="#">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/logo.png"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image src={"/logo.png"} size={24} alt="Neuropunk Academy" />
                 </Avatar>
               }
               subtitle="Learn and co-create with us"
@@ -193,8 +200,12 @@ export default function Tasks() {
           <Link href="/launch-params">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/icons/youtube.svg"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image
+                    src={"/icons/youtube.svg"}
+                    size={24}
+                    alt="Neuropunk Youtube"
+                  />
                 </Avatar>
               }
               after={<Badge type="number">+100</Badge>}
@@ -207,8 +218,12 @@ export default function Tasks() {
           <Link href="/theme-params">
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/icons/soundcloud.svg"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image
+                    src={"/icons/soundcloud.svg"}
+                    size={24}
+                    alt="Neuropunk SoundCloud"
+                  />
                 </Avatar>
               }
               after={<Badge type="number">+100</Badge>}
@@ -218,11 +233,15 @@ export default function Tasks() {
             </Cell>
           </Link>
 
-          <Link href="" hidden={true}>
+          <Link href="#" hidden={true}>
             <Cell
               before={
-                <Avatar size={40}>
-                  <Image src={"/logo.png"} size={24} />
+                <Avatar className="task__avatar" size={40}>
+                  <Image
+                    src={"/logo.png"}
+                    size={24}
+                    alt="Neuropunk Marketplace"
+                  />
                 </Avatar>
               }
               after={<Badge type="number">+100</Badge>}
