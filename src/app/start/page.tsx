@@ -4,18 +4,14 @@ import { useTranslations } from "next-intl";
 
 import { Page } from "@/components/Page";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Rive from "@rive-app/react-canvas";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
 
-  useEffect(() => {
-    document.body.classList.add("page--start");
-  }, []);
-
   return (
-    <Page back={true}>
+    <Page id="start" back={true}>
       <Rive
         style={{
           minHeight: "500px",

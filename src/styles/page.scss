@@ -1,7 +1,21 @@
 .page {
   height: calc(100% - 82px);
 
+  > div {
+    padding-bottom: 82px;
+  }
+
   &--start {
     background: #000;
+  }
+  &--settings {
+    .logo {
+      &--neuropunk {
+        img {
+          width: 77%;
+          height: 77%;
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,7 @@
+.tasks {
+  .task__avatar {
+    & > div {
+      @apply shadow-none;
+    }
+  }
+}

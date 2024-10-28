@@ -1,0 +1,10 @@
+.tabbar {
+  z-index: 1;
+
+  button {
+    padding: 12px 12px 16px;
+    > span {
+      font-size: 12px;
+    }
+  }
+}
