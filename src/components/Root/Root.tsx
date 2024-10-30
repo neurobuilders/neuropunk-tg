@@ -21,7 +21,8 @@ import { setLocale } from "@/core/i18n/locale";
 import { init } from "@/core/init";
 
 import "./styles.css";
-import { BottomNavigation } from "../BottomNavigation/BottomNavigation";
+import { BottomNavigation } from "@/components/BottomNavigation/BottomNavigation";
+import { Loader } from "@/components/Loader/Loader";
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === "development";
@@ -81,6 +82,6 @@ export function Root(props: PropsWithChildren) {
       <RootInner {...props} />
     </ErrorBoundary>
   ) : (
-    <div className="root__loading">Loading</div>
+    <Loader />
   );
 }
