@@ -19,7 +19,7 @@ const tabs: Tab[] = [
   {
     id: "home",
     text: "Home",
-    href: "/",
+    href: "/home",
     Icon: House,
   },
   {

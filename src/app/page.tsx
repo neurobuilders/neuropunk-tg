@@ -1,64 +1,28 @@
 "use client";
 
-import {Section, List, Placeholder, Button, Avatar, Banner} from "@telegram-apps/telegram-ui";
 import { useTranslations } from "next-intl";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Loader } from "@/components/Loader/Loader";
+import { PrefetchKind } from "next/dist/client/components/router-reducer/router-reducer-types";
 
-import { Page } from "@/components/Page";
-
-import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
-import { NeuropunkRive } from "@/components/NeuropunkRive";
-import RiveComponent from "@rive-app/react-canvas";
-import React from "react";
-
-export default function Home() {
+export default function IndexPage() {
   const t = useTranslations("i18n");
+  const router = useRouter();
 
-  return (
-    <Page back={false}>
-      <List>
-        <Section header="Welcome to Neuro Space">
-          <div style={{ padding: "20px" }}>
-            <NeuropunkRive />
-          </div>
+  useEffect(() => {
+    import("@rive-app/react-canvas");
 
-          <div>
-            <Placeholder
-              action={
-                <Button Component="a" href="/start" size="l" stretched>
-                  Create Neuro Pass
-                </Button>
-              }
-              description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
-            >
-              <NeuroWave />
-            </Placeholder>
-          </div>
-        </Section>
-        <Section>
-          <Banner
-              before={<Avatar size={96}>
-                <div style={{width: '70px', height: '70px'}}>
-                  <RiveComponent
-                      src="/rives/loading.riv"
-                      stateMachines={"State Machine 1"}
-                      artboard={"Artboard"}
-                  />
-                </div>
-              </Avatar>}
-              callout="Welcome Neuropunkers!"
-              description="NeuroSpace is a unique digital ecosystem that unites drum and bass and tech enthusiasts within a dynamic virtual world"
-              header="Introducing Neuro Reactor"
-              type="section"
-          >
-            <React.Fragment key=".0">
-              <Button size="s">
-                Claim
-              </Button>
+    // trying to preload critical endpoints
+    router.prefetch("/", { kind: PrefetchKind.FULL });
+    router.prefetch("/reactor", { kind: PrefetchKind.FULL });
+    router.prefetch("/pass", { kind: PrefetchKind.FULL });
+    router.prefetch("/settings", { kind: PrefetchKind.FULL });
 
-            </React.Fragment>
-          </Banner>
-        </Section>
-      </List>
-    </Page>
-  );
+    setTimeout(() => {
+      router.replace("/home");
+    }, 300);
+  }, [router]);
+
+  return <Loader />;
 }
