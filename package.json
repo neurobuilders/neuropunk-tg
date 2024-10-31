@@ -25,7 +25,8 @@
     "normalize.css": "^8.0.1",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.80.4"
+    "sass": "^1.80.4",
+    "supabase": "^1.207.9"
   },
   "devDependencies": {
     "@types/node": "^20",
