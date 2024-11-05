@@ -3666,6 +3666,50 @@
         }
       ]
     },
+    "seed_files": {
+      "id": "supabase_migrations.seed_files",
+      "schemaName": "supabase_migrations",
+      "tableName": "seed_files",
+      "fields": [
+        {
+          "id": "supabase_migrations.seed_files.path",
+          "name": "path",
+          "columnName": "path",
+          "type": "text",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": true,
+          "maxLength": null
+        },
+        {
+          "id": "supabase_migrations.seed_files.hash",
+          "name": "hash",
+          "columnName": "hash",
+          "type": "text",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        }
+      ],
+      "uniqueConstraints": [
+        {
+          "name": "seed_files_pkey",
+          "fields": [
+            "path"
+          ],
+          "nullNotDistinct": false
+        }
+      ]
+    },
     "sessions": {
       "id": "auth.sessions",
       "schemaName": "auth",
@@ -5010,20 +5054,6 @@
           "isGenerated": false,
           "sequence": false,
           "hasDefaultValue": false
-        },
-        {
-          "name": "public_users",
-          "type": "public_users",
-          "isRequired": false,
-          "kind": "object",
-          "relationName": "public_usersToauth_users",
-          "relationFromFields": [],
-          "relationToFields": [],
-          "isList": true,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
         }
       ],
       "uniqueConstraints": [
@@ -5100,7 +5130,7 @@
           "isList": false,
           "isGenerated": false,
           "sequence": false,
-          "hasDefaultValue": false,
+          "hasDefaultValue": true,
           "isId": true,
           "maxLength": null
         },
@@ -5147,10 +5177,52 @@
           "maxLength": null
         },
         {
-          "id": "public.users.telegram_id",
-          "name": "telegram_id",
-          "columnName": "telegram_id",
+          "id": "public.users.tg_id",
+          "name": "tg_id",
+          "columnName": "tg_id",
           "type": "text",
+          "isRequired": false,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.users.tg_avatar_url",
+          "name": "tg_avatar_url",
+          "columnName": "tg_avatar_url",
+          "type": "text",
+          "isRequired": false,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.users.tg_language_code",
+          "name": "tg_language_code",
+          "columnName": "tg_language_code",
+          "type": "text",
+          "isRequired": false,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "public.users.is_tg_premium",
+          "name": "is_tg_premium",
+          "columnName": "is_tg_premium",
+          "type": "bool",
           "isRequired": false,
           "kind": "scalar",
           "isList": false,
@@ -5175,24 +5247,6 @@
           "maxLength": null
         },
         {
-          "name": "auth_users",
-          "type": "auth_users",
-          "isRequired": true,
-          "kind": "object",
-          "relationName": "public_usersToauth_users",
-          "relationFromFields": [
-            "id"
-          ],
-          "relationToFields": [
-            "id"
-          ],
-          "isList": false,
-          "isId": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false
-        },
-        {
           "name": "wallets",
           "type": "wallets",
           "isRequired": false,
@@ -5209,13 +5263,6 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "users_email_key",
-          "fields": [
-            "email"
-          ],
-          "nullNotDistinct": false
-        },
-        {
           "name": "users_pkey",
           "fields": [
             "id"
@@ -5223,9 +5270,16 @@
           "nullNotDistinct": false
         },
         {
-          "name": "users_telegram_id_key",
+          "name": "users_tg_id_key",
           "fields": [
-            "telegram_id"
+            "tg_id"
+          ],
+          "nullNotDistinct": false
+        },
+        {
+          "name": "users_unique_email",
+          "fields": [
+            "email"
           ],
           "nullNotDistinct": false
         }

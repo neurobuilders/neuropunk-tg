@@ -7,7 +7,8 @@
     "dev:https": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supabase:db-seed": "npx tsx seed.ts > supabase/seed.sql"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.9.1",
@@ -26,7 +27,8 @@
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.80.4",
-    "supabase": "^1.215.0"
+    "supabase": "^1.215.0",
+    "tsx": "^4.19.2"
   },
   "devDependencies": {
     "@snaplet/copycat": "^5.1.0",

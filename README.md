@@ -1,5 +1,8 @@
 # Neuropunk Beta 
 
+## Supabase
+@todo
+
 This template demonstrates how developers can implement a web application on the
 Telegram Mini Apps platform using the following technologies and libraries:
 
@@ -34,6 +37,7 @@ This project contains the following scripts:
 - `lint`. Runs [eslint](https://eslint.org/) to ensure the code quality meets
   the required
   standards.
+- `supabase:db-seed`. Updates `supabase/seed.sql` file from `/seed.ts`
 
 To run a script, use the `pnpm run` command:
 

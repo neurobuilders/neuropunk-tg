@@ -1,10 +1,16 @@
 CREATE TABLE users (
-    id uuid NOT NULL REFERENCES auth.users ON DELETE CASCADE,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     first_name text,
     last_name text,
-    email text UNIQUE,
-    telegram_id text UNIQUE,
+    email text DEFAULT NULL,
+    tg_id text UNIQUE,
+    tg_avatar_url text,
+    tg_language_code text,
+    is_tg_premium boolean,
     created_at timestamptz DEFAULT now(),
     PRIMARY KEY (id)
 );
+
+CREATE UNIQUE INDEX users_unique_email ON users (email) WHERE email IS NOT NULL;
+
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;

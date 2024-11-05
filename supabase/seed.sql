@@ -1,0 +1,1 @@
+INSERT INTO public.users (id,first_name,last_name,email,tg_id,tg_avatar_url,tg_language_code,is_tg_premium,created_at) VALUES ('4df9b092-ed8b-5483-9e3b-0dbf3fd6c6c4', 'Maxim', 'M', NULL, '278171105', '', 'en', 't', DEFAULT), ('44a924b4-ca27-5077-8a7c-7fe7b0864171', 'Konstantin', 'C', NULL, '16595612', '', 'en', 't', DEFAULT);

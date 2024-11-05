@@ -7,17 +7,36 @@
 import { createSeedClient } from "@snaplet/seed";
 
 const main = async () => {
-  const seed = await createSeedClient();
+  const seed = await createSeedClient({ dryRun: true });
 
   // Truncate all tables in the database
   await seed.$resetDatabase();
 
   // Seed the database with 10 auth_users
-  await seed.auth_users((x) => x(10));
+  await seed.public_users([
+    {
+      first_name: "Maxim",
+      last_name: "M",
+      email: null,
+      tg_id: "278171105",
+      tg_avatar_url: "",
+      tg_language_code: "en",
+      is_tg_premium: true,
+    },
+    {
+      first_name: "Konstantin",
+      last_name: "C",
+      email: null,
+      tg_id: "16595612",
+      tg_avatar_url: "",
+      tg_language_code: "en",
+      is_tg_premium: true,
+    },
+  ]);
 
   // Type completion not working? You might want to reload your TypeScript Server to pick up the changes
 
-  console.log("Database seeded successfully!");
+  // console.log("Database seeded successfully!");
 
   process.exit();
 };
