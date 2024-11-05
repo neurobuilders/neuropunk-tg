@@ -37,40 +37,6 @@ export default function IndexPage() {
       //   method: "GET",
       // });
     });
-
-    // const signIn = async () => {
-    //   const providers = await getProviders();
-    //   const baseUrl = "https://user67658.ngrok.dev";
-
-    //   const callbackUrl = window.location.href;
-
-    //   const signInUrl = `${baseUrl}/api/auth/signin/telegram-login`;
-
-    //   fetch(signInUrl, {
-    //     method: "post",
-    //     body: new URLSearchParams({
-    //       // ...options,
-    //       csrfToken: await getCsrfToken(),
-    //       callbackUrl,
-    //       json: true,
-    //     } as any),
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //       // Authorization: `tma ${initDataRaw}`,
-    //     },
-    //   }).then(async (res) => {
-    //     const data = await res.json();
-    //     setTimeout(() => {
-    //       router.replace("/home");
-    //     }, 300);
-    //   });
-    // };
-
-    // signIn();
-
-    // const res = await fetch(_signInUrl, {
-
-    // })
   }, [initDataRaw, router]);
 
   return <Loader />;

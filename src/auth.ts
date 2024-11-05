@@ -1,11 +1,8 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import env from "./env";
 import Credentials from "next-auth/providers/credentials";
-import {
-  AuthDataValidator,
-  objectToAuthDataMap,
-  TelegramUserData,
-} from "@telegram-auth/server";
+import { AuthDataValidator, TelegramUserData } from "@telegram-auth/server";
+import { createClient } from "./helpers/supabase/server";
 // import { getTelegramUser, login } from "@/helpers/api/telegram";
 
 export const config: NextAuthOptions = {
@@ -14,15 +11,29 @@ export const config: NextAuthOptions = {
       id: "telegram-login",
       name: "Telegram Login",
       credentials: {},
-      async authorize(credentials, req) {
-        console.log("> authorize req", credentials, req);
-        const query = req.query as TelegramUserData;
-        console.log("authorize query", query);
-        // const validator = new AuthDataValidator({
-        //   botToken: env.telegram.botToken,
-        // });
+      async authorize(data) {
+        // console.log("> authorize req", data);
+        const { initDataRaw } = data as { initDataRaw: string };
+        try {
+          const initData = new Map(new URLSearchParams(initDataRaw));
 
-        // const data = objectToAuthDataMap((query || {}) as any);
+          const validator = new AuthDataValidator({
+            botToken: env.telegram.botToken,
+          });
+
+          //   const data = objectToAuthDataMap((query || {}) as any);
+          const user = await validator.validate(initData);
+          console.log("user", user);
+
+          if (!user.id) {
+            throw new Error("User object does not have 'id' property");
+          }
+          const supabase = await createClient();
+        } catch (err) {
+          console.error(err);
+        }
+
+        return null;
         // const user = await validator.validate(data);
         // console.log("user", user);
         // if (user.id) {
@@ -58,7 +69,6 @@ export const config: NextAuthOptions = {
         //     }
         //   }
         // }
-        return null;
       },
     }),
   ],
