@@ -1,7 +1,16 @@
-# Neuropunk Beta 
+Neuropunk Beta
 
-## Supabase
-@todo
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Install Dependencies](#install-dependencies)
+- [Scripts](#scripts)
+- [Create Bot and Mini App](#create-bot-and-mini-app)
+- [Run](#run)
+  - [Run Inside Telegram](#run-inside-telegram)
+- [Deploy](#deploy)
+- [Supabase](#supabase)
+- [Useful Links](#useful-links)
 
 This template demonstrates how developers can implement a web application on the
 Telegram Mini Apps platform using the following technologies and libraries:
@@ -37,7 +46,7 @@ This project contains the following scripts:
 - `lint`. Runs [eslint](https://eslint.org/) to ensure the code quality meets
   the required
   standards.
-- `supabase:db-seed`. Updates `supabase/seed.sql` file from `/seed.ts`
+- `supabase:db-seed`. Updates `supabase/seed.sql` file from `seed.ts`
 
 To run a script, use the `pnpm run` command:
 
@@ -137,6 +146,37 @@ from the creators of Next.js.
 Check out
 the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for
 more details.
+
+## Supabase
+1. Start the Supabase local environment:
+
+`pnpm supabase start`
+
+This spins up the Supabase services (e.g., PostgreSQL, API) locally in Docker containers, allowing you to develop with a local Supabase instance.
+
+2. Reset the Supabase database:
+
+`supabase db reset`
+
+This clears your local database, dropping all tables and recreating the database structure as defined in your project’s migrations.
+
+3. Sync Snaplet seed data:
+
+`npx @snaplet/seed sync`
+
+This command pulls or syncs seed data using Snaplet, a tool for managing seeded database data in development.
+
+4. Generate a SQL seed file:
+
+`npx supabase:db-seed`
+
+This runs the TypeScript seed.ts script and outputs the result as SQL commands into supabase/seed.sql. This file will contain the data seeding logic for initializing your database.
+
+5. Reset and apply seed data to the database again:
+
+`supabase db reset`
+
+Running supabase db reset again will reset the database, and it will use the newly generated seed file from the previous command to populate your database tables with the seed data.
 
 ## Useful Links
 
