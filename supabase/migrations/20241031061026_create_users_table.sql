@@ -12,5 +12,3 @@ CREATE TABLE users (
 );
 
 CREATE UNIQUE INDEX users_unique_email ON users (email) WHERE email IS NOT NULL;
-
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;

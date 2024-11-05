@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { Loader } from "@/components/Loader/Loader";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { PrefetchKind } from "next/dist/client/components/router-reducer/router-reducer-types";
-import { getCsrfToken, getProviders, signIn } from "next-auth/react";
-import { apiBaseUrl } from "next-auth/client/_utils";
+import { signIn } from "next-auth/react";
 
 export default function IndexPage() {
   const t = useTranslations("i18n");
@@ -22,20 +21,18 @@ export default function IndexPage() {
     isLoaded.current = true;
 
     import("@rive-app/react-canvas");
-
     // trying to preload critical endpoints
     router.prefetch("/", { kind: PrefetchKind.FULL });
     router.prefetch("/reactor", { kind: PrefetchKind.FULL });
     router.prefetch("/pass", { kind: PrefetchKind.FULL });
     router.prefetch("/settings", { kind: PrefetchKind.FULL });
 
-    signIn("telegram-login", { redirect: false, initDataRaw }).then((res) => {
-      // if (!res) return;
-      // const { url } = res;
-      // if (!url) return;
-      // fetch(url, {
-      //   method: "GET",
-      // });
+    signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
+      if (!res) return;
+      const { ok, error } = res;
+      if (ok) {
+        router.replace("/home");
+      }
     });
   }, [initDataRaw, router]);
 

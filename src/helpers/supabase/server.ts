@@ -11,7 +11,7 @@ export async function createClient() {
     env.supabase.anonKey!,
     {
       // use NextJS fetch for caching
-      global: { fetch: fetch.bind(globalThis) },
+      //   global: { fetch: fetch.bind(globalThis) },
       cookies: {
         getAll() {
           return cookieStore.getAll();
