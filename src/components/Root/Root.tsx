@@ -81,7 +81,8 @@ function RootInner({ children }: PropsWithChildren) {
   return (
     <TonConnectUIProvider manifestUrl="https://neuropunk-tg.vercel.app/tonconnect-manifest.json">
       <AppRoot
-        appearance={isDark ? "dark" : "light"}
+        // appearance={isDark ? "dark" : "light"}
+        appearance={"dark"}
         platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
         className="app-root"
       >

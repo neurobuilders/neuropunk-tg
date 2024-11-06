@@ -6,7 +6,11 @@ import env from "@/env";
 export default auth(function middleware(req: NextRequest & { auth: any }) {
   if (!req.auth) {
     const urlObj = new URL(req.url);
-    if (urlObj.pathname === "/" || urlObj.pathname.startsWith("/api/auth")) {
+    console.log("url pathname", urlObj.pathname);
+    if (
+      ["/", "/welcome"].includes(urlObj.pathname) ||
+      urlObj.pathname.startsWith("/api/auth")
+    ) {
       return NextResponse.next();
     }
     return NextResponse.redirect(env.siteUrl);
@@ -21,5 +25,5 @@ export const config = {
    * - favicon.ico, sitemap.xml, robots.txt (metadata files)
    */
   matcher:
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|neuropunk.riv).*)",
 };

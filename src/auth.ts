@@ -7,6 +7,10 @@ import { ExtendedUser } from "./types/next-auth";
 
 const cookiePrefix = "neuropunk_auth_";
 
+class NotFoundUserError extends CredentialsSignin {
+  code = "not-found-user";
+}
+
 export const config: NextAuthConfig = {
   secret: env.auth.secret,
   providers: [
@@ -42,13 +46,14 @@ export const config: NextAuthConfig = {
             .select()
             .eq("tg_id", user.id)
             .maybeSingle();
+
           dbUser = data;
         } catch (err) {
           console.error(err);
           return null;
         }
 
-        if (!dbUser) {
+        if (dbUser) {
           // console.log("database user", dbUser);
           const {
             id,
@@ -73,7 +78,7 @@ export const config: NextAuthConfig = {
             //   createdAt: created_at,
           };
         } else {
-          throw new Error("no-user");
+          throw new NotFoundUserError();
         }
       },
     }),
@@ -110,10 +115,11 @@ export const config: NextAuthConfig = {
       return { ...token, ...user };
     },
   },
-  //   pages: {
-  //     signIn: "/auth/signin",
-  //     error: "/auth/error",
-  //   },
+  // pages: {
+  //   // signIn: "/auth/signin",
+  //   // error: "/auth/error",
+  //   newUser: "/auth/newUser",
+  // },
   debug: !env.isProduction,
   useSecureCookies: true,
   cookies: {

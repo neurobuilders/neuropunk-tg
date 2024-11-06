@@ -22,6 +22,7 @@ export default function IndexPage() {
 
     import("@rive-app/react-canvas");
     // trying to preload critical endpoints
+    router.prefetch("/welcome", { kind: PrefetchKind.FULL });
     router.prefetch("/", { kind: PrefetchKind.FULL });
     router.prefetch("/reactor", { kind: PrefetchKind.FULL });
     router.prefetch("/pass", { kind: PrefetchKind.FULL });
@@ -30,9 +31,11 @@ export default function IndexPage() {
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
       console.log("res", res);
-      const { ok, error } = res;
+      const { ok, error, code } = res;
       if (error) {
-        router.replace("/welcome");
+        if (code === "not-found-user") {
+          router.replace("/welcome");
+        }
       } else if (ok) {
         router.replace("/home");
       }

@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { Button, Placeholder } from "@telegram-apps/telegram-ui";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
+import { retrieveLaunchParams } from "@telegram-apps/sdk";
 
 export default function WelcomePage() {
   const t = useTranslations("i18n");
@@ -18,12 +18,26 @@ export default function WelcomePage() {
       return;
     }
     isLoaded.current = true;
-  }, [initDataRaw, router]);
+  }, [router]);
+
+  const clickHandler = () => {
+    fetch("/api/auth/sign-up", {
+      method: "post",
+      headers: {
+        Authorization: `twa ${initDataRaw}`,
+      },
+    }).then(async (res) => {
+      const json = await res.json();
+      if (json.ok) {
+        router.replace("/");
+      }
+    });
+  };
 
   return (
     <Placeholder
       action={
-        <Button size="l" stretched>
+        <Button size="l" stretched onClick={clickHandler}>
           Step into the Future
         </Button>
       }
