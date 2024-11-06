@@ -16,22 +16,22 @@ export default function Home() {
           header="Application Dev Info"
           footer="These pages help developer to learn more about current app information"
         >
-          <Link href="/init-data">
+          <Link href="/dev-info/init-data">
             <Cell subtitle="User data, chat information, technical data">
               Init Data
             </Cell>
           </Link>
-          <Link href="/launch-params">
+          <Link href="/dev-info/launch-params">
             <Cell subtitle="Platform identifier, Mini Apps version, etc.">
               Launch Parameters
             </Cell>
           </Link>
-          <Link href="/theme-params">
+          <Link href="/dev-info/theme-params">
             <Cell subtitle="Telegram application palette information">
               Theme Parameters
             </Cell>
           </Link>
-          <Link href="/session-data">
+          <Link href="/dev-info/session-data">
             <Cell subtitle="Next Auth user session data">Session Data</Cell>
           </Link>
         </Section>
