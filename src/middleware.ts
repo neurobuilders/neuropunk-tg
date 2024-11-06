@@ -9,7 +9,6 @@ import env from "@/env";
 export default async function authMiddleware(request: NextRequest) {
   const token = await getToken({
     req: request,
-    secret: env.auth.secret,
     secureCookie: true,
   });
 

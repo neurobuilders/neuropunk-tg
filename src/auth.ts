@@ -18,12 +18,15 @@ export const config: NextAuthOptions = {
         try {
           const initData = new Map(new URLSearchParams(initDataRaw));
 
+          console.log("initData", initData);
+
           const validator = new AuthDataValidator({
             botToken: env.telegram.botToken,
           });
 
+          //   const user = await validator.validate(initData);
           const user = await validator.validate(initData);
-          //   console.log("user", user);
+          console.log("user", user);
 
           if (!user.id) {
             throw new Error("User object does not have 'id' property");
