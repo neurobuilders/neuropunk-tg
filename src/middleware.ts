@@ -1,8 +1,16 @@
 import { auth } from "@/auth";
+import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
+import env from "@/env";
 
-export default auth(function middleware(req: NextRequest) {
-  // console.log("req", req);
+export default auth(function middleware(req: NextRequest & { auth: any }) {
+  if (!req.auth) {
+    const urlObj = new URL(req.url);
+    if (urlObj.pathname === "/" || urlObj.pathname.startsWith("/api/auth")) {
+      return NextResponse.next();
+    }
+    return NextResponse.redirect(env.siteUrl);
+  }
 });
 
 export const config = {
