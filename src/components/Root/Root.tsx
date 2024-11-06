@@ -19,9 +19,9 @@ import { useDidMount } from "@/hooks/useDidMount";
 import { useClientOnce } from "@/hooks/useClientOnce";
 import { setLocale } from "@/core/i18n/locale";
 import { init } from "@/core/init";
+import { SessionProvider } from "next-auth/react";
 
 import "./styles.css";
-import { BottomNavigation } from "@/components/BottomNavigation/BottomNavigation";
 import { Loader } from "@/components/Loader/Loader";
 
 function RootInner({ children }: PropsWithChildren) {
@@ -64,8 +64,7 @@ function RootInner({ children }: PropsWithChildren) {
         platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
         className="app-root"
       >
-        {children}
-        <BottomNavigation />
+        <SessionProvider>{children}</SessionProvider>
       </AppRoot>
     </TonConnectUIProvider>
   );

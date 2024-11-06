@@ -4,4 +4,3 @@ CREATE TABLE wallets (
     balance numeric DEFAULT 0,
     created_at timestamptz DEFAULT now()
 );
-ALTER TABLE wallets ENABLE ROW LEVEL SECURITY;
