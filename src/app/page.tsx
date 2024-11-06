@@ -29,8 +29,11 @@ export default function IndexPage() {
 
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
+      console.log("res", res);
       const { ok, error } = res;
-      if (ok) {
+      if (error) {
+        router.replace("/welcome");
+      } else if (ok) {
         router.replace("/home");
       }
     });
