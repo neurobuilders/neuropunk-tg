@@ -47,6 +47,7 @@ This project contains the following scripts:
   the required
   standards.
 - `supabase:db-seed`. Updates `supabase/seed.sql` file from `seed.ts`
+- `supabase:generate-database-types`. Generate TypeScript types for the database into `src/types/database-generated.types.ts`
 
 To run a script, use the `pnpm run` command:
 
@@ -162,11 +163,15 @@ This command pulls or syncs seed data using Snaplet, a tool for managing seeded 
 
 4. Generate a SQL seed file: \
 `npx supabase:db-seed` \
-This runs the TypeScript seed.ts script and outputs the result as SQL commands into supabase/seed.sql. This file will contain the data seeding logic for initializing your database.
+This runs the TypeScript `seed.ts `script and outputs the result as SQL commands into `supabase/seed.sql`. This file will contain the data seeding logic for initializing your database.
 
 5. Reset and apply seed data to the database again: \
 `supabase db reset` \
-Running supabase db reset again will reset the database, and it will use the newly generated seed file from the previous command to populate your database tables with the seed data.
+Running `supabase db reset` again will reset the database, and it will use the newly generated seed file from the previous command to populate your database tables with the seed data.
+
+5. Generate TypeScript types from your Supabase schema: \
+`npx supabase:generate-database-types` \
+This command uses the Supabase CLI to generate TypeScript types from your database schema, based on the projectId of your Supabase project (`SUPABASE_PROJECT_ID` in .env file). The generated types are saved to `src/types/database-generated.types.ts`, making it easier to work with your Supabase data in a type-safe way.
 
 ## Useful Links
 
