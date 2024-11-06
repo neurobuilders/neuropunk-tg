@@ -76,62 +76,124 @@ const latestReleases = [
   },
 ];
 
+const upcomingEvents = [
+  {
+    date: "11/09/2024",
+    url: "https://neuropunk.ru/events/00-11-neuropunk-festilval-sound/",
+    title: "Neuropunk Festilval (Санкт Петербург)",
+    location: "@ Sound",
+  },
+  {
+    date: "11/23/2024",
+    url: "https://neuropunk.ru/events/neuropunk-ural-%d0%b5%d0%ba%d0%b1-%d1%84%d0%b0%d0%b1%d1%80%d0%b8%d0%ba%d0%b0/",
+    title: "Neuropunk Ural (Екб)",
+    location: "@ Фабрика",
+  },
+  {
+    date: "02/21/2025",
+    url: "https://neuropunk.ru/events/21-02-neuropunk-atmosphere/",
+    title: "Neuropunk Festival (Москва)",
+    location: "@ Atmosphere",
+  },
+];
+
 export default function Home() {
   return (
     <Page back={false}>
       <List>
         <Section header="Welcome to Neuro Space">
           <>
-            <h2 className="text-lg mt-4 mx-5 pb-2">Latest releases</h2>
-            <Swiper
-              slidesPerView={2}
-              spaceBetween={15}
-              loop={true}
-              pagination={{
-                clickable: true,
-              }}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className={clsx(
-                "releases releases--latest",
-                "!px-5 !pb-10 mt-2 mb-5"
-              )}
-            >
-              {latestReleases.map((v) => (
-                <SwiperSlide key={v.url}>
-                  <Card
-                    onClick={() => {
-                      openLink(v.url);
-                    }}
-                  >
-                    <React.Fragment key=".0">
-                      <CardChip readOnly className="card-chip">
-                        {v.catalogNr}
-                      </CardChip>
-                      <Image
-                        src={v.coverUrl}
-                        alt={v.title}
-                        width={v.width}
-                        height={v.height}
-                        priority={true}
-                      />
-                      <CardCell
-                        readOnly
-                        subtitle={v.artist}
-                        className="card-cell"
-                      >
-                        {v.title}
-                      </CardCell>
-                    </React.Fragment>
-                  </Card>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            <div className="row">
+              <div className="px-6 pt-4">
+                <NeuropunkRive />
+              </div>
+              <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
+              <Swiper
+                slidesPerView={2}
+                spaceBetween={15}
+                loop={true}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className={clsx(
+                  "releases releases--latest",
+                  "!px-5 !pb-10 mt-2 mb-5"
+                )}
+              >
+                {latestReleases.map((v) => (
+                  <SwiperSlide key={v.url}>
+                    <Card
+                      onClick={() => {
+                        openLink(v.url);
+                      }}
+                    >
+                      <React.Fragment key=".0">
+                        <CardChip readOnly className="card-chip">
+                          {v.catalogNr}
+                        </CardChip>
+                        <Image
+                          src={v.coverUrl}
+                          alt={v.title}
+                          width={v.width}
+                          height={v.height}
+                          priority={true}
+                        />
+                        <CardCell
+                          readOnly
+                          subtitle={v.artist}
+                          className="card-cell"
+                        >
+                          {v.title}
+                        </CardCell>
+                      </React.Fragment>
+                    </Card>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+            <div className="row">
+              <h2 className="text-lg mt-4 mx-5 pb-2">Upcoming Events</h2>
+              <div
+                className={clsx(
+                  "events events--upcoming",
+                  "!px-5 !pb-10 mt-2 mb-5"
+                )}
+              >
+                <ul className="flex flex-col gap-2 items-center justify-center">
+                  {upcomingEvents.map((v) => (
+                    <li
+                      key={v.url}
+                      className="w-full border-2 border-gray-700 rounded-xl"
+                    >
+                      <div className="flex justify-between p-5 gap-2">
+                        <div className="col-span-5 md:col-span-4">
+                          <p className="text-sky-500 font-bold text-xs">
+                            {v.date}
+                          </p>
+                          <p className="text-gray-400 font-bold">{v.title}</p>
+                          <p className="text-gray-600 text-sm">{v.location}</p>
+                          {/* <p className="text-gray-400"> Beginner speakers </p> */}
+                        </div>
+                        <div className="flex flex-col justify-center">
+                          <Button
+                            mode="bezeled"
+                            size="s"
+                            onClick={() => {
+                              openLink(v.url);
+                            }}
+                          >
+                            More Info
+                          </Button>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </>
-          <div style={{ padding: "20px" }}>
-            <NeuropunkRive />
-          </div>
-
           <div>
             <Placeholder
               action={
