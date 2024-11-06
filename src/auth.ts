@@ -18,15 +18,15 @@ export const config: NextAuthOptions = {
         try {
           const initData = new Map(new URLSearchParams(initDataRaw));
 
-          console.log("initData", initData);
+          //   console.log("initData", initData);
 
           const validator = new AuthDataValidator({
             botToken: env.telegram.botToken,
           });
 
-          //   const user = await validator.validate(initData);
           const user = await validator.validate(initData);
-          console.log("user", user);
+          //   const user = JSON.parse(initData.get("user")!);
+          //   console.log("user", user);
 
           if (!user.id) {
             throw new Error("User object does not have 'id' property");
@@ -38,6 +38,8 @@ export const config: NextAuthOptions = {
             .select()
             .eq("tg_id", user.id)
             .maybeSingle();
+
+          //   console.log("dbUser", dbUser);
 
           if (dbUser) {
             // console.log("database user", dbUser);
@@ -106,63 +108,63 @@ export const config: NextAuthOptions = {
   //   },
   debug: true,
   useSecureCookies: true,
-  cookies: {
-    sessionToken: {
-      name: `${cookiePrefix}session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
-    callbackUrl: {
-      name: `${cookiePrefix}callback-url`,
-      options: {
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
-    csrfToken: {
-      name: `${cookiePrefix}csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
-    pkceCodeVerifier: {
-      name: `${cookiePrefix}pkce-code-verifier`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-        maxAge: 900,
-      },
-    },
-    state: {
-      name: `${cookiePrefix}state`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-        maxAge: 900,
-      },
-    },
-    nonce: {
-      name: `${cookiePrefix}nonce`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: true,
-      },
-    },
-  },
+  //   cookies: {
+  //     sessionToken: {
+  //       name: `${cookiePrefix}session-token`,
+  //       options: {
+  //         httpOnly: true,
+  //         sameSite: "lax",
+  //         path: "/",
+  //         secure: true,
+  //       },
+  //     },
+  //     callbackUrl: {
+  //       name: `${cookiePrefix}callback-url`,
+  //       options: {
+  //         sameSite: "lax",
+  //         path: "/",
+  //         secure: true,
+  //       },
+  //     },
+  //     csrfToken: {
+  //       name: `${cookiePrefix}csrf-token`,
+  //       options: {
+  //         httpOnly: true,
+  //         sameSite: "lax",
+  //         path: "/",
+  //         secure: true,
+  //       },
+  //     },
+  //     pkceCodeVerifier: {
+  //       name: `${cookiePrefix}pkce-code-verifier`,
+  //       options: {
+  //         httpOnly: true,
+  //         sameSite: "lax",
+  //         path: "/",
+  //         secure: true,
+  //         maxAge: 900,
+  //       },
+  //     },
+  //     state: {
+  //       name: `${cookiePrefix}state`,
+  //       options: {
+  //         httpOnly: true,
+  //         sameSite: "lax",
+  //         path: "/",
+  //         secure: true,
+  //         maxAge: 900,
+  //       },
+  //     },
+  //     nonce: {
+  //       name: `${cookiePrefix}nonce`,
+  //       options: {
+  //         httpOnly: true,
+  //         sameSite: "lax",
+  //         path: "/",
+  //         secure: true,
+  //       },
+  //     },
+  //   },
 };
 
 export const handler = NextAuth(config);
