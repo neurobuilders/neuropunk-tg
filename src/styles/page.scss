@@ -18,4 +18,11 @@
       }
     }
   }
+  &-slug {
+    &--welcome {
+      .app-root {
+        @apply flex flex-col justify-center items-center;
+      }
+    }
+  }
 }

@@ -23,9 +23,13 @@ import { SessionProvider } from "next-auth/react";
 
 import "./styles.css";
 import { Loader } from "@/components/Loader/Loader";
+import { usePathname } from "next/navigation";
+import slugify from "slugify";
+import { ToastProvider } from "@/context/ToastContext";
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === "development";
+  const pathname = usePathname();
 
   // Mock Telegram environment in development mode if needed.
   if (isDev) {
@@ -57,14 +61,35 @@ function RootInner({ children }: PropsWithChildren) {
     debug && import("eruda").then((lib) => lib.default.init());
   }, [debug]);
 
+  useEffect(() => {
+    const pageClassName = `page-slug--${slugify(pathname)}`;
+    let willAdd = true;
+    for (const className of Array.from(document.body.classList.values())) {
+      console.log("className", className);
+      if (className.startsWith("page-slug--")) {
+        if (className === pageClassName) {
+          willAdd = false;
+        } else {
+          document.body.classList.remove(className);
+        }
+      }
+    }
+    if (willAdd && pathname) {
+      document.body.classList.add(pageClassName);
+    }
+  }, [pathname]);
+
   return (
     <TonConnectUIProvider manifestUrl="https://neuropunk-tg.vercel.app/tonconnect-manifest.json">
       <AppRoot
-        appearance={isDark ? "dark" : "light"}
+        // appearance={isDark ? "dark" : "light"}
+        appearance={"dark"}
         platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
         className="app-root"
       >
-        <SessionProvider>{children}</SessionProvider>
+        <ToastProvider>
+          <SessionProvider>{children}</SessionProvider>
+        </ToastProvider>
       </AppRoot>
     </TonConnectUIProvider>
   );

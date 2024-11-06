@@ -1,0 +1,16 @@
+.snackbar {
+  bottom: calc(82px + 10px);
+  z-index: 1;
+
+  &--error {
+    > div {
+      background: #f443369c;
+    }
+  }
+
+  &--success {
+    > div {
+      background: #4cf4369c;
+    }
+  }
+}

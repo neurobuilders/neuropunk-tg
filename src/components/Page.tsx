@@ -5,6 +5,7 @@ import { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { BottomNavigation } from "./BottomNavigation/BottomNavigation";
+import { Snackbar } from "@telegram-apps/telegram-ui";
 
 interface PageProps {
   /**

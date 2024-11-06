@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthConfig } from "next-auth";
+import NextAuth, { CredentialsSignin, NextAuthConfig } from "next-auth";
 import env from "@/env";
 import Credentials from "next-auth/providers/credentials";
 import { AuthDataValidator } from "@telegram-auth/server";
@@ -6,6 +6,10 @@ import { createClient } from "@/helpers/supabase/server";
 import { ExtendedUser } from "./types/next-auth";
 
 const cookiePrefix = "neuropunk_auth_";
+
+class NotFoundUserError extends CredentialsSignin {
+  code = "not-found-user";
+}
 
 export const config: NextAuthConfig = {
   secret: env.auth.secret,
@@ -17,6 +21,7 @@ export const config: NextAuthConfig = {
       async authorize(data) {
         // console.log("> authorize req", data);
         const { initDataRaw } = data as { initDataRaw: string };
+        let dbUser = null;
         try {
           const initData = new Map(new URLSearchParams(initDataRaw));
 
@@ -36,44 +41,45 @@ export const config: NextAuthConfig = {
           }
           const supabase = await createClient();
 
-          const { data: dbUser } = await supabase
+          const { data } = await supabase
             .from("users")
             .select()
             .eq("tg_id", user.id)
             .maybeSingle();
 
-          //   console.log("dbUser", dbUser);
-
-          if (dbUser) {
-            // console.log("database user", dbUser);
-            const {
-              id,
-              first_name,
-              last_name,
-              email,
-              tg_id,
-              tg_avatar_url,
-              tg_language_code,
-              is_tg_premium,
-              created_at,
-            } = dbUser;
-            return {
-              id,
-              firstName: first_name,
-              lastName: last_name,
-              name: [first_name, last_name || ""].filter(Boolean).join(" "),
-              //   tgId: tg_id,
-              image: tg_avatar_url,
-              //   languageCode: tg_language_code,
-              //   isPremium: is_tg_premium,
-              //   createdAt: created_at,
-            };
-          }
+          dbUser = data;
         } catch (err) {
           console.error(err);
+          return null;
         }
 
-        return null;
+        if (dbUser) {
+          // console.log("database user", dbUser);
+          const {
+            id,
+            first_name,
+            last_name,
+            email,
+            tg_id,
+            tg_avatar_url,
+            tg_language_code,
+            is_tg_premium,
+            created_at,
+          } = dbUser;
+          return {
+            id,
+            firstName: first_name,
+            lastName: last_name,
+            name: [first_name, last_name || ""].filter(Boolean).join(" "),
+            //   tgId: tg_id,
+            image: tg_avatar_url,
+            //   languageCode: tg_language_code,
+            //   isPremium: is_tg_premium,
+            //   createdAt: created_at,
+          };
+        } else {
+          throw new NotFoundUserError();
+        }
       },
     }),
   ],
@@ -109,10 +115,11 @@ export const config: NextAuthConfig = {
       return { ...token, ...user };
     },
   },
-  //   pages: {
-  //     signIn: "/auth/signin",
-  //     error: "/auth/error",
-  //   },
+  // pages: {
+  //   // signIn: "/auth/signin",
+  //   // error: "/auth/error",
+  //   newUser: "/auth/newUser",
+  // },
   debug: !env.isProduction,
   useSecureCookies: true,
   cookies: {
