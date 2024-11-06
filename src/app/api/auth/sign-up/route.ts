@@ -58,6 +58,7 @@ export async function POST() {
     return Response.json({ ok: true });
   } catch (err) {
     console.error(err);
-    throw new Error((err as Error).message, { cause: err });
+    // throw new Error((err as Error).message, { cause: err });
+    return Response.json({ ok: false, error: (err as Error).message });
   }
 }

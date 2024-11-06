@@ -25,6 +25,7 @@ import "./styles.css";
 import { Loader } from "@/components/Loader/Loader";
 import { usePathname } from "next/navigation";
 import slugify from "slugify";
+import { ToastProvider } from "@/context/ToastContext";
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === "development";
@@ -86,7 +87,9 @@ function RootInner({ children }: PropsWithChildren) {
         platform={["macos", "ios"].includes(lp.platform) ? "ios" : "base"}
         className="app-root"
       >
-        <SessionProvider>{children}</SessionProvider>
+        <ToastProvider>
+          <SessionProvider>{children}</SessionProvider>
+        </ToastProvider>
       </AppRoot>
     </TonConnectUIProvider>
   );

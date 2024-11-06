@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import { Button, Placeholder } from "@telegram-apps/telegram-ui";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
+import { useToast } from "@/context/ToastContext";
 
 export default function WelcomePage() {
   const t = useTranslations("i18n");
   const router = useRouter();
+  const { showToast } = useToast();
   const { initDataRaw } = retrieveLaunchParams();
   const isLoaded = useRef(false);
 
@@ -28,8 +30,22 @@ export default function WelcomePage() {
       },
     }).then(async (res) => {
       const json = await res.json();
-      if (json.ok) {
+      const { ok, error } = json;
+      if (ok) {
         router.replace("/");
+        showToast({
+          title: "Yesss!",
+          message: "Welcome to the Neuropunk Space",
+          type: "success",
+          duration: 5000,
+        });
+      } else {
+        showToast({
+          title: "Error occured",
+          message: error,
+          type: "error",
+          duration: 5000,
+        });
       }
     });
   };
