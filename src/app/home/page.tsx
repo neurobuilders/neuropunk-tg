@@ -16,7 +16,7 @@ import Image from "next/image";
 import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
 import RiveComponent from "@rive-app/react-canvas";
-import React from "react";
+import React, { useRef } from "react";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 import "./styles.scss";
@@ -45,6 +45,7 @@ const latestReleases = [
     title: "Neuropunks LP 2",
     coverUrl:
       "https://cdn.neurocdn.ru/CACHE/images/covers/NRPNK063/8534c32b99793781a52805126eee9375.jpg",
+    videoUrl: "/neuropunks_lp2.webm",
     artist: "Various Artists",
     catalogNr: "NRPNK063",
     url: "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
@@ -159,6 +160,7 @@ to build off that success throughout 2018.`,
 ];
 
 export default function Home() {
+  const imageRefs = useRef<Record<number, HTMLImageElement | null>>({});
   return (
     <Page back={false}>
       <List>
@@ -190,7 +192,7 @@ export default function Home() {
                 }}
                 // centeredSlides={true}
                 autoplay={{
-                  delay: 6000,
+                  delay: 9000,
                   disableOnInteraction: false,
                 }}
                 navigation={true}
@@ -200,36 +202,65 @@ export default function Home() {
                   "!px-5 !pb-10 mt-2 mb-5"
                 )}
               >
-                {latestReleases.map((v) => (
-                  <SwiperSlide key={v.url}>
-                    <Card
-                      onClick={() => {
-                        triggerHapticFeedback();
-                        openLink(v.url);
-                      }}
-                    >
-                      <React.Fragment key=".0">
-                        <CardChip readOnly className="card-chip">
-                          {v.catalogNr}
-                        </CardChip>
-                        <Image
-                          src={v.coverUrl}
-                          alt={v.title}
-                          width={v.width}
-                          height={v.height}
-                          priority={true}
-                        />
-                        <CardCell
-                          readOnly
-                          subtitle={v.artist}
-                          className="card-cell"
-                        >
-                          {v.title}
-                        </CardCell>
-                      </React.Fragment>
-                    </Card>
-                  </SwiperSlide>
-                ))}
+                {latestReleases.map((v, i) => {
+                  return (
+                    <SwiperSlide key={v.url}>
+                      <Card
+                        onClick={() => {
+                          triggerHapticFeedback();
+                          openLink(v.url);
+                        }}
+                      >
+                        <React.Fragment key=".0">
+                          <CardChip readOnly className="card-chip">
+                            {v.catalogNr}
+                          </CardChip>
+                          <Image
+                            ref={(ref) => {
+                              imageRefs.current[i] = ref;
+                            }}
+                            src={v.coverUrl}
+                            alt={v.title}
+                            width={v.width}
+                            height={v.height}
+                            priority={true}
+                          />
+                          {v.videoUrl && (
+                            <video
+                              playsInline
+                              muted
+                              autoPlay
+                              loop
+                              className="hidden"
+                              width="100%"
+                              preload=""
+                              onPlay={(e) => {
+                                (e.target as any)?.classList.remove("hidden");
+                                imageRefs.current[i]?.classList.add("hidden");
+                              }}
+                              onCanPlayThrough={async (e) => {
+                                try {
+                                  await (e.target as any)?.play();
+                                } catch (err) {
+                                  console.error(err);
+                                }
+                              }}
+                            >
+                              <source src={v.videoUrl} type="video/webm" />
+                            </video>
+                          )}
+                          <CardCell
+                            readOnly
+                            subtitle={v.artist}
+                            className="card-cell"
+                          >
+                            {v.title}
+                          </CardCell>
+                        </React.Fragment>
+                      </Card>
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             </div>
             <div className="row">
