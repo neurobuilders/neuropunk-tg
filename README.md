@@ -10,6 +10,13 @@ Neuropunk Beta
   - [Run Inside Telegram](#run-inside-telegram)
 - [Deploy](#deploy)
 - [Supabase](#supabase)
+- [Environment Variables](#environment-variables)
+  - [Core Configuration](#core-configuration)
+  - [Authentication Configuration](#authentication-configuration)
+  - [Telegram Bot Configuration](#telegram-bot-configuration)
+  - [Supabase Configuration](#supabase-configuration)
+  - [Notes](#notes)
+- [Example `.env` File](#example-env-file)
 - [Useful Links](#useful-links)
 
 This template demonstrates how developers can implement a web application on the
@@ -172,6 +179,75 @@ Running `supabase db reset` again will reset the database, and it will use the n
 6. Generate TypeScript types from your Supabase schema: \
 `npx supabase:generate-database-types` \
 This command uses the Supabase CLI to generate TypeScript types from your database schema, based on the projectId of your Supabase project (`SUPABASE_PROJECT_ID` in .env file). The generated types are saved to `src/types/database-generated.types.ts`, making it easier to work with your Supabase data in a type-safe way.
+
+## Environment Variables
+
+### Core Configuration
+
+- **`NODE_ENV`**  
+  - **Description**: Specifies the environment in which the application is running.
+  - **Options**: `development`, `production`, or `test`
+  - **Usage**: Sets `env.env` to the current environment and `env.isProduction` to `true` when `NODE_ENV` is set to `production`.
+
+- **`NEXT_PUBLIC_SITE_URL`**  
+  - **Description**: Defines the base URL of the site.
+  - **Usage**: `env.siteUrl` uses this value. If not set, the app falls back to the `VERCEL_URL` environment variable (if available).
+
+- **`VERCEL_URL`**  
+  - **Description**: Automatically populated by Vercel deployments; provides the URL of the deployed application.
+  - **Usage**: Used as a fallback for `env.siteUrl` when `NEXT_PUBLIC_SITE_URL` is not specified.
+
+### Authentication Configuration
+
+- **`AUTH_URL`**  
+  - **Description**: Specifies the URL for the authentication service.
+  - **Usage**: Used in `env.auth.url`.
+
+- **`AUTH_SECRET`**  
+  - **Description**: Secret key for authentication. Ensure this is kept secure and not shared.
+  - **Usage**: Used in `env.auth.secret`.
+
+### Telegram Bot Configuration
+
+- **`TG_BOT_TOKEN`**  
+  - **Description**: Token for the Telegram bot used in the application.
+  - **Usage**: Stored in `env.telegram.botToken` to interact with Telegram's API.
+
+- **`TG_USER_VALIDATION_DISABLED`**  
+  - **Description**: A flag to disable user validation within the Telegram bot.
+  - **Options**: `"true"` to disable validation; any other value or absence defaults to validation being enabled.
+  - **Usage**: Parsed as a boolean (`env.telegram.userValidationDisabled`) to control validation behavior.
+
+### Supabase Configuration
+
+- **`NEXT_PUBLIC_SUPABASE_URL`**  
+  - **Description**: URL for connecting to your Supabase instance.
+  - **Usage**: Stored in `env.supabase.url` and used for Supabase API calls.
+
+- **`NEXT_PUBLIC_SUPABASE_ANON_KEY`**  
+  - **Description**: Public API key for Supabase, used for client-side connections.
+  - **Usage**: Stored in `env.supabase.anonKey`.
+
+### Notes
+
+- Variables prefixed with `NEXT_PUBLIC_` are accessible on both the client and server. 
+- Secret keys such as `AUTH_SECRET` and `TG_BOT_TOKEN` should not be shared or exposed on the client side.
+- Ensure that sensitive environment variables are set in your server environment (e.g., Vercel, .env file in local development).
+
+## Example `.env` File
+
+```dotenv
+NODE_ENV=development
+NEXT_PUBLIC_SITE_URL=https://your-site-url.com
+AUTH_URL=https://auth-service-url.com
+AUTH_SECRET=your-auth-secret
+TG_BOT_TOKEN=your-telegram-bot-token
+TG_USER_VALIDATION_DISABLED=true
+NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-url.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+By setting up these environment variables correctly, you can configure the application to behave appropriately across different environments.
 
 ## Useful Links
 
