@@ -1,6 +1,5 @@
-import env from "@/env";
 import { createClient } from "@/helpers/supabase/server";
-import { AuthDataValidator } from "@telegram-auth/server";
+import { validateUser } from "@/helpers/user";
 import { headers } from "next/headers";
 
 export async function POST() {
@@ -15,33 +14,9 @@ export async function POST() {
       throw new Error("Unsupported authorization header type");
     }
 
-    const initData = new Map(new URLSearchParams(initDataRaw));
-
-    let user = JSON.parse(initData.get("user")!);
-    if (!env.telegram.userValidationDisabled) {
-      const validator = new AuthDataValidator({
-        botToken: env.telegram.botToken,
-      });
-      user = await validator.validate(initData);
-      //   console.log("user", user);
-    }
-
-    if (!user.id) {
-      throw new Error("User object does not have 'id' property");
-    }
+    const user = await validateUser(initDataRaw);
     const supabase = await createClient();
 
-    // const { data } = await supabase
-    //   .from("users")
-    //   .select()
-    //   .eq("tg_id", user.id)
-    //   .maybeSingle();
-
-    // if (!data) {
-
-    // }
-
-    // console.log("insert user data", user);
     const { error } = await supabase.from("users").insert({
       first_name: user.first_name,
       last_name: user.last_name,

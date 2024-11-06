@@ -30,7 +30,6 @@ export default function IndexPage() {
 
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
-      console.log("res", res);
       const { ok, error, code } = res;
       if (error) {
         if (code === "not-found-user") {
