@@ -10,6 +10,7 @@ const env = {
   },
   telegram: {
     botToken: process.env.TG_BOT_TOKEN,
+    userValidationDisabled: process.env.TG_USER_VALIDATION_DISABLED === "true",
   },
   supabase: {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL,

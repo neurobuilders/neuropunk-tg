@@ -1,4 +1,9 @@
-export { auth as middleware } from "@/auth";
+import { auth } from "@/auth";
+import { NextRequest } from "next/server";
+
+export default auth(function middleware(req: NextRequest) {
+  // console.log("req", req);
+});
 
 export const config = {
   /*
