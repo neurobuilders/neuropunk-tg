@@ -21,6 +21,7 @@ export default function IndexPage() {
     isLoaded.current = true;
 
     import("@rive-app/react-canvas");
+    router.prefetch("/neuropunk.riv");
     // trying to preload critical endpoints
     router.prefetch("/welcome", { kind: PrefetchKind.FULL });
     router.prefetch("/", { kind: PrefetchKind.FULL });

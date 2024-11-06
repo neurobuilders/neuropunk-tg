@@ -350,32 +350,40 @@ export default function Home() {
             onNavigationPrev={() => {
               triggerHapticFeedback("medium");
             }}
+            autoplay={{
+              delay: 9000,
+              disableOnInteraction: false,
+            }}
             // onTouchStart={() => {
             //   triggerHapticFeedback("light");
             // }}
             // onTouchEnd={() => {
             //   triggerHapticFeedback("light");
             // }}
-            style={{
-              "--swiper-navigation-color": "#fff",
-              "--swiper-pagination-color": "#fff",
-            }}
+            style={
+              {
+                "--swiper-navigation-color": "#fff",
+                "--swiper-pagination-color": "#fff",
+              } as any
+            }
             speed={600}
             parallax={true}
             pagination={{
               clickable: true,
             }}
             navigation={true}
-            modules={[Parallax, Pagination, Navigation]}
+            modules={[Parallax, Pagination, Navigation, Autoplay]}
             className="swiper--parallax"
           >
             <div
               slot="container-start"
               className="parallax-bg"
-              style={{
-                "background-image":
-                  "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
-              }}
+              style={
+                {
+                  "background-image":
+                    "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
+                } as any
+              }
               data-swiper-parallax="-23%"
             ></div>
             {artists.map((v) => (
