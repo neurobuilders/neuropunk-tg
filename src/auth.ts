@@ -4,6 +4,8 @@ import Credentials from "next-auth/providers/credentials";
 import { AuthDataValidator } from "@telegram-auth/server";
 import { createClient } from "@/helpers/supabase/server";
 
+const cookiePrefix = "neuropunk_auth_";
+
 export const config: NextAuthOptions = {
   providers: [
     Credentials({
@@ -100,6 +102,64 @@ export const config: NextAuthOptions = {
   //     error: "/auth/error",
   //   },
   debug: true,
+  useSecureCookies: true,
+  cookies: {
+    sessionToken: {
+      name: `${cookiePrefix}session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+    callbackUrl: {
+      name: `${cookiePrefix}callback-url`,
+      options: {
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+    csrfToken: {
+      name: `${cookiePrefix}csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+    pkceCodeVerifier: {
+      name: `${cookiePrefix}pkce-code-verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+        maxAge: 900,
+      },
+    },
+    state: {
+      name: `${cookiePrefix}state`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+        maxAge: 900,
+      },
+    },
+    nonce: {
+      name: `${cookiePrefix}nonce`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+  },
 };
 
 export const handler = NextAuth(config);

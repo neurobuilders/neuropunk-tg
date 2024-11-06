@@ -65,7 +65,6 @@ function RootInner({ children }: PropsWithChildren) {
         className="app-root"
       >
         {children}
-        <BottomNavigation />
       </AppRoot>
     </TonConnectUIProvider>
   );

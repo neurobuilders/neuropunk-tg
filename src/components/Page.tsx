@@ -4,6 +4,7 @@ import { backButton } from "@telegram-apps/sdk-react";
 import { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { BottomNavigation } from "./BottomNavigation/BottomNavigation";
 
 interface PageProps {
   /**
@@ -42,12 +43,15 @@ export function Page({
   }, [id]);
 
   return (
-    <div
-      className={clsx("page", {
-        [`page-${id}`]: id,
-      })}
-    >
-      {children}
-    </div>
+    <>
+      <div
+        className={clsx("page", {
+          [`page-${id}`]: id,
+        })}
+      >
+        {children}
+      </div>
+      <BottomNavigation />
+    </>
   );
 }
