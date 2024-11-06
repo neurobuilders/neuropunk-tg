@@ -45,7 +45,7 @@ export async function POST() {
     const { error } = await supabase.from("users").insert({
       first_name: user.first_name,
       last_name: user.last_name,
-      email: "",
+      email: null,
       tg_id: user.id,
       tg_avatar_url: "",
       tg_language_code: user.language_code,
