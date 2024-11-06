@@ -1,8 +1,11 @@
 const env = {
   env: process.env.NODE_ENV,
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ""),
   auth: {
-    url: process.env.NEXTAUTH_URL!,
-    secret: process.env.NEXTAUTH_SECRET!,
+    url: process.env.AUTH_URL!,
+    secret: process.env.AUTH_SECRET!,
   },
   telegram: {
     botToken: process.env.TG_BOT_TOKEN,

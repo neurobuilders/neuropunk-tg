@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import env from "@/env";
 import Credentials from "next-auth/providers/credentials";
 import { AuthDataValidator } from "@telegram-auth/server";
@@ -6,7 +6,8 @@ import { createClient } from "@/helpers/supabase/server";
 
 const cookiePrefix = "neuropunk_auth_";
 
-export const config: NextAuthOptions = {
+export const config: NextAuthConfig = {
+  secret: env.auth.secret,
   providers: [
     Credentials({
       id: "tg-miniapp",
@@ -42,7 +43,7 @@ export const config: NextAuthOptions = {
           //   console.log("dbUser", dbUser);
 
           if (dbUser) {
-            // console.log("database user", dbUser);
+            console.log("database user", dbUser);
             const {
               id,
               first_name,
@@ -113,33 +114,33 @@ export const config: NextAuthOptions = {
       name: `__Secure-next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: "None",
+        sameSite: "none",
         path: "/",
         secure: true,
         partitioned: true,
       },
     },
     callbackUrl: {
-      name: `__Secure-next-auth.callback-url`,
+      name: `__Secure-authjs.callback-url`,
       options: {
-        sameSite: "None",
+        sameSite: "none",
         path: "/",
         secure: true,
         partitioned: true,
       },
     },
     csrfToken: {
-      name: `__Host-next-auth.csrf-token`,
+      name: `__Host-authjs.csrf-token`,
       options: {
         httpOnly: true,
-        sameSite: "None",
+        sameSite: "none",
         path: "/",
         secure: true,
         partitioned: true,
       },
     },
     pkceCodeVerifier: {
-      name: `${cookiePrefix}next-auth.pkce.code_verifier`,
+      name: `${cookiePrefix}authjs.pkce.code_verifier`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -149,7 +150,7 @@ export const config: NextAuthOptions = {
       },
     },
     state: {
-      name: `${cookiePrefix}next-auth.state`,
+      name: `${cookiePrefix}authjs.state`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -159,7 +160,7 @@ export const config: NextAuthOptions = {
       },
     },
     nonce: {
-      name: `${cookiePrefix}next-auth.nonce`,
+      name: `${cookiePrefix}authjs.nonce`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -227,6 +228,4 @@ export const config: NextAuthOptions = {
   //   },
 };
 
-export const handler = NextAuth(config);
-
-export const { handlers, auth, signIn, signOut } = handler;
+export const { auth, handlers, signIn, signOut } = NextAuth(config);

@@ -169,7 +169,7 @@ This runs the TypeScript `seed.ts `script and outputs the result as SQL commands
 `supabase db reset` \
 Running `supabase db reset` again will reset the database, and it will use the newly generated seed file from the previous command to populate your database tables with the seed data.
 
-5. Generate TypeScript types from your Supabase schema: \
+6. Generate TypeScript types from your Supabase schema: \
 `npx supabase:generate-database-types` \
 This command uses the Supabase CLI to generate TypeScript types from your database schema, based on the projectId of your Supabase project (`SUPABASE_PROJECT_ID` in .env file). The generated types are saved to `src/types/database-generated.types.ts`, making it easier to work with your Supabase data in a type-safe way.
 
