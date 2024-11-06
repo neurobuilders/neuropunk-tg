@@ -24,14 +24,11 @@ import clsx from "clsx";
 import { openLink } from "@telegram-apps/sdk-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { Pagination, Navigation, Parallax, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// import required modules
-import { Pagination, Navigation, Parallax } from "swiper/modules";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 const latestReleases = [
   {
@@ -173,14 +170,31 @@ export default function Home() {
               </div>
               <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
               <Swiper
+                onNavigationNext={() => {
+                  triggerHapticFeedback("medium");
+                }}
+                onNavigationPrev={() => {
+                  triggerHapticFeedback("medium");
+                }}
+                // onTouchStart={() => {
+                //   triggerHapticFeedback("light");
+                // }}
+                // onTouchEnd={() => {
+                //   triggerHapticFeedback("light");
+                // }}
                 slidesPerView={2}
                 spaceBetween={15}
                 loop={true}
                 pagination={{
                   clickable: true,
                 }}
+                // centeredSlides={true}
+                autoplay={{
+                  delay: 6000,
+                  disableOnInteraction: false,
+                }}
                 navigation={true}
-                modules={[Pagination, Navigation]}
+                modules={[Pagination, Navigation, Autoplay]}
                 className={clsx(
                   "releases releases--latest swiper--releases",
                   "!px-5 !pb-10 mt-2 mb-5"
@@ -190,6 +204,7 @@ export default function Home() {
                   <SwiperSlide key={v.url}>
                     <Card
                       onClick={() => {
+                        triggerHapticFeedback();
                         openLink(v.url);
                       }}
                     >
@@ -245,6 +260,7 @@ export default function Home() {
                             mode="bezeled"
                             size="s"
                             onClick={() => {
+                              triggerHapticFeedback();
                               openLink(v.url);
                             }}
                           >
@@ -297,6 +313,18 @@ export default function Home() {
         </Section>
         <div>
           <Swiper
+            onNavigationNext={() => {
+              triggerHapticFeedback("medium");
+            }}
+            onNavigationPrev={() => {
+              triggerHapticFeedback("medium");
+            }}
+            // onTouchStart={() => {
+            //   triggerHapticFeedback("light");
+            // }}
+            // onTouchEnd={() => {
+            //   triggerHapticFeedback("light");
+            // }}
             style={{
               "--swiper-navigation-color": "#fff",
               "--swiper-pagination-color": "#fff",

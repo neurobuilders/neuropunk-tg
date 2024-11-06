@@ -40,7 +40,7 @@
   width: 100%;
   height: 100%;
 
-  &-slide {
+  .swiper-slide {
     text-align: center;
     font-size: 18px;
 
@@ -50,7 +50,7 @@
     align-items: center;
   }
 
-  &-button {
+  .swiper-button {
     &-prev,
     &-next {
       --swiper-navigation-sides-offset: 3px;
@@ -91,7 +91,7 @@
       font-size: 14px;
       max-width: 400px;
       line-height: 1.3;
-      background: #607d8be0;
+      background: #607d8b;
       @apply rounded-xl px-3 py-2;
     }
   }
