@@ -20,17 +20,21 @@ export default function IndexPage() {
     }
     isLoaded.current = true;
 
-    import("@rive-app/react-canvas");
-    // trying to preload critical endpoints
-    router.prefetch("/welcome", { kind: PrefetchKind.FULL });
-    router.prefetch("/", { kind: PrefetchKind.FULL });
-    router.prefetch("/reactor", { kind: PrefetchKind.FULL });
-    router.prefetch("/pass", { kind: PrefetchKind.FULL });
-    router.prefetch("/settings", { kind: PrefetchKind.FULL });
+    try {
+      import("@rive-app/react-canvas");
+      // router.prefetch("/neuropunk.riv");
+      // trying to preload critical endpoints
+      router.prefetch("/welcome", { kind: PrefetchKind.FULL });
+      router.prefetch("/", { kind: PrefetchKind.FULL });
+      router.prefetch("/reactor", { kind: PrefetchKind.FULL });
+      router.prefetch("/pass", { kind: PrefetchKind.FULL });
+      router.prefetch("/settings", { kind: PrefetchKind.FULL });
+    } catch (err) {
+      console.error(err);
+    }
 
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
-      console.log("res", res);
       const { ok, error, code } = res;
       if (error) {
         if (code === "not-found-user") {

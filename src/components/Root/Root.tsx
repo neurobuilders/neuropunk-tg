@@ -6,8 +6,9 @@ import {
   miniApp,
   useLaunchParams,
   useSignal,
-  isViewportExpanded,
+  viewport,
   expandViewport,
+  swipeBehavior,
 } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
@@ -42,10 +43,12 @@ function RootInner({ children }: PropsWithChildren) {
 
   // Initialize the library.
   useClientOnce(() => {
-    if (!isViewportExpanded()) {
-      expandViewport();
-    }
     init(debug);
+    if (!viewport.isExpanded()) {
+      viewport.expand();
+    }
+    swipeBehavior.mount();
+    swipeBehavior.disableVertical();
   });
 
   const isDark = useSignal(miniApp.isDark);

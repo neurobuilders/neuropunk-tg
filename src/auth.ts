@@ -1,9 +1,9 @@
 import NextAuth, { CredentialsSignin, NextAuthConfig } from "next-auth";
 import env from "@/env";
 import Credentials from "next-auth/providers/credentials";
-import { AuthDataValidator } from "@telegram-auth/server";
 import { createClient } from "@/helpers/supabase/server";
 import { ExtendedUser } from "./types/next-auth";
+import { validateUser } from "./helpers/user";
 
 const cookiePrefix = "neuropunk_auth_";
 
@@ -23,22 +23,7 @@ export const config: NextAuthConfig = {
         const { initDataRaw } = data as { initDataRaw: string };
         let dbUser = null;
         try {
-          const initData = new Map(new URLSearchParams(initDataRaw));
-
-          //   console.log("initData", initData);
-
-          let user = JSON.parse(initData.get("user")!);
-          if (!env.telegram.userValidationDisabled) {
-            const validator = new AuthDataValidator({
-              botToken: env.telegram.botToken,
-            });
-            user = await validator.validate(initData);
-            //   console.log("user", user);
-          }
-
-          if (!user.id) {
-            throw new Error("User object does not have 'id' property");
-          }
+          const user = await validateUser(initDataRaw);
           const supabase = await createClient();
 
           const { data } = await supabase
