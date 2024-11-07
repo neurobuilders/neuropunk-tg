@@ -282,7 +282,9 @@ export default function Home() {
                           <p className="text-sky-500 font-bold text-xs">
                             {v.date}
                           </p>
-                          <p className="text-gray-400 font-bold">{v.title}</p>
+                          <p className="text-gray-400 font-bold leading-none mt-1 mb-1">
+                            {v.title}
+                          </p>
                           <p className="text-gray-600 text-sm">{v.location}</p>
                           {/* <p className="text-gray-400"> Beginner speakers </p> */}
                         </div>

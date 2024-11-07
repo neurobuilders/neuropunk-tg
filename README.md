@@ -76,11 +76,19 @@ within [Telegram applications](https://docs.telegram-mini-apps.com/platform/abou
 you can still develop and test them outside of Telegram during the development
 process.
 
-To run the application in the development mode, use the `dev` script:
+To run the application in the development mode for `localhost`, use the `dev:https` script:
+
+```bash
+pnpm run dev:https
+```
+
+To run the application in the development mode with **`ngrok`**, use the `dev` script:
 
 ```bash
 pnpm run dev
 ```
+
+**NB! After implementing NextAuth it is impossible to pass the loading screen using `http` protocol, only `https`**
 
 After this, you will see a similar message in your terminal:
 
