@@ -20,6 +20,7 @@ import {
 import { Link } from "@/components/Link/Link";
 import { Check } from "lucide-react";
 import RiveComponent from "@rive-app/react-canvas";
+import NextImage from "next/image";
 
 import "./styles.scss";
 
@@ -29,6 +30,18 @@ export default function Tasks() {
   return (
     <Page back={true}>
       <List>
+        <Section header="Your Neuro Reactor is Ready">
+          <div className="pb-8">
+            <div className="relative h-[150px] mt-6">
+              <NextImage
+                src="/logo.svg"
+                fill={true}
+                alt="Reactor logo"
+                priority={true}
+              />
+            </div>
+          </div>
+        </Section>
         <Banner
           className="banner"
           before={
