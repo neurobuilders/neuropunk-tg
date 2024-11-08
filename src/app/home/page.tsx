@@ -17,6 +17,7 @@ import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
 import RiveComponent from "@rive-app/react-canvas";
 import React, { useRef } from "react";
+import * as Sentry from "@sentry/nextjs";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 import "./styles.scss";
@@ -242,7 +243,7 @@ export default function Home() {
                                 try {
                                   await (e.target as any)?.play();
                                 } catch (err) {
-                                  console.error(err);
+                                  Sentry.captureException(err);
                                 }
                               }}
                             >
