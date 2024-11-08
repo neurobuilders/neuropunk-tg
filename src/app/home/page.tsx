@@ -379,12 +379,10 @@ export default function Home() {
             <div
               slot="container-start"
               className="parallax-bg"
-              style={
-                {
-                  "background-image":
-                    "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
-                } as any
-              }
+              style={{
+                backgroundImage:
+                  "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
+              }}
               data-swiper-parallax="-23%"
             ></div>
             {artists.map((v) => (
