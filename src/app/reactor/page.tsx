@@ -23,6 +23,7 @@ import RiveComponent from "@rive-app/react-canvas";
 import NextImage from "next/image";
 
 import "./styles.scss";
+import { ParticlesBackground } from "@/components/ParticlesBackground/ParticlesBackground";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -41,7 +42,8 @@ export default function Tasks() {
       <List>
         <Section header="">
           <div className="pb-8">
-            <div className="relative h-[150px] mt-6">
+            <div className="relative h-[138px] mt-6">
+              <ParticlesBackground />
               <NextImage
                 src="/logo.svg"
                 fill={true}

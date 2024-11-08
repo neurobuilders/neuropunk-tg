@@ -1,8 +1,8 @@
 // best in chrome
 $total: 300; // total particles
-$orb-size: 100px;
-$particle-size: 2px;
-$time: 14s;
+$orb-size: 160px;
+$particle-size: 3px;
+$time: 5s;
 $base-hue: 0; // change for diff colors (180 is nice)
 
 html,
@@ -10,10 +10,10 @@ body {
   height: 100%;
 }
 
-body {
-  background: black;
-  overflow: hidden; // no scrollbars..
-}
+// body {
+//   background: black;
+//   overflow: hidden; // no scrollbars..
+// }
 
 .wrap {
   position: relative;
