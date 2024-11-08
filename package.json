@@ -24,6 +24,7 @@
     "@telegram-apps/telegram-ui": "^2.1.5",
     "@telegram-auth/server": "^1.0.4",
     "@tonconnect/ui-react": "^2.0.5",
+    "animate.css": "^4.1.1",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "eruda": "^3.0.1",

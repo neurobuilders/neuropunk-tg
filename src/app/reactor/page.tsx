@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Page } from "@/components/Page";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Badge,
@@ -26,19 +26,38 @@ import "./styles.scss";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
+  const [logoClassName, setLogoClassName] = useState(
+    "animate__animated animate__fadeIn"
+  );
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLogoClassName("anim_pulsation");
+    }, 500);
+  }, []);
 
   return (
     <Page back={true}>
       <List>
-        <Section header="Your Neuro Reactor is Ready">
+        <Section header="">
           <div className="pb-8">
             <div className="relative h-[150px] mt-6">
               <NextImage
                 src="/logo.svg"
                 fill={true}
                 alt="Reactor logo"
+                className={logoClassName}
                 priority={true}
               />
+            </div>
+            <div className="flex flex-col items-center mt-8">
+              <h3 className="text-2xl font-bold mb-1">2 475 NE</h3>
+              <h3 className="text-md mt-2">
+                Complete tasks and mine <strong>Neuro Energy</strong>
+              </h3>
+              <a href="#" className="text-sky-500 mt-1">
+                How it works →
+              </a>
             </div>
           </div>
         </Section>

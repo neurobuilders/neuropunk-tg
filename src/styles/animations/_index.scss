@@ -1,0 +1,10 @@
+@import "animate.css";
+
+.anim_pulsation {
+  animation: pulse; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 3s; /* don't forget to set a duration! */
+  //   animation-delay: 4s;
+  animation-iteration-count: infinite;
+}
+
+@import "particles";
