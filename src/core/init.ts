@@ -8,6 +8,7 @@ import {
   init as initSDK,
   swipeBehavior,
 } from "@telegram-apps/sdk-react";
+import * as Sentry from "@sentry/nextjs";
 
 /**
  * Initializes the application and configures its dependencies.
@@ -43,6 +44,7 @@ export async function init(debug: boolean): Promise<void> {
       await viewport.mount();
     } catch (err) {
       console.error("Something went wrong mounting the viewport", err);
+      Sentry.captureException(err);
     }
   }
 
