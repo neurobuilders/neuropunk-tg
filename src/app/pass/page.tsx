@@ -12,17 +12,16 @@ export default function Profile() {
   return (
       <Page back={true}>
         <List>
-          <Section header="Profile">
-            <Cell before={<Image size={48} src="/neo.jpg" />} subtitle="Wake up">Neo Morheus</Cell>
-            {/*<Cell subtitle="User's unique identifier">NeuroID: 47A3-M0RPH</Cell>*/}
-            <Cell subtitle="Current level of the user">Level: 12</Cell>
-            <Cell subtitle="Premium">NeuroPremuim: Active</Cell>
-            <Cell subtitle="Access information if available">NeuroPass: Active</Cell>
-            <Cell subtitle="Current rank in the system">Rank: NeuroMaster</Cell>
+          <Section header="NEUROPUNK PASS">
+            <Cell before={<Image size={48} src="/neo.jpg" />} subtitle="Wake up">Neuro Morheus</Cell>
+            <Cell subtitle="Social Pulse: Rising">Respect: 1.231</Cell>
+            <Cell subtitle="Neuro: Engaged 💠">Premium: Active 🌀</Cell>
+            <Cell subtitle="Wisdom flows through you">Rank: Oracle</Cell>
+            <Cell subtitle="United in rhythm">Squad: Paperfunk</Cell>
           </Section>
 
           <Section header="Achievements">
-            <Cell>🎖️ NeuroExplorer: Discovering the unknown realms of Neurospace.</Cell>
+            <Cell>🎖️ Boostframe Hooked</Cell>
             <Cell>🚀 Captain: Commanding the Neuroship and journeying through Neurospace.</Cell>
             <Cell>🌌 NeuroContributor: Helping expand our Multiverse.</Cell>
             <Cell>🔥 NeuroPioneer: Among the first to chart new territories in Neurospace.</Cell>
