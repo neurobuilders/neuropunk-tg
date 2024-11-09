@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useSpring, animated } from "react-spring";
 import emitter, { Events } from "@/helpers/events";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 interface ClaimButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -19,7 +20,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
   const [floatCount, setFloatCount] = useState(
     parseFloat(`${startValue ?? 0}`)
   ); // Initialize to a float value
-  const incrementValue = 100.2586; // Increment by 0.1 every second
+  const incrementValue = 0.0013; // Increment by 0.1 every second
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
@@ -53,8 +54,11 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
   useEffect(() => {
     const handleEvent = (value: any) => {
-      setFloatCount(value);
-      springProps.value.set(value);
+      triggerHapticFeedback();
+      setTimeout(() => {
+        setFloatCount(value);
+        springProps.value.set(value);
+      }, 100);
     };
 
     emitter.on(Events.SetClaimButtonCurrentValue, handleEvent);
