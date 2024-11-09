@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Page } from "@/components/Page";
 
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Badge,
@@ -13,11 +13,10 @@ import {
   Image,
   List,
   Modal,
-  Placeholder,
   Section,
 } from "@telegram-apps/telegram-ui";
 import { Link } from "@/components/Link/Link";
-import { Check, CircleX } from "lucide-react";
+import { Check } from "lucide-react";
 import NextImage from "next/image";
 
 import "./styles.scss";
@@ -25,25 +24,31 @@ import { ReactorLogoBackground } from "@/components/ParticlesBackground/ReactorL
 import clsx from "clsx";
 import ClaimButton from "@/components/Button/ClaimButton";
 import { formatNumber } from "@/helpers/utils";
-import emitter, { Events } from "@/helpers/events";
 import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader";
-import { ModalClose } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalClose/ModalClose";
 
 const claimButtonStartValue = 0;
-const currentNeuroEnergyAmount = 2746;
+const initialNeuroEnergyAmount = 2746;
 const neuroEnergyPerSecond = 0.0013;
 
-export default function Tasks() {
+export default function ReactorPage() {
   const t = useTranslations("i18n");
   const [logoClassName, setLogoClassName] = useState(
     "animate__animated animate__fadeIn"
   );
 
   const [isModalOpen, setModalOpen] = useState(false);
+  const [currentNeuroEnergyAmount, setCurrentNeuroEnergyAmount] = useState(
+    initialNeuroEnergyAmount
+  );
 
-  const claimButtonHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const claimButtonHandler: (
+    value: number,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void = (value: number, e) => {
     e.preventDefault();
-    emitter.emit(Events.SetClaimButtonCurrentValue, 0);
+    setCurrentNeuroEnergyAmount((prevVal) => {
+      return prevVal + value;
+    });
   };
 
   useEffect(() => {
@@ -73,7 +78,7 @@ export default function Tasks() {
             </div>
             <div className="flex flex-col items-center mt-[50px]">
               <h3 className="text-2xl font-bold mb-1">
-                {formatNumber(currentNeuroEnergyAmount, 1)} NE
+                {formatNumber(currentNeuroEnergyAmount, 2)} NE
               </h3>
               <h3 className="text-md mt-2">
                 Complete tasks and mine <strong>Neuro Energy</strong>
@@ -112,7 +117,7 @@ export default function Tasks() {
                       setModalOpen(false);
                     }}
                   >
-                    OK
+                    Okay, got it
                   </Button>
                 </div>
               </Modal>

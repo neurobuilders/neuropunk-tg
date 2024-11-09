@@ -11,7 +11,10 @@ import { triggerHapticFeedback } from "@/helpers/telegram";
 import clsx from "clsx";
 
 interface ClaimButtonProps {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: (
+    value: number,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
   startValue?: number;
   currentValue?: number;
   className?: string;
@@ -27,9 +30,15 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (onClick) {
-        onClick(e);
-      }
+      setTimeout(() => {
+        triggerHapticFeedback();
+        setFloatCount(0);
+        springProps.value.set(0);
+
+        if (onClick) {
+          onClick(floatCount, e);
+        }
+      }, 100);
     },
     [onClick]
   );
@@ -53,24 +62,6 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
-
-  useEffect(() => {
-    const handleEvent = (value: any) => {
-      setTimeout(() => {
-        triggerHapticFeedback();
-        setFloatCount(value);
-        springProps.value.set(value);
-      }, 100);
-    };
-
-    emitter.on(Events.SetClaimButtonCurrentValue, handleEvent);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      emitter.off(Events.SetClaimButtonCurrentValue, handleEvent);
-    };
-  }, [springProps.value]);
-
   return (
     <button
       className={clsx("btn btn__claim", className)}
