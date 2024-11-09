@@ -44,9 +44,7 @@ export default async function HomePage() {
           <>
             <div className="row">
               <div className="px-6 pt-4">
-                {/* <Suspense>
-                  <NeuropunkRive />
-                </Suspense> */}
+                <NeuropunkRive />
               </div>
               <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
               <ReleasesSlider releases={releases} />
@@ -66,7 +64,7 @@ export default async function HomePage() {
               }
               description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
             >
-              <Suspense>{/* <NeuroWave /> */}</Suspense>
+              <NeuroWave />
             </Placeholder>
           </div>
         </Section>

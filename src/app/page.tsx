@@ -14,12 +14,34 @@ export default function IndexPage() {
   const router = useRouter();
   const { initDataRaw } = retrieveLaunchParams();
   const isLoaded = useRef(false);
+  const isPreloaded = useRef(false);
+
+  const preload = () => {
+    try {
+      if (isPreloaded.current) {
+        return;
+      }
+      import("@rive-app/react-canvas");
+      // router.prefetch("/neuropunk.riv");
+      // trying to preload critical endpoints
+      router.prefetch("/welcome", { kind: PrefetchKind.FULL });
+      router.prefetch("/", { kind: PrefetchKind.FULL });
+      router.prefetch("/reactor", { kind: PrefetchKind.FULL });
+      router.prefetch("/pass", { kind: PrefetchKind.FULL });
+      router.prefetch("/settings", { kind: PrefetchKind.FULL });
+      isPreloaded.current = true;
+    } catch (err) {
+      captureException(err);
+    }
+  };
 
   useEffect(() => {
     if (isLoaded.current) {
       return;
     }
     isLoaded.current = true;
+
+    preload();
 
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
@@ -29,21 +51,14 @@ export default function IndexPage() {
           router.replace("/welcome");
         }
       } else if (ok) {
-        try {
-          import("@rive-app/react-canvas");
-          // router.prefetch("/neuropunk.riv");
-          // trying to preload critical endpoints
-          router.prefetch("/welcome", { kind: PrefetchKind.FULL });
-          router.prefetch("/", { kind: PrefetchKind.FULL });
-          router.prefetch("/reactor", { kind: PrefetchKind.FULL });
-          router.prefetch("/pass", { kind: PrefetchKind.FULL });
-          router.prefetch("/settings", { kind: PrefetchKind.FULL });
-        } catch (err) {
-          captureException(err);
-        }
-        setTimeout(() => {
+        if (isPreloaded.current) {
           router.replace("/home");
-        }, 300);
+        } else {
+          preload();
+          setTimeout(() => {
+            router.replace("/home");
+          }, 300);
+        }
       }
     });
   }, [initDataRaw, router]);
