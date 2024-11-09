@@ -79,35 +79,41 @@ export default function Tasks() {
                 Complete tasks and mine <strong>Neuro Energy</strong>
               </h3>
               <Modal
-                header={
-                  <ModalHeader
-                    after={
-                      <ModalClose>
-                        <CircleX
-                          style={{ color: "var(--tgui--plain_foreground)" }}
-                        />
-                      </ModalClose>
-                    }
-                  >
-                    Introducing Neuro Reactor
-                  </ModalHeader>
-                }
+                header={<ModalHeader></ModalHeader>}
+                open={isModalOpen}
+                onOpenChange={setModalOpen}
                 trigger={
                   <button type="button" className="text-sky-500 mt-1">
                     How it works →
                   </button>
                 }
               >
-                <div className="px-5 pb-6">
+                <div className="px-5 pb-6 mb-2">
                   <h3 className="text-2xl font-bold mb-3">
                     Introducing Neuro Reactor
                   </h3>
-                  <h4 className="text-md mb-2">Welcome Neuropunkers!</h4>
-                  <p>
+                  <p className="mb-5">
                     The NeuroReactor is the core of NeuroSpace, where energy
                     flows and tasks unlock special rewards. Complete missions to
                     harness NeuroPulse and boost your rank
                   </p>
+                  <h3 className="text-2xl font-bold mb-3">
+                    Welcome Neuropunkers!
+                  </h3>
+                  <p className="pb-6">
+                    The NeuroReactor is the core of NeuroSpace, where energy
+                    flows and tasks unlock special rewards. Complete missions to
+                    harness NeuroPulse and boost your rank
+                  </p>
+                  <Button
+                    size="l"
+                    stretched
+                    onClick={() => {
+                      setModalOpen(false);
+                    }}
+                  >
+                    OK
+                  </Button>
                 </div>
               </Modal>
               <div className="">
