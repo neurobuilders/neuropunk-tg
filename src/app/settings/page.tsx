@@ -9,7 +9,7 @@ import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
 
-export default function Home() {
+export default function SettingsPage() {
   const t = useTranslations("i18n");
 
   return (

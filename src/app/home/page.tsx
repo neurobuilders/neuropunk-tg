@@ -160,7 +160,7 @@ to build off that success throughout 2018.`,
   },
 ];
 
-export default function Home() {
+export default function HomePage() {
   const imageRefs = useRef<Record<number, HTMLImageElement | null>>({});
   return (
     <Page back={false}>

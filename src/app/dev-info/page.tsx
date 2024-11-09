@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/components/Link/Link";
 import { Page } from "@/components/Page";
 
-export default function Home() {
+export default function DevInfoPage() {
   const t = useTranslations("i18n");
 
   return (
