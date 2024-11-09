@@ -27,6 +27,7 @@ import { ParticlesBackground } from "@/components/ParticlesBackground/ParticlesB
 import { ReactorLogoBackground } from "@/components/ParticlesBackground/ReactorLogoBackground";
 import clsx from "clsx";
 import ClaimButton from "@/components/Button/ClaimButton";
+import { formatNumber } from "@/helpers/utils";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -60,7 +61,9 @@ export default function Tasks() {
               </ReactorLogoBackground>
             </div>
             <div className="flex flex-col items-center mt-[120px]">
-              <h3 className="text-2xl font-bold mb-1">2 475 NE</h3>
+              <h3 className="text-2xl font-bold mb-1">
+                {formatNumber(2746, 1)} NE
+              </h3>
               <h3 className="text-md mt-2">
                 Complete tasks and mine <strong>Neuro Energy</strong>
               </h3>
