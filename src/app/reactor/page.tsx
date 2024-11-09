@@ -26,6 +26,7 @@ import "./styles.scss";
 import { ParticlesBackground } from "@/components/ParticlesBackground/ParticlesBackground";
 import { ReactorLogoBackground } from "@/components/ParticlesBackground/ReactorLogoBackground";
 import clsx from "clsx";
+import ClaimButton from "@/components/Button/ClaimButton";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -67,14 +68,7 @@ export default function Tasks() {
                 How it works →
               </a>
               <div className="">
-                <button
-                  className="btn btn__claim mt-[40px] mb-[30px]"
-                  type="button"
-                >
-                  <span>
-                    Claim <span className="icon icon-ne"></span> 7.823232
-                  </span>
-                </button>
+                <ClaimButton />
               </div>
             </div>
           </div>

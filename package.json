@@ -35,6 +35,7 @@
     "normalize.css": "^8.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-spring": "^9.7.4",
     "sass": "^1.80.4",
     "slugify": "^1.6.6",
     "supabase": "^1.215.0",

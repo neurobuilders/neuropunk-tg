@@ -6,6 +6,11 @@ interface ReactorLogoBackgroundProps {
   className?: string;
 }
 
+const liCount = 60;
+const liElements = Array.from(Array(liCount).keys()).map((v) => (
+  <li key={v}></li>
+));
+
 /**
  *
  * @returns
@@ -29,68 +34,7 @@ export const ReactorLogoBackground = ({
             </div>
             <div className="core2">{children}</div>
           </div>
-          <ul className="marks">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+          <ul className="marks">{liElements}</ul>
         </div>
       </div>
     </div>
