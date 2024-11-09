@@ -5,3 +5,24 @@
     }
   }
 }
+
+.icon {
+  &-ne {
+    height: 16px;
+    width: 16px;
+    display: block;
+    position: relative;
+    top: -2px;
+    @apply mx-2;
+    &::before {
+      content: "";
+      background: center/contain url("/logo-black.svg") no-repeat;
+      min-height: 100%;
+      min-width: 100%;
+      display: inline-block;
+      position: relative;
+    }
+  }
+}
+
+@import "variant-1";

@@ -1,0 +1,45 @@
+$violet: violet;
+$blue: #0ff;
+
+.btn__claim {
+  width: 80vw;
+  height: 50px;
+  position: relative;
+  // background-color: #707070;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    // animation: spin 4s linear infinite;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    // margin-top: 140px;
+    // border-radius: 50%;
+    $x1: 300px;
+    $x2: 60px;
+    box-shadow: inset 0 0 50px #fff, inset 20px 0 $x2 $violet,
+      inset -20px 0 $x2 $blue, inset 20px 0 $x1 $violet, inset -20px 0 $x1 $blue,
+      0 0 50px #fff, -10px 0 $x2 $violet, 10px 0 $x2 $blue;
+  }
+
+  > span {
+    // background-color: #000;
+    z-index: 1;
+    position: relative;
+    color: #414141;
+    @apply font-bold inline-flex items-center text-base;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

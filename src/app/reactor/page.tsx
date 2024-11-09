@@ -60,10 +60,17 @@ export default function Tasks() {
               <a href="#" className="text-sky-500 mt-1">
                 How it works →
               </a>
+              <div className="">
+                <button className="btn btn__claim mt-[40px] mb-[30px]">
+                  <span>
+                    Claim <span className="icon icon-ne"></span> 7.823232
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </Section>
-        <Banner
+        {/* <Banner
           className="banner"
           before={
             <React.Fragment key=".0">
@@ -89,7 +96,6 @@ export default function Tasks() {
                   <div style={{ fontSize: "24px", fontWeight: "bold" }}>
                     2421 NP
                   </div>
-                  {/*<div>XComplete tasks in NeuroReactor to earn NeuroPulse</div>*/}
                   <Link href="#">Hot it works</Link>
                 </div>
               </div>
@@ -105,7 +111,7 @@ export default function Tasks() {
               Claim 12.7344 NP
             </Button>
           </React.Fragment>
-        </Banner>
+        </Banner> */}
 
         <Section className="tasks" header="⚡ Reactor Tasks">
           <Cell
