@@ -47,9 +47,9 @@ export default function Tasks() {
     <Page back={true}>
       <List>
         <Section header="">
-          <div className="pb-8">
-            <div className="relative h-[120px] mt-[70px]">
-              <ReactorLogoBackground className="animate__animated animate__fadeIn">
+          <div>
+            <div className="relative">
+              <ReactorLogoBackground className="animate__animated animate__fadeIn pt-[40px]">
                 <NextImage
                   src="/logo.svg"
                   fill={true}
@@ -62,7 +62,7 @@ export default function Tasks() {
                 />
               </ReactorLogoBackground>
             </div>
-            <div className="flex flex-col items-center mt-[120px]">
+            <div className="flex flex-col items-center mt-[50px]">
               <h3 className="text-2xl font-bold mb-1">
                 {formatNumber(2746, 1)} NE
               </h3>

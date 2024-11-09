@@ -21,7 +21,7 @@ export const ReactorLogoBackground = ({
   className,
 }: PropsWithChildren<ReactorLogoBackgroundProps>) => {
   return (
-    <div className={clsx("absolute h-full w-full", className)}>
+    <div className={clsx(/*"absolute h-full w-full"*/ className)}>
       <div className="arc_reactor">
         <div className="case_container">
           <div className="e7">
