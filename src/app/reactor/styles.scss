@@ -8,15 +8,16 @@
 
 .icon {
   &-ne {
-    height: 16px;
-    width: 16px;
     display: block;
     position: relative;
-    top: -2px;
+    top: -1px;
+    height: 20px;
+    width: 20px;
     @apply mx-2;
+
     &::before {
       content: "";
-      background: center/contain url("/logo-black.svg") no-repeat;
+      background: center/contain url("/logo.svg") no-repeat;
       min-height: 100%;
       min-width: 100%;
       display: inline-block;
@@ -26,7 +27,7 @@
 }
 
 .btn__claim {
-  width: 70vw;
+  width: 80vw;
   position: relative;
   &:after {
     content: "";
@@ -56,7 +57,32 @@
   }
 }
 
-// @import "variant-1";
-@import "variant-2";
-// @import "variant-3";
-// @import "variant-4";
+// https://getcssscan.com/css-buttons-examples
+// button 63
+.btn__claim {
+  align-items: center;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 15px 24px;
+  text-decoration: none;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn__claim:active,
+.btn__claim:hover {
+  outline: 0;
+}
