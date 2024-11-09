@@ -1,4 +1,4 @@
-import "./styles.scss";
+import "./styles1.scss";
 
 const divsCount = 300;
 const arr = Array.from(Array(divsCount).keys());

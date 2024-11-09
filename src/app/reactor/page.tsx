@@ -24,6 +24,7 @@ import NextImage from "next/image";
 
 import "./styles.scss";
 import { ParticlesBackground } from "@/components/ParticlesBackground/ParticlesBackground";
+import { ParticlesBackground2 } from "@/components/ParticlesBackground/ParticlesBackground2";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -43,7 +44,7 @@ export default function Tasks() {
         <Section header="">
           <div className="pb-8">
             <div className="relative h-[138px] mt-6">
-              <ParticlesBackground />
+              <ParticlesBackground2 />
               <NextImage
                 src="/logo.svg"
                 fill={true}
