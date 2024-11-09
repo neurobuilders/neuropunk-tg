@@ -16,7 +16,7 @@ import Image from "next/image";
 import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
 import RiveComponent from "@rive-app/react-canvas";
-import React, { useRef } from "react";
+import React, { Suspense, useRef } from "react";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 import "./styles.scss";
@@ -30,6 +30,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { captureException } from "@/helpers/utils";
+import ArtistsSlider from "@/components/ArtistsSlider/ArtistsSlider";
 
 const latestReleases = [
   {
@@ -103,60 +104,6 @@ const upcomingEvents = [
     url: "https://neuropunk.ru/events/21-02-neuropunk-atmosphere/",
     title: "Neuropunk Festival (Москва)",
     location: "@ Atmosphere",
-  },
-];
-
-const artists = [
-  {
-    name: "Gydra",
-    country: "RU",
-    description: `Gydra is D&B duo formed by legend of Russian D&B scene, leader of Neuropunk
-podcast & Tamrecords Eugene Besman aka DJ Bes & outstanding Moscowbased
-producer Nikolay Shilov aka Menfort.
-With countless Beatport Drum & Bass TOP 10’s, releases on labels like Eatbrain,
-Blackout, Bad Taste, Renegade Hardware, Cause 4 Concern and others, Gydra is
-one of the most exciting and fastest growing Drum&Bass acts coming from
-Russia.
-Project also was nominated as best newcomer on Drum&Bass Awards 2017.
-Guys are gaining regular DJ support from the likes of Noisia, Audio, Ed Rush &
-Optical, Prolix, BTK, Optiv, Bad Company, Black Sun Empire, Jade, Billain, DC
-Breaks (to name few!) as well as making appearances on huge music platforms
-& radio shows.
-After a huge two years of productions in Drum & Bass, Gydra looks to continue
-to build off that success throughout 2018.`,
-    url: "https://neuropunk.ru/artist/gydra/",
-    imageUrl: "https://neuropunk.ru/wp-content/uploads/2018/06/6.jpg",
-    imageWidth: 1170,
-    imageHeight: 780,
-  },
-  {
-    name: "L 33",
-    country: "BG",
-    description: `L 33 is a Bulgarian drum and bass producer and DJ known for his distinctive style in neurofunk. His music is defined by heavy basslines, sharp, aggressive synths, and intricate, high-energy rhythms. L 33 has released music on renowned labels like Eatbrain, Bad Taste Recordings, and MethLab, establishing a global presence in the drum and bass community. His complex sound design and technical prowess have earned him recognition among some of the most respected artists in the genre. In addition to solo productions, L 33 collaborates with other prominent artists and often creates impactful remixes, which showcase his unique approach to sound.`,
-    url: "https://neuropunk.ru/artist/l-33/",
-    imageUrl:
-      "https://neuropunk.ru/wp-content/uploads/2024/11/312053536_668417284850498_8574182613708254731_n.jpg",
-    imageWidth: 960,
-    imageHeight: 960,
-  },
-  {
-    name: "2Whales",
-    country: "RU",
-    description: `2Whales is a highly promising drum & bass duo from Russia’s city of Vologda. Having been inspired by the material delivered by the native artists, Bogdan and Yaroslav joined forces to create their own neuro style. These masters of deep and heavy bass do know how to serve their fat meals properly. Over less than two years of activity, they managed to receive support from different monsters of drum & bass scene. They repeatedly popped up in top 100 DNB Beatport Releases and different drum and bass podcasts such as: Pirate Station, Neuropunk, Dnb France, BBC Radio 1xtra and etc.`,
-    url: "https://neuropunk.ru/artist/2whales/",
-    imageUrl: "https://neuropunk.ru/wp-content/uploads/2023/08/GW_sEc9IYvw.jpg",
-    imageWidth: 1170,
-    imageHeight: 521,
-  },
-  {
-    name: "KROT",
-    country: "RU",
-    description: `KROT has began his career as a DJ and producer in 2005. Originally from Saint Petersburg, Russia. The main direction in sound is old-school Neurofunk, but there are also releases in Soulful/Liquid funk d&b. Has been signed by many international labels, some of them: Eatbrain, Close2Death, Mindtech, High Resistance Greypost Audio, Live History, Modulate, Blu Saphir, KOS.MOS.MUSIC, Influenza Media, TAMP3CORDS and TILT.`,
-    url: "https://neuropunk.ru/artist/krot/",
-    imageUrl:
-      "https://neuropunk.ru/wp-content/uploads/2023/07/%D0%91%D0%B5%D0%B7-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg?w=1313&ssl=1",
-    imageWidth: 1170,
-    imageHeight: 1280,
   },
 ];
 
@@ -346,70 +293,9 @@ export default function HomePage() {
           </Banner>
         </Section>
         <div>
-          <Swiper
-            onNavigationNext={() => {
-              triggerHapticFeedback("medium");
-            }}
-            onNavigationPrev={() => {
-              triggerHapticFeedback("medium");
-            }}
-            autoplay={{
-              delay: 9000,
-              disableOnInteraction: false,
-            }}
-            // onTouchStart={() => {
-            //   triggerHapticFeedback("light");
-            // }}
-            // onTouchEnd={() => {
-            //   triggerHapticFeedback("light");
-            // }}
-            style={
-              {
-                "--swiper-navigation-color": "#fff",
-                "--swiper-pagination-color": "#fff",
-              } as any
-            }
-            speed={600}
-            parallax={true}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Parallax, Pagination, Navigation, Autoplay]}
-            className="swiper--parallax"
-          >
-            <div
-              slot="container-start"
-              className="parallax-bg"
-              style={{
-                backgroundImage:
-                  "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
-              }}
-              data-swiper-parallax="-23%"
-            ></div>
-            {artists.map((v) => (
-              <SwiperSlide key={v.url}>
-                <div className="flex pb-4 gap-6 items-center">
-                  <Image
-                    src={v.imageUrl}
-                    alt={v.name}
-                    width={v.imageWidth}
-                    height={v.imageHeight}
-                    className="max-w-[80px]"
-                  />
-                  <div className="title" data-swiper-parallax="-300">
-                    {v.name}
-                  </div>
-                </div>
-                {/* <div className="subtitle" data-swiper-parallax="-200">
-                  {v.country}
-                </div> */}
-                <div className="text" data-swiper-parallax="-100">
-                  <p>{v.description}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <Suspense fallback={<p>Loading artists...</p>}>
+            <ArtistsSlider />
+          </Suspense>
         </div>
       </List>
     </Page>
