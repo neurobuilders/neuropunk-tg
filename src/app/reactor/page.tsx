@@ -30,8 +30,13 @@ const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
 const neuroEnergyPerSecond = 0.0013;
 
+function getRandomArbitrary(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
 export default function ReactorPage() {
   const t = useTranslations("i18n");
+  // const [marksTranslateY, setMarksTranslateY] = useState(125);
   const [logoClassName, setLogoClassName] = useState(
     "animate__animated animate__fadeIn"
   );
@@ -49,12 +54,27 @@ export default function ReactorPage() {
     setCurrentNeuroEnergyAmount((prevVal) => {
       return prevVal + value;
     });
+    const rootEl = document.querySelector(":root");
+    if (rootEl) {
+      // const rootComputedStyle = getComputedStyle(rootEl);
+      (rootEl as any).style.setProperty(
+        "--marks-translate-y",
+        `${100 * getRandomArbitrary(1, 1.4)}px`
+      );
+    }
   };
 
   useEffect(() => {
     setTimeout(() => {
       setLogoClassName("anim_pulsation");
     }, 500);
+    // const rootEl = document.querySelector(":root");
+    // if (rootEl) {
+    //   const rootComputedStyle = getComputedStyle(rootEl);
+    //   if(rootComputedStyle) {
+    //     const value = rootComputedStyle.getPropertyValue('--marks-translate-y')
+    //   }
+    // }
   }, []);
 
   return (
