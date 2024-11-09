@@ -27,6 +27,7 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
     <Section className="release__links">
       {links.map((v) => (
         <Link
+          key={v.url}
           href={v.url}
           className={clsx("release__link", `release__link--${v.providerId}`)}
         >

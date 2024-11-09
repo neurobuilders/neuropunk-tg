@@ -5,7 +5,9 @@ import { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { BottomNavigation } from "./BottomNavigation/BottomNavigation";
-import { Snackbar } from "@telegram-apps/telegram-ui";
+import Head from "next/head";
+// @ts-ignore
+import riveWASMResource from "@rive-app/canvas/rive.wasm";
 
 interface PageProps {
   /**
@@ -45,6 +47,22 @@ export function Page({
 
   return (
     <>
+      <Head>
+        <link
+          key="preload-riveWASMResource"
+          rel="preload"
+          href={riveWASMResource}
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+        <link
+          key="preload-neuropunk.riv"
+          rel="preload"
+          href="/neuropunk.riv"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </Head>
       <div
         className={clsx("page", {
           [`page-${id}`]: id,

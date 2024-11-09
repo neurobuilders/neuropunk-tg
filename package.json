@@ -43,7 +43,8 @@
     "slugify": "^1.6.6",
     "supabase": "^1.215.0",
     "swiper": "^11.1.14",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@snaplet/copycat": "^5.1.0",

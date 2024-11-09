@@ -8,6 +8,11 @@ import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { PrefetchKind } from "next/dist/client/components/router-reducer/router-reducer-types";
 import { signIn } from "next-auth/react";
 import { captureException } from "@/helpers/utils";
+// @ts-ignore
+import riveWASMResource from "@rive-app/canvas/rive.wasm";
+import { RuntimeLoader } from "@rive-app/react-canvas";
+
+RuntimeLoader.setWasmUrl(riveWASMResource);
 
 export default function IndexPage() {
   const t = useTranslations("i18n");
@@ -21,7 +26,6 @@ export default function IndexPage() {
       if (isPreloaded.current) {
         return;
       }
-      import("@rive-app/react-canvas");
       // router.prefetch("/neuropunk.riv");
       // trying to preload critical endpoints
       router.prefetch("/welcome", { kind: PrefetchKind.FULL });

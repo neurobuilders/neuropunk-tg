@@ -11,12 +11,12 @@ interface ShareButtonProps {
 
 export const ShareButton = (props: ShareButtonProps) => {
   const { release } = props;
-  if (!release) {
-    return;
-  }
   const shareButtonHandler: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
       e.preventDefault();
+      if (!release) {
+        return;
+      }
       shareURL(window.location.href, `${release.artist} - ${release.title}`);
     },
     []
