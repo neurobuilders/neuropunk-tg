@@ -29,7 +29,7 @@
             },
             {
                 "url": "https://music.yandex.ru/album/33366198?utm_source=bandlink&utm_medium=TNTKLZ&utm_campaign=Synthesis%20LP",
-                "providerId": "yandex",
+                "providerId": "yandex-music",
                 "label": "Play",
                 "providerName": "Yandex Music"
             },
@@ -53,7 +53,7 @@
             },
             {
                 "url": "https://music.youtube.com/playlist?list=OLAK5uy_mhzoSSuVPLr4UTKunj0aAPQDSMadtG3Gc",
-                "providerId": "music-youtube",
+                "providerId": "youtube-music",
                 "label": "Play",
                 "providerName": "YouTube Music"
             },
@@ -89,7 +89,7 @@
             },
             {
                 "url": "https://zvuk.com/release/35374757",
-                "providerId": "zvooq",
+                "providerId": "zvuk",
                 "label": "Play",
                 "providerName": "Zvuk"
             },
@@ -138,7 +138,7 @@
             },
             {
                 "url": "https://music.yandex.ru/album/32926730?utm_source=bandlink&utm_medium=Various%20Artists&utm_campaign=Neuropunks%20LP%202",
-                "providerId": "yandex",
+                "providerId": "yandex-music",
                 "label": "Play",
                 "providerName": "Yandex Music"
             },
@@ -150,7 +150,7 @@
             },
             {
                 "url": "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
-                "providerId": "custom_icon1",
+                "providerId": "neuropunk",
                 "label": "Купить",
                 "providerName": "Neuropunk"
             },
@@ -168,7 +168,7 @@
             },
             {
                 "url": "https://music.youtube.com/playlist?list=OLAK5uy_nTxKM8g__eklCZFvl5L9nAhWe2cPOzC_s",
-                "providerId": "music-youtube",
+                "providerId": "youtube-music",
                 "label": "Play",
                 "providerName": "YouTube Music"
             },
@@ -234,7 +234,7 @@
             },
             {
                 "url": "https://music.yandex.ru/album/33366190?utm_source=bandlink&utm_medium=L%2033&utm_campaign=Get%20Busy%2C%20You%20Was%20There",
-                "providerId": "yandex",
+                "providerId": "yandex-music",
                 "label": "Play",
                 "providerName": "Yandex Music"
             },
@@ -252,7 +252,7 @@
             },
             {
                 "url": "https://neuropunk.app/release/l-33-get-busy-you-was-there",
-                "providerId": "custom_icon1",
+                "providerId": "neuropunk",
                 "label": "Купить",
                 "providerName": "Neuropunk"
             },
@@ -264,7 +264,7 @@
             },
             {
                 "url": "https://music.youtube.com/watch?v=A-lk_KiJBt8&list=OLAK5uy_mlknGUNwsr6XSfuzlnQoK3_XrYv3uaGiM",
-                "providerId": "music-youtube",
+                "providerId": "youtube-music",
                 "label": "Play",
                 "providerName": "YouTube Music"
             },
@@ -300,7 +300,7 @@
             },
             {
                 "url": "https://zvuk.com/release/35374658",
-                "providerId": "zvooq",
+                "providerId": "zvuk",
                 "label": "Play",
                 "providerName": "Zvuk"
             }

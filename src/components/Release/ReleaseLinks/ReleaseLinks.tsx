@@ -1,17 +1,10 @@
 "use client";
 
 import { Release } from "@/helpers/api/release";
-import { captureException } from "@/helpers/utils";
-import { useState } from "react";
 import clsx from "clsx";
-import {
-  Avatar,
-  Button,
-  Cell,
-  Section,
-  Image,
-} from "@telegram-apps/telegram-ui";
+import { Button, Cell, Section } from "@telegram-apps/telegram-ui";
 import { Link } from "@/components/Link/Link";
+import Image from "next/image";
 
 interface ReleaseLinksProps {
   release?: Release;
@@ -32,16 +25,22 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
   return (
     <Section className="release__links">
       {links.map((v) => (
-        <Link href={v.url}>
+        <Link
+          href={v.url}
+          className={clsx("release__link", `release__link--${v.providerId}`)}
+        >
           <Cell
             className="px-3"
             before={
-              <Avatar className="link__avatar" size={40}>
-                <Image src={"/logo.png"} size={24} alt="Neuropunk Premium" />
-              </Avatar>
+              <Image
+                src={`/icons/providers/${v.providerId}.svg`}
+                height={28}
+                width={28}
+                alt={v.providerName}
+              />
             }
             after={
-              <Button size="s" stretched>
+              <Button size="s" mode="gray" className="min-w-[80px] h-[32px]">
                 {v.label}
               </Button>
             }
