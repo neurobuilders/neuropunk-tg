@@ -13,8 +13,7 @@ import { Page } from "@/components/Page";
 
 import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
-import RiveComponent from "@rive-app/react-canvas";
-import React, { Suspense } from "react";
+import React from "react";
 import "./styles.scss";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -25,6 +24,7 @@ import ReleasesSlider from "@/components/ReleasesSlider/ReleasesSlider";
 import { getReleases } from "@/helpers/api/releases";
 import { getEvents } from "@/helpers/api/events";
 import { getArtists } from "@/helpers/api/artists";
+import { LoadingRive } from "@/components/LoadingRive";
 
 export default async function HomePage() {
   const [releases, events, artists] = await Promise.all([
@@ -32,10 +32,6 @@ export default async function HomePage() {
     getEvents(),
     getArtists(),
   ]);
-  // console.log("promises", promises);
-  // const releases = await getReleases();
-  // const events = await getEvents();
-  // const artists = await getArtists();
 
   return (
     <Page back={false}>
@@ -73,13 +69,7 @@ export default async function HomePage() {
             before={
               <Avatar size={96}>
                 <div style={{ width: "70px", height: "70px" }}>
-                  <Suspense>
-                    {/* <RiveComponent
-                      src="/rives/loading.riv"
-                      stateMachines={"State Machine 1"}
-                      artboard={"Artboard"}
-                    /> */}
-                  </Suspense>
+                  <LoadingRive />
                 </div>
               </Avatar>
             }
