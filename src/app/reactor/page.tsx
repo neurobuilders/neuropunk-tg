@@ -24,7 +24,8 @@ import NextImage from "next/image";
 
 import "./styles.scss";
 import { ParticlesBackground } from "@/components/ParticlesBackground/ParticlesBackground";
-import { ParticlesBackground2 } from "@/components/ParticlesBackground/ParticlesBackground2";
+import { ReactorLogoBackground } from "@/components/ParticlesBackground/ReactorLogoBackground";
+import clsx from "clsx";
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -44,15 +45,18 @@ export default function Tasks() {
         <Section header="">
           <div className="pb-8">
             <div className="relative h-[120px] mt-[70px]">
-              <ParticlesBackground2>
+              <ReactorLogoBackground className="animate__animated animate__fadeIn">
                 <NextImage
                   src="/logo.svg"
                   fill={true}
                   alt="Reactor logo"
-                  className="!relative max-w-full max-h-full"
+                  className={clsx(
+                    "!relative max-w-full max-h-full",
+                    logoClassName
+                  )}
                   priority={true}
                 />
-              </ParticlesBackground2>
+              </ReactorLogoBackground>
             </div>
             <div className="flex flex-col items-center mt-[120px]">
               <h3 className="text-2xl font-bold mb-1">2 475 NE</h3>

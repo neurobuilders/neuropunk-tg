@@ -1,14 +1,22 @@
-import Image from "next/image";
+import clsx from "clsx";
 import "./styles2.scss";
+import { PropsWithChildren } from "react";
+
+interface ReactorLogoBackgroundProps {
+  className?: string;
+}
 
 /**
  *
  * @returns
  * @url https://codepen.io/natewiley/pen/GgONKy
  */
-export const ParticlesBackground2 = ({ children }) => {
+export const ReactorLogoBackground = ({
+  children,
+  className,
+}: PropsWithChildren<ReactorLogoBackgroundProps>) => {
   return (
-    <div style={{ position: "absolute", height: "100%", width: "100%" }}>
+    <div className={clsx("absolute h-full w-full", className)}>
       <div className="arc_reactor">
         <div className="case_container">
           <div className="e7">
