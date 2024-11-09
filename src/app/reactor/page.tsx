@@ -7,14 +7,17 @@ import React, { MouseEventHandler, useEffect, useState } from "react";
 import {
   Avatar,
   Badge,
+  Button,
   Cell,
   IconButton,
   Image,
   List,
+  Modal,
+  Placeholder,
   Section,
 } from "@telegram-apps/telegram-ui";
 import { Link } from "@/components/Link/Link";
-import { Check } from "lucide-react";
+import { Check, CircleX } from "lucide-react";
 import NextImage from "next/image";
 
 import "./styles.scss";
@@ -23,6 +26,8 @@ import clsx from "clsx";
 import ClaimButton from "@/components/Button/ClaimButton";
 import { formatNumber } from "@/helpers/utils";
 import emitter, { Events } from "@/helpers/events";
+import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader";
+import { ModalClose } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalClose/ModalClose";
 
 const claimButtonStartValue = 0;
 const currentNeuroEnergyAmount = 2746;
@@ -33,6 +38,8 @@ export default function Tasks() {
   const [logoClassName, setLogoClassName] = useState(
     "animate__animated animate__fadeIn"
   );
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const claimButtonHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -71,9 +78,38 @@ export default function Tasks() {
               <h3 className="text-md mt-2">
                 Complete tasks and mine <strong>Neuro Energy</strong>
               </h3>
-              <a href="#" className="text-sky-500 mt-1">
-                How it works →
-              </a>
+              <Modal
+                header={
+                  <ModalHeader
+                    after={
+                      <ModalClose>
+                        <CircleX
+                          style={{ color: "var(--tgui--plain_foreground)" }}
+                        />
+                      </ModalClose>
+                    }
+                  >
+                    Introducing Neuro Reactor
+                  </ModalHeader>
+                }
+                trigger={
+                  <button type="button" className="text-sky-500 mt-1">
+                    How it works →
+                  </button>
+                }
+              >
+                <div className="px-5 pb-6">
+                  <h3 className="text-2xl font-bold mb-3">
+                    Introducing Neuro Reactor
+                  </h3>
+                  <h4 className="text-md mb-2">Welcome Neuropunkers!</h4>
+                  <p>
+                    The NeuroReactor is the core of NeuroSpace, where energy
+                    flows and tasks unlock special rewards. Complete missions to
+                    harness NeuroPulse and boost your rank
+                  </p>
+                </div>
+              </Modal>
               <div className="">
                 <ClaimButton
                   className="mt-[40px] mb-[30px]"
@@ -85,49 +121,6 @@ export default function Tasks() {
             </div>
           </div>
         </Section>
-        {/* <Banner
-          className="banner"
-          before={
-            <React.Fragment key=".0">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Avatar size={96}>
-                  <div style={{ width: "70px", height: "70px" }}>
-                    <RiveComponent
-                      src="/rives/loading.riv"
-                      stateMachines={"State Machine 1"}
-                      artboard={"Artboard"}
-                    />
-                  </div>
-                </Avatar>
-
-                <div style={{ textAlign: "center", marginTop: "10px" }}>
-                  Your balance
-                  <div style={{ fontSize: "24px", fontWeight: "bold" }}>
-                    2421 NP
-                  </div>
-                  <Link href="#">Hot it works</Link>
-                </div>
-              </div>
-            </React.Fragment>
-          }
-          callout="Welcome Neuropunkers!"
-          description="The NeuroReactor is the core of NeuroSpace, where energy flows and tasks unlock special rewards. Complete missions to harness NeuroPulse and boost your rank"
-          header="Introducing Neuro Reactor"
-          type="section"
-        >
-          <React.Fragment key=".0">
-            <Button size="s" className="mt-1 mb-2">
-              Claim 12.7344 NP
-            </Button>
-          </React.Fragment>
-        </Banner> */}
-
         <Section className="tasks" header="⚡ Reactor Tasks">
           <Cell
             before={<Avatar size={40}>⚖️</Avatar>}
