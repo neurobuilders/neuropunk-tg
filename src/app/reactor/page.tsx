@@ -61,7 +61,10 @@ export default function Tasks() {
                 How it works →
               </a>
               <div className="">
-                <button className="btn btn__claim mt-[40px] mb-[30px]">
+                <button
+                  className="btn btn__claim button-63 mt-[40px] mb-[30px]"
+                  type="button"
+                >
                   <span>
                     Claim <span className="icon icon-ne"></span> 7.823232
                   </span>
