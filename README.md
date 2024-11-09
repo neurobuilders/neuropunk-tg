@@ -15,6 +15,7 @@ Neuropunk Beta
   - [Authentication Configuration](#authentication-configuration)
   - [Telegram Bot Configuration](#telegram-bot-configuration)
   - [Supabase Configuration](#supabase-configuration)
+  - [Sentry Configuration](#sentry-configuration)
   - [Notes](#notes)
 - [Example `.env` File](#example-env-file)
 - [Useful Links](#useful-links)
@@ -235,6 +236,16 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
 - **`NEXT_PUBLIC_SUPABASE_ANON_KEY`**  
   - **Description**: Public API key for Supabase, used for client-side connections.
   - **Usage**: Stored in `env.supabase.anonKey`.
+
+### Sentry Configuration
+
+- **`SENTRY_DSN`**  
+  - **Description**: Data Source Name for Sentry, which is required to connect your application to Sentry for error tracking.
+  - **Usage**: Used to configure Sentry for error monitoring and reporting.
+
+- **`SENTRY_AUTH_TOKEN`**  
+  - **Description**: Authentication token for Sentry, used for deployment tracking and other integrations.
+  - **Usage**: Stored securely and used when authenticating API calls to Sentry.
 
 ### Notes
 
