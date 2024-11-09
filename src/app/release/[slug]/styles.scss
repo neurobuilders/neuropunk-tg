@@ -6,4 +6,11 @@
   &__cover {
     @apply w-full;
   }
+  &__info {
+    > div {
+      background: hsl(
+        from var(--tg-theme-section-bg-color) h s calc(l - 4)
+      ) !important;
+    }
+  }
 }

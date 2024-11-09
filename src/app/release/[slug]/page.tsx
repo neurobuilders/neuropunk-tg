@@ -1,16 +1,15 @@
 "use server";
 
-import { useTranslations } from "next-intl";
-
 import { Page } from "@/components/Page";
 import React from "react";
 import { List, Section } from "@telegram-apps/telegram-ui";
 import { getRelease } from "@/helpers/api/release";
-import Image from "next/image";
+import NextImage from "next/image";
 import clsx from "clsx";
 import "./styles.scss";
 import { ShareButton } from "@/components/Button/ShareButton";
 import { ReleaseCover } from "@/components/Release/ReleaseCover/ReleaseCover";
+import { ReleaseLinks } from "@/components/Release/ReleaseLinks/ReleaseLinks";
 
 interface ReleasePageProps {
   params: {
@@ -33,7 +32,7 @@ export default async function ReleasePage(props: ReleasePageProps) {
 
   return (
     <Page id="release" back={true}>
-      <Image
+      <NextImage
         className={clsx("release__background")}
         src={release.coverUrl}
         width={release.width}
@@ -41,20 +40,26 @@ export default async function ReleasePage(props: ReleasePageProps) {
         alt={release.slug}
         priority={true}
       />
-      <List className="relative z-2 p-4">
-        <div>
+      <List className="relative z-2 p-2">
+        <div className="mb-2">
           <ReleaseCover release={release} />
-          <Section>
-            <div className="px-3 py-2 flex items-center justify-between">
+          <Section className="release__info">
+            <div
+              className={clsx(
+                "px-3 pt-2.5 pb-3",
+                "flex items-center justify-between gap-3"
+              )}
+            >
               <div>
-                <h1 className="font-bold text-lg">{release.artist}</h1>
+                <h1 className="font-bold text-lg leading-none mb-2">
+                  {release.artist}
+                </h1>
                 <h2 className="text-sm">{release.title}</h2>
               </div>
-              <div>
-                <ShareButton release={release} />
-              </div>
+              <ShareButton release={release} />
             </div>
           </Section>
+          <ReleaseLinks release={release} />
         </div>
       </List>
     </Page>
