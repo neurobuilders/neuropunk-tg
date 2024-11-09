@@ -25,6 +25,8 @@ import { formatNumber } from "@/helpers/utils";
 import emitter, { Events } from "@/helpers/events";
 
 const claimButtonStartValue = 0;
+const currentNeuroEnergyAmount = 2746;
+const neuroEnergyPerSecond = 0.0013;
 
 export default function Tasks() {
   const t = useTranslations("i18n");
@@ -64,7 +66,7 @@ export default function Tasks() {
             </div>
             <div className="flex flex-col items-center mt-[50px]">
               <h3 className="text-2xl font-bold mb-1">
-                {formatNumber(2746, 1)} NE
+                {formatNumber(currentNeuroEnergyAmount, 1)} NE
               </h3>
               <h3 className="text-md mt-2">
                 Complete tasks and mine <strong>Neuro Energy</strong>
@@ -74,7 +76,9 @@ export default function Tasks() {
               </a>
               <div className="">
                 <ClaimButton
+                  className="mt-[40px] mb-[30px]"
                   onClick={claimButtonHandler}
+                  valuePerSecond={neuroEnergyPerSecond}
                   startValue={claimButtonStartValue}
                 />
               </div>

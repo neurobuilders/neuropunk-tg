@@ -8,19 +8,22 @@ import React, {
 import { useSpring, animated } from "react-spring";
 import emitter, { Events } from "@/helpers/events";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import clsx from "clsx";
 
 interface ClaimButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   startValue?: number;
   currentValue?: number;
+  className?: string;
+  valuePerSecond?: number;
 }
 
 const ClaimButton = (props: ClaimButtonProps) => {
-  const { onClick, startValue, currentValue } = props;
+  const { onClick, startValue, currentValue, className, valuePerSecond } =
+    props;
   const [floatCount, setFloatCount] = useState(
     parseFloat(`${startValue ?? 0}`)
   ); // Initialize to a float value
-  const incrementValue = 0.0013; // Increment by 0.1 every second
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
@@ -32,7 +35,6 @@ const ClaimButton = (props: ClaimButtonProps) => {
   );
 
   useEffect(() => {
-    console.log("setFloatCount", currentValue);
     const float = parseFloat(`${currentValue ?? 0}`);
     setFloatCount(float);
   }, [currentValue]);
@@ -46,7 +48,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFloatCount((prevCount) => prevCount + incrementValue); // Increment the float count
+      setFloatCount((prevCount) => prevCount + (valuePerSecond ?? 0)); // Increment the float count
     }, 1000); // Update every second (1000 ms)
 
     return () => clearInterval(interval); // Cleanup on unmount
@@ -54,8 +56,8 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
   useEffect(() => {
     const handleEvent = (value: any) => {
-      triggerHapticFeedback();
       setTimeout(() => {
+        triggerHapticFeedback();
         setFloatCount(value);
         springProps.value.set(value);
       }, 100);
@@ -71,7 +73,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
   return (
     <button
-      className="btn btn__claim mt-[40px] mb-[30px]"
+      className={clsx("btn btn__claim", className)}
       type="button"
       onClick={_onClick}
     >
