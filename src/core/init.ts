@@ -1,3 +1,4 @@
+import { captureException } from "@/helpers/utils";
 import {
   backButton,
   viewport,
@@ -6,13 +7,13 @@ import {
   initData,
   $debug,
   init as initSDK,
+  swipeBehavior,
 } from "@telegram-apps/sdk-react";
-import * as Sentry from "@sentry/nextjs";
 
 /**
  * Initializes the application and configures its dependencies.
  */
-export function init(debug: boolean): void {
+export async function init(debug: boolean): Promise<void> {
   // Set @telegram-apps/sdk-react debug mode.
   $debug.set(debug);
 
@@ -39,13 +40,28 @@ export function init(debug: boolean): void {
   initData.restore();
 
   if (!viewport.isMounted() && !viewport.isMounting()) {
-    void viewport.mount().catch((err) => {
-      console.error("Something went wrong mounting the viewport", err);
-      Sentry.captureException(err);
-    });
+    try {
+      await viewport.mount();
+    } catch (err) {
+      captureException(err);
+    }
   }
 
   if (viewport.isMounted()) {
     viewport.bindCssVars();
+
+    // Expand the TMA if it was launched in compact mode
+    if (!viewport.isExpanded()) {
+      viewport.expand();
+    }
+  }
+
+  if (!swipeBehavior.isMounted()) {
+    swipeBehavior.mount();
+  }
+
+  // Disable vertical swipe behavior for TMA (if it wasn't yet), so that it can't be closed or minimized
+  if (swipeBehavior.isVerticalEnabled()) {
+    swipeBehavior.disableVertical();
   }
 }

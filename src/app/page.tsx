@@ -1,6 +1,5 @@
 "use client";
 
-import * as Sentry from "@sentry/nextjs";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -8,6 +7,7 @@ import { Loader } from "@/components/Loader/Loader";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { PrefetchKind } from "next/dist/client/components/router-reducer/router-reducer-types";
 import { signIn } from "next-auth/react";
+import { captureException } from "@/helpers/utils";
 
 export default function IndexPage() {
   const t = useTranslations("i18n");
@@ -31,7 +31,7 @@ export default function IndexPage() {
       router.prefetch("/pass", { kind: PrefetchKind.FULL });
       router.prefetch("/settings", { kind: PrefetchKind.FULL });
     } catch (err) {
-      Sentry.captureException(err);
+      captureException(err);
     }
 
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {

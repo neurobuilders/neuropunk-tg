@@ -1,10 +1,10 @@
 import NextAuth, { CredentialsSignin, NextAuthConfig } from "next-auth";
 import env from "@/env";
-import * as Sentry from "@sentry/nextjs";
 import Credentials from "next-auth/providers/credentials";
 import { createClient } from "@/helpers/supabase/server";
 import { ExtendedUser } from "@/types/next-auth";
 import { validateUser } from "@/helpers/user";
+import { captureException } from "@/helpers/utils";
 
 const cookiePrefix = "neuropunk_auth_";
 
@@ -35,7 +35,7 @@ export const config: NextAuthConfig = {
 
           dbUser = data;
         } catch (err) {
-          Sentry.captureException(err);
+          captureException(err);
           return null;
         }
 

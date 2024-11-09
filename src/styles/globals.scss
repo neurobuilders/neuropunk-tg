@@ -24,6 +24,11 @@ body {
   --tg-header-color: #17212b;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .app-root {
   height: 100%;
 }
@@ -43,3 +48,4 @@ body {
 @import "loader";
 @import "page";
 @import "components";
+@import "animations/_index";

@@ -1,7 +1,7 @@
-import * as Sentry from "@sentry/nextjs";
 import { createClient } from "@/helpers/supabase/server";
 import { validateUser } from "@/helpers/user";
 import { headers } from "next/headers";
+import { captureException } from "@/helpers/utils";
 
 export async function POST() {
   try {
@@ -33,7 +33,7 @@ export async function POST() {
     }
     return Response.json({ ok: true });
   } catch (err) {
-    Sentry.captureException(err);
+    captureException(err);
     // throw new Error((err as Error).message, { cause: err });
     return Response.json({ ok: false, error: (err as Error).message });
   }

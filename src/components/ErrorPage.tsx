@@ -1,5 +1,5 @@
+import { captureException } from "@/helpers/utils";
 import { useEffect } from "react";
-import * as Sentry from "@sentry/nextjs";
 
 export function ErrorPage({
   error,
@@ -10,7 +10,7 @@ export function ErrorPage({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    Sentry.captureException(error);
+    captureException(error);
   }, [error]);
 
   return (

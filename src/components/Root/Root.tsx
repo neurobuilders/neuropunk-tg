@@ -44,11 +44,6 @@ function RootInner({ children }: PropsWithChildren) {
   // Initialize the library.
   useClientOnce(() => {
     init(debug);
-    if (!viewport.isExpanded()) {
-      viewport.expand();
-    }
-    swipeBehavior.mount();
-    swipeBehavior.disableVertical();
   });
 
   const isDark = useSignal(miniApp.isDark);

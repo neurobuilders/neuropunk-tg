@@ -2,7 +2,7 @@ import {
   hapticFeedback,
   ImpactHapticFeedbackStyle,
 } from "@telegram-apps/sdk-react";
-import * as Sentry from "@sentry/nextjs";
+import { captureException } from "@/helpers/utils";
 
 export const triggerHapticFeedback = (
   style: ImpactHapticFeedbackStyle = "heavy"
@@ -10,6 +10,6 @@ export const triggerHapticFeedback = (
   try {
     hapticFeedback.impactOccurred(style);
   } catch (err) {
-    Sentry.captureException(err);
+    captureException(err);
   }
 };
