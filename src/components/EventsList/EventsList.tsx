@@ -2,17 +2,19 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
-import { getEvents } from "@/helpers/api/events";
+import { Event } from "@/helpers/api/events";
 import { Button } from "@telegram-apps/telegram-ui";
 import { openLink } from "@telegram-apps/sdk-react";
 import clsx from "clsx";
 
-export default async function EventsList() {
-  const t = useTranslations("i18n");
+interface EventsListProps {
+  events: Event[];
+}
 
-  const events = await getEvents();
+export default function EventsList(props: EventsListProps) {
+  const { events } = props;
+  const t = useTranslations("i18n");
 
   return (
     <div className={clsx("events events--upcoming", "px-5 pb-5 mt-2 mb-2")}>

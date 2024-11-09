@@ -21,19 +21,6 @@ export default function IndexPage() {
     }
     isLoaded.current = true;
 
-    try {
-      import("@rive-app/react-canvas");
-      // router.prefetch("/neuropunk.riv");
-      // trying to preload critical endpoints
-      router.prefetch("/welcome", { kind: PrefetchKind.FULL });
-      router.prefetch("/", { kind: PrefetchKind.FULL });
-      router.prefetch("/reactor", { kind: PrefetchKind.FULL });
-      router.prefetch("/pass", { kind: PrefetchKind.FULL });
-      router.prefetch("/settings", { kind: PrefetchKind.FULL });
-    } catch (err) {
-      captureException(err);
-    }
-
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
       const { ok, error, code } = res;
@@ -42,7 +29,21 @@ export default function IndexPage() {
           router.replace("/welcome");
         }
       } else if (ok) {
-        router.replace("/home");
+        try {
+          import("@rive-app/react-canvas");
+          // router.prefetch("/neuropunk.riv");
+          // trying to preload critical endpoints
+          router.prefetch("/welcome", { kind: PrefetchKind.FULL });
+          router.prefetch("/", { kind: PrefetchKind.FULL });
+          router.prefetch("/reactor", { kind: PrefetchKind.FULL });
+          router.prefetch("/pass", { kind: PrefetchKind.FULL });
+          router.prefetch("/settings", { kind: PrefetchKind.FULL });
+        } catch (err) {
+          captureException(err);
+        }
+        setTimeout(() => {
+          router.replace("/home");
+        }, 300);
       }
     });
   }, [initDataRaw, router]);

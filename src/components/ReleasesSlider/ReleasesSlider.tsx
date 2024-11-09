@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
-import { getReleases } from "@/helpers/api/releases";
+import { Release } from "@/helpers/api/releases";
 import clsx from "clsx";
 import { Card } from "@telegram-apps/telegram-ui";
 import { openLink } from "@telegram-apps/sdk-react";
@@ -17,11 +17,14 @@ import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card
 import { captureException } from "@/helpers/utils";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 
-export default async function ReleasesSlider() {
+interface ReleasesSliderProps {
+  releases: Release[];
+}
+
+export default function ReleasesSlider(props: ReleasesSliderProps) {
+  const { releases } = props;
   const imageRefs = useRef<Record<number, HTMLImageElement | null>>({});
   const t = useTranslations("i18n");
-
-  const releases = await getReleases();
 
   return (
     <Swiper

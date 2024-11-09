@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { DotLottie, DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { triggerHapticFeedback } from "@/helpers/telegram";

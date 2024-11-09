@@ -9,12 +9,15 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
-import { getArtists } from "@/helpers/api/artists";
+import { Artist } from "@/helpers/api/artists";
 
-export default async function ArtistsSlider() {
+interface ArtistsSliderProps {
+  artists: Artist[];
+}
+
+export default function ArtistsSlider(props: ArtistsSliderProps) {
+  const { artists } = props;
   const t = useTranslations("i18n");
-
-  const artists = await getArtists();
 
   return (
     <Swiper

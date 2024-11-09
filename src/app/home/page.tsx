@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import {
   Section,
@@ -22,8 +22,21 @@ import "swiper/css/navigation";
 import ArtistsSlider from "@/components/ArtistsSlider/ArtistsSlider";
 import EventsList from "@/components/EventsList/EventsList";
 import ReleasesSlider from "@/components/ReleasesSlider/ReleasesSlider";
+import { getReleases } from "@/helpers/api/releases";
+import { getEvents } from "@/helpers/api/events";
+import { getArtists } from "@/helpers/api/artists";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [releases, events, artists] = await Promise.all([
+    getReleases(),
+    getEvents(),
+    getArtists(),
+  ]);
+  // console.log("promises", promises);
+  // const releases = await getReleases();
+  // const events = await getEvents();
+  // const artists = await getArtists();
+
   return (
     <Page back={false}>
       <List>
@@ -31,18 +44,16 @@ export default function HomePage() {
           <>
             <div className="row">
               <div className="px-6 pt-4">
-                <NeuropunkRive />
+                {/* <Suspense>
+                  <NeuropunkRive />
+                </Suspense> */}
               </div>
               <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
-              <Suspense fallback={<p>Loading releases...</p>}>
-                <ReleasesSlider />
-              </Suspense>
+              <ReleasesSlider releases={releases} />
             </div>
             <div className="row">
               <h2 className="text-lg mt-4 mx-5 pb-2">Events</h2>
-              <Suspense fallback={<p>Loading events...</p>}>
-                <EventsList />
-              </Suspense>
+              <EventsList events={events} />
             </div>
           </>
           <div>
@@ -55,7 +66,7 @@ export default function HomePage() {
               }
               description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
             >
-              <NeuroWave />
+              <Suspense>{/* <NeuroWave /> */}</Suspense>
             </Placeholder>
           </div>
         </Section>
@@ -64,11 +75,13 @@ export default function HomePage() {
             before={
               <Avatar size={96}>
                 <div style={{ width: "70px", height: "70px" }}>
-                  <RiveComponent
-                    src="/rives/loading.riv"
-                    stateMachines={"State Machine 1"}
-                    artboard={"Artboard"}
-                  />
+                  <Suspense>
+                    {/* <RiveComponent
+                      src="/rives/loading.riv"
+                      stateMachines={"State Machine 1"}
+                      artboard={"Artboard"}
+                    /> */}
+                  </Suspense>
                 </div>
               </Avatar>
             }
@@ -83,9 +96,7 @@ export default function HomePage() {
           </Banner>
         </Section>
         <div>
-          <Suspense fallback={<p>Loading artists...</p>}>
-            <ArtistsSlider />
-          </Suspense>
+          <ArtistsSlider artists={artists} />
         </div>
       </List>
     </Page>
