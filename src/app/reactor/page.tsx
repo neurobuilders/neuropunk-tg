@@ -3,15 +3,11 @@
 import { useTranslations } from "next-intl";
 import { Page } from "@/components/Page";
 
-import React, { useEffect, useState } from "react";
+import React, { MouseEventHandler, useEffect, useState } from "react";
 import {
   Avatar,
   Badge,
-  Banner,
-  Button,
-  Card,
   Cell,
-  Chip,
   IconButton,
   Image,
   List,
@@ -19,21 +15,27 @@ import {
 } from "@telegram-apps/telegram-ui";
 import { Link } from "@/components/Link/Link";
 import { Check } from "lucide-react";
-import RiveComponent from "@rive-app/react-canvas";
 import NextImage from "next/image";
 
 import "./styles.scss";
-import { ParticlesBackground } from "@/components/ParticlesBackground/ParticlesBackground";
 import { ReactorLogoBackground } from "@/components/ParticlesBackground/ReactorLogoBackground";
 import clsx from "clsx";
 import ClaimButton from "@/components/Button/ClaimButton";
 import { formatNumber } from "@/helpers/utils";
+import emitter, { Events } from "@/helpers/events";
+
+const claimButtonStartValue = 0;
 
 export default function Tasks() {
   const t = useTranslations("i18n");
   const [logoClassName, setLogoClassName] = useState(
     "animate__animated animate__fadeIn"
   );
+
+  const claimButtonHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    emitter.emit(Events.SetClaimButtonCurrentValue, 0);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -71,7 +73,10 @@ export default function Tasks() {
                 How it works →
               </a>
               <div className="">
-                <ClaimButton />
+                <ClaimButton
+                  onClick={claimButtonHandler}
+                  startValue={claimButtonStartValue}
+                />
               </div>
             </div>
           </div>
