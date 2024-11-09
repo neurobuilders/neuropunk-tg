@@ -1,3 +1,4 @@
+import Image from "next/image";
 import "./styles2.scss";
 
 /**
@@ -5,7 +6,7 @@ import "./styles2.scss";
  * @returns
  * @url https://codepen.io/natewiley/pen/GgONKy
  */
-export const ParticlesBackground2 = () => {
+export const ParticlesBackground2 = ({ children }) => {
   return (
     <div style={{ position: "absolute", height: "100%", width: "100%" }}>
       <div className="arc_reactor">
@@ -18,7 +19,7 @@ export const ParticlesBackground2 = () => {
                 </div>
               </div>
             </div>
-            <div className="core2"></div>
+            <div className="core2">{children}</div>
           </div>
           <ul className="marks">
             <li></li>

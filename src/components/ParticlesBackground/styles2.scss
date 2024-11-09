@@ -24,7 +24,7 @@ body {
   animation: flicker2 0.2s infinite;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 40px;
+  // margin-top: 40px;
 }
 
 .big_core {
@@ -321,6 +321,9 @@ body {
 
 .arc_reactor {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: -50px;
   margin-left: auto;
   margin-right: auto;
@@ -333,14 +336,17 @@ body {
 
 .core2 {
   // background: #cedce0;
-  width: 100px;
-  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   border: 5px solid rgba(2, 255, 255, 0.15);
   animation: flicker2 0.2s infinite;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
+  // margin-top: 50px;
 }
 
 .e7 {
@@ -352,7 +358,9 @@ body {
   transform: rotateZ(0deg);
   transition: box-shadow 3s ease;
   text-align: center;
-  line-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .case_container {
@@ -360,8 +368,8 @@ body {
   height: 210px;
   border-radius: 50%;
   position: absolute;
-  margin-left: 20px;
-  margin-top: 20px;
+  // margin-left: 20px;
+  // margin-top: 20px;
 }
 
 .marks li {

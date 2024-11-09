@@ -43,17 +43,18 @@ export default function Tasks() {
       <List>
         <Section header="">
           <div className="pb-8">
-            <div className="relative h-[138px] mt-[70px]">
-              <ParticlesBackground2 />
-              <NextImage
-                src="/logo.svg"
-                fill={true}
-                alt="Reactor logo"
-                className={logoClassName}
-                priority={true}
-              />
+            <div className="relative h-[120px] mt-[70px]">
+              <ParticlesBackground2>
+                <NextImage
+                  src="/logo.svg"
+                  fill={true}
+                  alt="Reactor logo"
+                  className="!relative max-w-full max-h-full"
+                  priority={true}
+                />
+              </ParticlesBackground2>
             </div>
-            <div className="flex flex-col items-center mt-[100px]">
+            <div className="flex flex-col items-center mt-[120px]">
               <h3 className="text-2xl font-bold mb-1">2 475 NE</h3>
               <h3 className="text-md mt-2">
                 Complete tasks and mine <strong>Neuro Energy</strong>
