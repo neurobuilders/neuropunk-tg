@@ -7,7 +7,7 @@ export interface Release {
   slug: string;
   title: string;
   coverUrl: string;
-  videoUrl: string;
+  videoUrl?: string;
   artist: string;
   catalogNr: string;
   url: string;
@@ -21,8 +21,9 @@ export interface Release {
   }[];
 }
 
-export const getReleases = () => {
-  return readJsonFile<Release[]>("./src/mock-data/releases.json");
+export const getReleases = async () => {
+  // return readJsonFile<Release[]>("./src/mock-data/releases.json");
+  return (await import("@/mock-data/releases.json")).default;
 };
 
 export const getRelease = async (slug: string) => {

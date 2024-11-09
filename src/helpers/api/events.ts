@@ -10,6 +10,7 @@ export interface Event {
   url: string;
 }
 
-export const getEvents = () => {
-  return readJsonFile<Event[]>("./src/mock-data/events.json");
+export const getEvents = async () => {
+  // return readJsonFile<Event[]>("./src/mock-data/events.json");
+  return (await import("@/mock-data/events.json")).default;
 };

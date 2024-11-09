@@ -13,6 +13,7 @@ export interface Artist {
   imageHeight: number;
 }
 
-export const getArtists = () => {
-  return readJsonFile<Artist[]>("./src/mock-data/artists.json");
+export const getArtists = async () => {
+  // return readJsonFile<Artist[]>("./src/mock-data/artists.json");
+  return (await import("@/mock-data/artists.json")).default;
 };

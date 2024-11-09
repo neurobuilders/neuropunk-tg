@@ -1,6 +1,10 @@
 "use client";
 
-import Rive from "@rive-app/react-canvas";
+// @ts-ignore
+import riveWASMResource from "@rive-app/canvas/rive.wasm";
+import Rive, { RuntimeLoader } from "@rive-app/react-canvas";
+
+RuntimeLoader.setWasmUrl(riveWASMResource);
 
 export const NeuropunkRive = () => (
   <Rive
