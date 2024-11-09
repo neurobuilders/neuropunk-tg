@@ -44,7 +44,7 @@ export default function ReactorPage() {
   const claimButtonHandler: (
     value: number,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void = (value: number, e) => {
+  ) => void = (value, e) => {
     e.preventDefault();
     setCurrentNeuroEnergyAmount((prevVal) => {
       return prevVal + value;

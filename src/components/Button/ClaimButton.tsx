@@ -16,14 +16,12 @@ interface ClaimButtonProps {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
   startValue?: number;
-  currentValue?: number;
   className?: string;
-  valuePerSecond?: number;
+  valuePerSecond: number;
 }
 
 const ClaimButton = (props: ClaimButtonProps) => {
-  const { onClick, startValue, currentValue, className, valuePerSecond } =
-    props;
+  const { onClick, startValue, className, valuePerSecond } = props;
   const [floatCount, setFloatCount] = useState(
     parseFloat(`${startValue ?? 0}`)
   ); // Initialize to a float value
@@ -31,22 +29,17 @@ const ClaimButton = (props: ClaimButtonProps) => {
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
       setTimeout(() => {
-        triggerHapticFeedback();
-        setFloatCount(0);
-        springProps.value.set(0);
-
+        const val = springProps.value.get();
         if (onClick) {
-          onClick(floatCount, e);
+          onClick(val, e);
         }
+        triggerHapticFeedback();
+        springProps.value.set(0);
+        setFloatCount(0);
       }, 100);
     },
     [onClick]
   );
-
-  useEffect(() => {
-    const float = parseFloat(`${currentValue ?? 0}`);
-    setFloatCount(float);
-  }, [currentValue]);
 
   // Animation setup using react-spring
   const springProps = useSpring({
@@ -57,7 +50,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFloatCount((prevCount) => prevCount + (valuePerSecond ?? 0)); // Increment the float count
+      setFloatCount((prevCount) => prevCount + valuePerSecond); // Increment the float count
     }, 1000); // Update every second (1000 ms)
 
     return () => clearInterval(interval); // Cleanup on unmount
