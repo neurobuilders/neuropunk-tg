@@ -62,7 +62,7 @@ export default function Tasks() {
               </a>
               <div className="">
                 <button
-                  className="btn btn__claim button-63 mt-[40px] mb-[30px]"
+                  className="btn btn__claim mt-[40px] mb-[30px]"
                   type="button"
                 >
                   <span>

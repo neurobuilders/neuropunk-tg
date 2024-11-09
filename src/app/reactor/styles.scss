@@ -25,4 +25,15 @@
   }
 }
 
-@import "variant-2";
+.btn__claim {
+  width: 70vw;
+  > span {
+    text-transform: uppercase;
+    @apply inline-flex items-center;
+  }
+}
+
+// @import "variant-1";
+// @import "variant-2";
+// @import "variant-3";
+@import "variant-4";

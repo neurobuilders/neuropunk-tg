@@ -1,4 +1,7 @@
-.button-63 {
+// https://getcssscan.com/css-buttons-examples
+// button 63
+
+.btn__claim {
   align-items: center;
   background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
   border: 0;
@@ -22,17 +25,10 @@
   cursor: pointer;
 }
 
-.button-63:active,
-.button-63:hover {
+.btn__claim:active,
+.btn__claim:hover {
   outline: 0;
 }
-
-// @media (min-width: 768px) {
-//   .button-63 {
-//     font-size: 24px;
-//     min-width: 196px;
-//   }
-// }
 
 .icon {
   &-ne {
@@ -40,12 +36,5 @@
     &::before {
       background: center/contain url("/logo.svg") no-repeat;
     }
-  }
-}
-
-.btn__claim {
-  > span {
-    text-transform: uppercase;
-    @apply inline-flex items-center;
   }
 }
