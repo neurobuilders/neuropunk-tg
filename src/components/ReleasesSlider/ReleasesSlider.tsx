@@ -43,15 +43,17 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
       //   triggerHapticFeedback("light");
       // }}
       slidesPerView={2}
-      spaceBetween={15}
+      spaceBetween={20}
       loop={true}
       pagination={{
         clickable: true,
       }}
+      // slidesOffsetAfter={1}
       // centeredSlides={true}
       autoplay={{
         delay: 9000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
       }}
       navigation={true}
       modules={[Pagination, Navigation, Autoplay]}

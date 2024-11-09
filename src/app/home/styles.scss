@@ -53,14 +53,18 @@
   .swiper-button {
     &-prev,
     &-next {
-      --swiper-navigation-sides-offset: 3px;
+      --swiper-navigation-sides-offset: -10px;
       --swiper-navigation-size: 28px;
-      top: calc(50% - 20px) !important;
+      top: calc(50% - 35px) !important;
+      padding: 20px;
       opacity: 0.5;
       &:hover {
         opacity: 1;
       }
     }
+    // &-prev {
+
+    // }
   }
 }
 

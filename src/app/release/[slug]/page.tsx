@@ -10,6 +10,7 @@ import "./styles.scss";
 import { ShareButton } from "@/components/Button/ShareButton";
 import { ReleaseCover } from "@/components/Release/ReleaseCover/ReleaseCover";
 import { ReleaseLinks } from "@/components/Release/ReleaseLinks/ReleaseLinks";
+import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 
 interface ReleasePageProps {
   params: {
@@ -41,7 +42,10 @@ export default async function ReleasePage(props: ReleasePageProps) {
         priority={true}
       />
       <List className="relative z-2 p-2">
-        <div className="mb-2">
+        <div className="mb-2 relative">
+          <CardChip readOnly className="card-chip">
+            {release.catalogNr}
+          </CardChip>
           <ReleaseCover release={release} />
           <Section className="release__info">
             <div
