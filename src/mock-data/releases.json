@@ -35,7 +35,7 @@
             },
             {
                 "url": "https://vk.com/music/album/-2000986857_21986857_057085d57c54976668?act=album",
-                "providerId": "vk_music",
+                "providerId": "vk-music",
                 "label": "Play",
                 "providerName": "VK Music"
             },
@@ -186,7 +186,7 @@
             },
             {
                 "url": "https://music.vk.com/link/0GTIw",
-                "providerId": "vk_music",
+                "providerId": "vk-music",
                 "label": "Play",
                 "providerName": "VK Music"
             },
@@ -246,7 +246,7 @@
             },
             {
                 "url": "https://vk.com/music/album/-2000986798_21986798_876aaaf4c2d858ab34?act=album",
-                "providerId": "vk_music",
+                "providerId": "vk-music",
                 "label": "Play",
                 "providerName": "VK Music"
             },

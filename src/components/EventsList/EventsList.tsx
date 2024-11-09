@@ -37,6 +37,7 @@ export default function EventsList(props: EventsListProps) {
                 <Button
                   mode="bezeled"
                   size="s"
+                  className="h-[28px] text-[12px] px-2.5"
                   onClick={() => {
                     triggerHapticFeedback();
                     openLink(v.url);

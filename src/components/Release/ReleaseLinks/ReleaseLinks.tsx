@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Button, Cell, Section } from "@telegram-apps/telegram-ui";
 import { Link } from "@/components/Link/Link";
 import Image from "next/image";
+import "./styles.scss";
 
 interface ReleaseLinksProps {
   release?: Release;
@@ -32,12 +33,13 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
           <Cell
             className="px-3"
             before={
-              <Image
-                src={`/icons/providers/${v.providerId}.svg`}
-                height={28}
-                width={28}
-                alt={v.providerName}
-              />
+              <span className="release__link-image" role="image"></span>
+              // <Image
+              //   src={`/icons/providers/${v.providerId}.svg`}
+              //   height={28}
+              //   width={28}
+              //   alt={v.providerName}
+              // />
             }
             after={
               <Button size="s" mode="gray" className="min-w-[80px] h-[32px]">
