@@ -7,7 +7,7 @@ import "./styles2.scss";
  */
 export const ParticlesBackground2 = () => {
   return (
-    <div style={{ position: "fixed", height: "100%", width: "100%" }}>
+    <div style={{ position: "absolute", height: "100%", width: "100%" }}>
       <div className="arc_reactor">
         <div className="case_container">
           <div className="e7">
