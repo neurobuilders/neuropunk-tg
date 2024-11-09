@@ -21,9 +21,9 @@ import "swiper/css/navigation";
 import ArtistsSlider from "@/components/ArtistsSlider/ArtistsSlider";
 import EventsList from "@/components/EventsList/EventsList";
 import ReleasesSlider from "@/components/ReleasesSlider/ReleasesSlider";
-import { getReleases } from "@/helpers/api/releases";
+import { getReleases } from "@/helpers/api/release";
 import { getEvents } from "@/helpers/api/events";
-import { getArtists } from "@/helpers/api/artists";
+import { getArtists } from "@/helpers/api/artist";
 import { LoadingRive } from "@/components/LoadingRive";
 
 export default async function HomePage() {

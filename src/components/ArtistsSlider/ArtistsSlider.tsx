@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
-import { Artist } from "@/helpers/api/artists";
+import { Artist } from "@/helpers/api/artist";
 
 interface ArtistsSliderProps {
   artists: Artist[];

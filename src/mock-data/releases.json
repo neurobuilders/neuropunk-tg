@@ -1,14 +1,108 @@
 [
     {
+        "slug": "tntklz-synthesis-lp",
         "title": "Synthesis LP",
         "coverUrl": "https://cdn.neurocdn.ru/CACHE/images/covers/NRPNK065-3000x3000/d0b7f07c34c9f431e4008b4ee3cf4aa4.jpg",
         "artist": "TNTKLZ",
         "catalogNr": "NRPNK065",
         "url": "https://neuropunk.app/release/tntklz-synthesis-lp",
         "width": 370,
-        "height": 370
+        "height": 370,
+        "links": [
+            {
+                "url": "https://www.beatport.com/release/synthesis-lp/4743288",
+                "providerId": "beatport",
+                "label": "Buy",
+                "providerName": "Beatport"
+            },
+            {
+                "url": "https://music.apple.com/de/album/1769599694?app=itunes&mt=1&at=1000lqjf&ct=bq&Is=1&ls=1",
+                "providerId": "itunes",
+                "label": "Buy",
+                "providerName": "iTunes"
+            },
+            {
+                "url": "https://www.junodownload.com/products/tntklz-synthesis-lp/6791857-02/",
+                "providerId": "junodownload",
+                "label": "Buy",
+                "providerName": "Juno Download"
+            },
+            {
+                "url": "https://music.yandex.ru/album/33366198?utm_source=bandlink&utm_medium=TNTKLZ&utm_campaign=Synthesis%20LP",
+                "providerId": "yandex",
+                "label": "Play",
+                "providerName": "Yandex Music"
+            },
+            {
+                "url": "https://vk.com/music/album/-2000986857_21986857_057085d57c54976668?act=album",
+                "providerId": "vk_music",
+                "label": "Play",
+                "providerName": "VK Music"
+            },
+            {
+                "url": "https://music.apple.com/de/album/1769599694?app=music&mt=1&at=1000lqjf&ct=bq&Is=1&ls=1",
+                "providerId": "apple-music",
+                "label": "Play",
+                "providerName": "Apple Music"
+            },
+            {
+                "url": "https://www.youtube.com/watch?v=5jwP0oystHw&list=OLAK5uy_mcVxPUm6_NztLZ5plFMOF9ZKwGsTbupNc",
+                "providerId": "youtube",
+                "label": "Play",
+                "providerName": "YouTube"
+            },
+            {
+                "url": "https://music.youtube.com/playlist?list=OLAK5uy_mhzoSSuVPLr4UTKunj0aAPQDSMadtG3Gc",
+                "providerId": "music-youtube",
+                "label": "Play",
+                "providerName": "YouTube Music"
+            },
+            {
+                "url": "https://tidal.com/browse/album/388558330",
+                "providerId": "tidal",
+                "label": "Play",
+                "providerName": "Tidal"
+            },
+            {
+                "url": "https://www.deezer.com/de/album/646107351",
+                "providerId": "deezer",
+                "label": "Play",
+                "providerName": "Deezer"
+            },
+            {
+                "url": "https://soundcloud.com/neuropunkrecords/sets/nrpnk065-tntklz-synthesis-lp",
+                "providerId": "soundcloud",
+                "label": "Play",
+                "providerName": "SoundCloud"
+            },
+            {
+                "url": "https://music.amazon.de/albums/B0DHL7KD3P",
+                "providerId": "amazon",
+                "label": "Buy",
+                "providerName": "Amazon"
+            },
+            {
+                "url": "https://music.mts.ru/album/33366198",
+                "providerId": "mts-music",
+                "label": "Play",
+                "providerName": "MTC Music"
+            },
+            {
+                "url": "https://zvuk.com/release/35374757",
+                "providerId": "zvooq",
+                "label": "Play",
+                "providerName": "Zvuk"
+            },
+            {
+                "url": "https://open.spotify.com/album/13BOnPR7oQfmJd3CKMrngd",
+                "providerId": "spotify",
+                "label": "Play",
+                "providerName": "Spotify"
+            }
+        ]
     },
     {
+        "slug": "various-artists-neuropunks-lp-2",
         "title": "Neuropunks LP 2",
         "coverUrl": "https://cdn.neurocdn.ru/CACHE/images/covers/NRPNK063/8534c32b99793781a52805126eee9375.jpg",
         "videoUrl": "/neuropunks_lp2.webm",
@@ -16,18 +110,204 @@
         "catalogNr": "NRPNK063",
         "url": "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
         "width": 370,
-        "height": 370
+        "height": 370,
+        "links": [
+            {
+                "url": "https://open.spotify.com/album/1PMSsvthQpBKMwtdd21JOB",
+                "providerId": "spotify",
+                "label": "Play",
+                "providerName": "Spotify"
+            },
+            {
+                "url": "https://www.beatport.com/release/neuropunks-lp-2/4699066",
+                "providerId": "beatport",
+                "label": "Buy",
+                "providerName": "Beatport"
+            },
+            {
+                "url": "https://music.apple.com/de/album/1763976888?app=itunes&mt=1&at=1000lqjf&ct=bq&Is=1&ls=1",
+                "providerId": "itunes",
+                "label": "Buy",
+                "providerName": "iTunes"
+            },
+            {
+                "url": "https://www.junodownload.com/products/neuropunks-lp-2/6751256-02/",
+                "providerId": "junodownload",
+                "label": "Купить",
+                "providerName": "Juno Download"
+            },
+            {
+                "url": "https://music.yandex.ru/album/32926730?utm_source=bandlink&utm_medium=Various%20Artists&utm_campaign=Neuropunks%20LP%202",
+                "providerId": "yandex",
+                "label": "Play",
+                "providerName": "Yandex Music"
+            },
+            {
+                "url": "https://music.apple.com/de/album/1763976888?app=music&mt=1&at=1000lqjf&ct=bq&Is=1&ls=1",
+                "providerId": "apple-music",
+                "label": "Play",
+                "providerName": "Apple Music"
+            },
+            {
+                "url": "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
+                "providerId": "custom_icon1",
+                "label": "Купить",
+                "providerName": "Neuropunk"
+            },
+            {
+                "url": "https://www.youtube.com/watch?v=R3xS3uzgELM&list=OLAK5uy_m8uv6CYdlQFeuXBxLgFLnP7ruFPyug6Ik&index=2",
+                "providerId": "youtube",
+                "label": "Play",
+                "providerName": "YouTube"
+            },
+            {
+                "url": "https://soundcloud.com/neuropunkrecords/sets/nrpnk063-neuropunks-2-lp",
+                "providerId": "soundcloud",
+                "label": "Play",
+                "providerName": "SoundCloud"
+            },
+            {
+                "url": "https://music.youtube.com/playlist?list=OLAK5uy_nTxKM8g__eklCZFvl5L9nAhWe2cPOzC_s",
+                "providerId": "music-youtube",
+                "label": "Play",
+                "providerName": "YouTube Music"
+            },
+            {
+                "url": "https://www.deezer.com/ru/album/631877361",
+                "providerId": "deezer",
+                "label": "Play",
+                "providerName": "Deezer"
+            },
+            {
+                "url": "https://music.amazon.de/albums/B0DDQ1G5MD",
+                "providerId": "amazon",
+                "label": "Buy",
+                "providerName": "Amazon"
+            },
+            {
+                "url": "https://music.vk.com/link/0GTIw",
+                "providerId": "vk_music",
+                "label": "Play",
+                "providerName": "VK Music"
+            },
+            {
+                "url": "https://music.mts.ru/album/32926730",
+                "providerId": "mts-music",
+                "label": "Play",
+                "providerName": "MTC Music"
+            }
+        ]
     },
     {
+        "slug": "l-33-get-busy-you-was-there",
         "title": "Get Busy, You Was There",
         "coverUrl": "https://cdn.neurocdn.ru/CACHE/images/covers/NRPNK064/90a77281a60c2c67be40229dc714cf35.jpg",
         "artist": "L 33",
         "catalogNr": "NRPNK064",
         "url": "https://neuropunk.app/release/l-33-get-busy-you-was-there",
         "width": 370,
-        "height": 370
+        "height": 370,
+        "links": [
+            {
+                "url": "https://www.beatport.com/release/get-busy-you-was-there/4743283",
+                "providerId": "beatport",
+                "label": "Buy",
+                "providerName": "Beatport"
+            },
+            {
+                "url": "https://open.spotify.com/album/1XWcZ4S9mtX17PsoBGV51R",
+                "providerId": "spotify",
+                "label": "Play",
+                "providerName": "Spotify"
+            },
+            {
+                "url": "https://music.apple.com/us/album/1769598086?app=music&mt=1&at=1000lqjf&ct=bq&Is=1&ls=1",
+                "providerId": "apple-music",
+                "label": "Play",
+                "providerName": "Apple Music"
+            },
+            {
+                "url": "https://www.junodownload.com/products/l-33-get-busy-you-was-there/6791838-02/",
+                "providerId": "junodownload",
+                "label": "Пресейв",
+                "providerName": "Juno Download"
+            },
+            {
+                "url": "https://music.yandex.ru/album/33366190?utm_source=bandlink&utm_medium=L%2033&utm_campaign=Get%20Busy%2C%20You%20Was%20There",
+                "providerId": "yandex",
+                "label": "Play",
+                "providerName": "Yandex Music"
+            },
+            {
+                "url": "https://music.apple.com/us/album/1769598086?app=itunes&mt=1&at=1000lqjf&ct=bq&Is=1&ls=1",
+                "providerId": "itunes",
+                "label": "Buy",
+                "providerName": "iTunes"
+            },
+            {
+                "url": "https://vk.com/music/album/-2000986798_21986798_876aaaf4c2d858ab34?act=album",
+                "providerId": "vk_music",
+                "label": "Play",
+                "providerName": "VK Music"
+            },
+            {
+                "url": "https://neuropunk.app/release/l-33-get-busy-you-was-there",
+                "providerId": "custom_icon1",
+                "label": "Купить",
+                "providerName": "Neuropunk"
+            },
+            {
+                "url": "https://www.youtube.com/watch?v=A-lk_KiJBt8&list=OLAK5uy_nzu7ndgs4U3CWUDc4PX6T8euf-Yx1VNQY&index=2",
+                "providerId": "youtube",
+                "label": "Play",
+                "providerName": "YouTube"
+            },
+            {
+                "url": "https://music.youtube.com/watch?v=A-lk_KiJBt8&list=OLAK5uy_mlknGUNwsr6XSfuzlnQoK3_XrYv3uaGiM",
+                "providerId": "music-youtube",
+                "label": "Play",
+                "providerName": "YouTube Music"
+            },
+            {
+                "url": "https://soundcloud.com/neuropunkrecords/sets/nrpnk064-l33-get-busy-you-was",
+                "providerId": "soundcloud",
+                "label": "Play",
+                "providerName": "SoundCloud"
+            },
+            {
+                "url": "https://tidal.com/browse/album/388557646",
+                "providerId": "tidal",
+                "label": "Play",
+                "providerName": "Tidal"
+            },
+            {
+                "url": "https://www.deezer.com/us/album/646107141",
+                "providerId": "deezer",
+                "label": "Play",
+                "providerName": "Deezer"
+            },
+            {
+                "url": "https://music.amazon.com/albums/B0DHL5CGFH?tag=bandlnk-20",
+                "providerId": "amazon",
+                "label": "Buy",
+                "providerName": "Amazon"
+            },
+            {
+                "url": "https://music.mts.ru/album/33366190",
+                "providerId": "mts-music",
+                "label": "Play",
+                "providerName": "MTC Music"
+            },
+            {
+                "url": "https://zvuk.com/release/35374658",
+                "providerId": "zvooq",
+                "label": "Play",
+                "providerName": "Zvuk"
+            }
+        ]
     },
     {
+        "slug": "ijenta-vefa-part-2",
         "title": "Vega Part 2",
         "coverUrl": "https://cdn.neurocdn.ru/CACHE/images/covers/%D0%B2%D0%B5%D0%B3%D0%B02/3012536f2b39a9d18a10efc305ec36d4.jpg",
         "artist": "IJENTA",
@@ -37,6 +317,7 @@
         "height": 370
     },
     {
+        "slug": "nerv3-humane-made-higrade-verzor-prosto-crazy",
         "title": "PROSTO CRAZY",
         "coverUrl": "https://cdn.neurocdn.ru/CACHE/images/covers/11/f95823b9e98219a381f6ef4c06e8d188.jpg",
         "artist": "NERV3, Humane Made, Higrade, Verzor",

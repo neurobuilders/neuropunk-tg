@@ -9,13 +9,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
-import { Release } from "@/helpers/api/releases";
+import { Release } from "@/helpers/api/release";
 import clsx from "clsx";
 import { Card } from "@telegram-apps/telegram-ui";
-import { openLink } from "@telegram-apps/sdk-react";
+import { isTMA, openLink } from "@telegram-apps/sdk-react";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 import { captureException } from "@/helpers/utils";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
+import { useRouter } from "next/navigation";
 
 interface ReleasesSliderProps {
   releases: Release[];
@@ -25,6 +26,7 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
   const { releases } = props;
   const imageRefs = useRef<Record<number, HTMLImageElement | null>>({});
   const t = useTranslations("i18n");
+  const router = useRouter();
 
   return (
     <Swiper
@@ -62,9 +64,14 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
         return (
           <SwiperSlide key={v.url}>
             <Card
-              onClick={() => {
+              onClick={async () => {
+                const url = `/release/${v.slug}`;
+                // if (await isTMA()) {
+                //   openLink(url);
+                // } else {
+                // }
+                router.push(url);
                 triggerHapticFeedback();
-                openLink(v.url);
               }}
             >
               <React.Fragment key=".0">
