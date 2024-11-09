@@ -66,7 +66,7 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
         return (
           <SwiperSlide key={v.url}>
             <Card
-              onClick={async () => {
+              onClick={() => {
                 const url = `/release/${v.slug}`;
                 // if (await isTMA()) {
                 //   openLink(url);
@@ -76,7 +76,7 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
                 triggerHapticFeedback();
               }}
             >
-              <React.Fragment key=".0">
+              <>
                 <CardChip readOnly className="card-chip">
                   {v.catalogNr}
                 </CardChip>
@@ -117,7 +117,7 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
                 <CardCell readOnly subtitle={v.artist} className="card-cell">
                   {v.title}
                 </CardCell>
-              </React.Fragment>
+              </>
             </Card>
           </SwiperSlide>
         );

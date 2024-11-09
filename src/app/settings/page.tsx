@@ -8,6 +8,7 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
+import env from "@/env";
 
 export default function SettingsPage() {
   const t = useTranslations("i18n");
@@ -59,6 +60,11 @@ export default function SettingsPage() {
           </Cell>
           <Cell subtitle="Access exclusive content and rewards through a membership program">
             NeuroPass Membership (Coming Soon)
+          </Cell>
+          <Cell
+            subtitle={`v${env.app.version} - #${env.vercel.gitCommitRef} (${env.vercel.gitCommitSha})`}
+          >
+            Version
           </Cell>
         </Section>
       </List>

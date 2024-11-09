@@ -1,10 +1,17 @@
 import { withSentryConfig } from "@sentry/nextjs";
 import createNextIntlPlugin from "next-intl/plugin";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const json = require("./package.json");
 
 const withNextIntl = createNextIntlPlugin("./src/core/i18n/i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    appVersion: json.version,
+  },
   images: {
     domains: ["t.me", "cdn.neurocdn.ru", "neuropunk.ru"],
     remotePatterns: [
