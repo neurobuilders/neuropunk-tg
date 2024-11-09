@@ -17,7 +17,6 @@ import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
 import RiveComponent from "@rive-app/react-canvas";
 import React, { useRef } from "react";
-import * as Sentry from "@sentry/nextjs";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 import "./styles.scss";
@@ -30,6 +29,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import { captureException } from "@/helpers/utils";
 
 const latestReleases = [
   {
@@ -243,7 +243,7 @@ export default function Home() {
                                 try {
                                   await (e.target as any)?.play();
                                 } catch (err) {
-                                  Sentry.captureException(err);
+                                  captureException(err);
                                 }
                               }}
                             >
