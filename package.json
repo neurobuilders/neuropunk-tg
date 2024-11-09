@@ -16,6 +16,7 @@
     "@next/env": "^15.0.2",
     "@rive-app/canvas": "^2.21.6",
     "@rive-app/react-canvas": "^4.14.5",
+    "@sentry/nextjs": "^8",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.46.1",
     "@telegram-apps/sdk": "^2.5.2",
