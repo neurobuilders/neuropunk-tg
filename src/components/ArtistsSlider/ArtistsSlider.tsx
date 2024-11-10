@@ -46,10 +46,10 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
         clickable: true,
       }}
       slidesPerView={3}
-      spaceBetween={15}
+      spaceBetween={10}
       loop={true}
       modules={[Pagination, Autoplay]}
-      className="mt-3 !pb-[40px] mb-3"
+      className="mt-3 !pb-[40px] mb-3 !px-2"
     >
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
@@ -59,7 +59,7 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
               alt={v.name}
               width={v.imageWidth}
               height={v.imageHeight}
-              className="min-w-[125px] h-[150px] object-cover"
+              className="min-w-[110px] h-[150px] object-cover"
             />
             <CardCell readOnly className="card-cell">
               {v.name}

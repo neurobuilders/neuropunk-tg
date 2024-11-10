@@ -1,7 +1,19 @@
 .release {
   &__background {
     filter: blur(13px);
-    @apply fixed top-0 right-0 bottom-0 left-0 w-full h-full object-cover;
+    @apply fixed top-0 right-0 bottom-0 left-0 w-full h-full;
+
+    &::after,
+    img {
+      @apply absolute top-0 right-0 bottom-0 left-0 w-full h-full  object-cover;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      background: var(--tg-theme-secondary-bg-color, white);
+      opacity: 0.7;
+    }
   }
   &__cover {
     video,
@@ -13,9 +25,12 @@
   }
   &__info {
     > div {
-      background: hsl(
-        from var(--tg-theme-section-bg-color) h s calc(l - 4)
-      ) !important;
+      > div {
+        overflow: hidden;
+      }
+      // background: hsl(
+      //   from var(--tg-theme-section-bg-color) h s calc(l - 4)
+      // ) !important;
     }
   }
 }

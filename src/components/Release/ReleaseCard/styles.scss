@@ -1,0 +1,8 @@
+.release-card {
+  &__cell {
+    // align-items: flex-end;
+    > div {
+      padding: var(--tgui--cell--middle--padding);
+    }
+  }
+}

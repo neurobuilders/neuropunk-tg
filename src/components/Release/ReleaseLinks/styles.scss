@@ -1,19 +1,31 @@
 @mixin providerStyle($name) {
   &--#{$name} {
-    .release__link-image {
+    .release-link__image {
       background-image: svg-load("./icons/#{$name}.svg");
     }
   }
 }
 
+.release-link {
+  &__after {
+    button {
+      min-width: 60px;
+    }
+  }
+}
+
 .release {
-  &__link {
-    .release__link-image {
+  &-link {
+    .badge {
+      &--invisible {
+        --tgui--plain_background: none;
+      }
+    }
+    .release-link__image {
       display: block;
-      height: 28px;
-      width: 28px;
       background-repeat: no-repeat;
       background-size: contain;
+      @apply w-8 h-8;
     }
 
     @include providerStyle("beatport");

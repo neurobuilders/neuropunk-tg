@@ -2,7 +2,14 @@
 
 import { Page } from "@/components/Page";
 import React from "react";
-import { List, Section } from "@telegram-apps/telegram-ui";
+import {
+  Cell,
+  Headline,
+  Info,
+  List,
+  Section,
+  Subheadline,
+} from "@telegram-apps/telegram-ui";
 import { getRelease } from "@/helpers/api/release";
 import NextImage from "next/image";
 import clsx from "clsx";
@@ -10,6 +17,7 @@ import "./styles.scss";
 import { ReleaseCover } from "@/components/Release/ReleaseCover/ReleaseCover";
 import { ReleaseLinks } from "@/components/Release/ReleaseLinks/ReleaseLinks";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
+import ReleaseCard from "@/components/Release/ReleaseCard/ReleaseCard";
 
 interface ReleasePageProps {
   params: {
@@ -30,35 +38,22 @@ export default async function ReleasePage(props: ReleasePageProps) {
 
   return (
     <Page id="release" back={true}>
-      <NextImage
-        className={clsx(
-          "release__background animate__animated animate__fadeIn"
-        )}
-        src={release.coverUrl}
-        width={release.width}
-        height={release.height}
-        alt={release.slug}
-        priority={true}
-      />
+      <div className="release__background">
+        <NextImage
+          className={clsx(" animate__animated animate__fadeIn")}
+          src={release.coverUrl}
+          width={release.width}
+          height={release.height}
+          alt={release.slug}
+          priority={true}
+        />
+      </div>
+
       <List className="relative z-2 p-4">
-        <div className="mb-4 relative">
-          <CardChip readOnly className="card-chip">
-            {release.catalogNr}
-          </CardChip>
-          <ReleaseCover
-            release={release}
-            className="animate__animated animate__fadeIn"
-          />
-          <Section className="release__info">
-            <div className={clsx("px-3 pt-3 pb-3", "flex flex-col gap-0")}>
-              <h1 className="font-bold text-lg leading-none mb-2">
-                {release.artist}
-              </h1>
-              <h2 className="text-sm">{release.title}</h2>
-            </div>
-          </Section>
-          <ReleaseLinks release={release} />
-        </div>
+        {/* <div className="mb-4 relative"> */}
+        <ReleaseCard release={release}></ReleaseCard>
+        <ReleaseLinks release={release} />
+        {/* </div> */}
       </List>
     </Page>
   );
