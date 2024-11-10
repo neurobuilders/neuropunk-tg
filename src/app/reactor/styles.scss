@@ -80,6 +80,11 @@
   touch-action: manipulation;
   white-space: nowrap;
   cursor: pointer;
+
+  &[disabled] {
+    pointer-events: none;
+    background-image: linear-gradient(358deg, #7b7b7b, #4e4e4e 50%, #4e5253);
+  }
 }
 
 .btn__claim:active,

@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { useSpring, animated } from "react-spring";
-import emitter, { Events } from "@/helpers/events";
+// import emitter, { Events } from "@/helpers/events";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import clsx from "clsx";
 
@@ -22,6 +22,7 @@ interface ClaimButtonProps {
 
 const ClaimButton = (props: ClaimButtonProps) => {
   const { onClick, startValue, className, valuePerSecond } = props;
+  const [isDisabled, setDisabled] = useState(false);
   const [floatCount, setFloatCount] = useState(startValue ?? 0); // Initialize to a float value
   // Animation setup using react-spring
   const springProps = useSpring({
@@ -33,6 +34,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
       setTimeout(() => {
+        setDisabled(true);
         const val = springProps.value.get();
         if (onClick) {
           onClick(val, e);
@@ -40,6 +42,11 @@ const ClaimButton = (props: ClaimButtonProps) => {
         triggerHapticFeedback();
         springProps.value.set(0);
         setFloatCount(0);
+
+        setTimeout(() => {
+          //cooldown
+          setDisabled(false);
+        }, 5000);
       }, 100);
     },
     [onClick]
@@ -59,12 +66,12 @@ const ClaimButton = (props: ClaimButtonProps) => {
       className={clsx("btn btn__claim", className)}
       type="button"
       onClick={_onClick}
+      disabled={isDisabled}
     >
       <span>
         Claim <span className="icon icon-ne"></span>
         <animated.span>
           {springProps.value.to((val) => {
-            console.log("formatNumber(val)", formatNumber(val));
             return formatNumber(val);
           })}
         </animated.span>

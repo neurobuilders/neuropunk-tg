@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Page } from "@/components/Page";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Badge,
@@ -30,19 +30,34 @@ import { triggerHapticFeedback } from "@/helpers/telegram";
 const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
 const neuroEnergyPerSecond = 0.0013;
+const maxMarksTranslateY = 150;
 
 function getRandomArbitrary(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
+const updateVariable = (val: number) => {
+  const rootEl = document.querySelector(":root");
+  if (rootEl) {
+    (rootEl as any).style.setProperty("--marks-translate-y", `${val}px`);
+  }
+};
+
 export default function ReactorPage() {
   const t = useTranslations("i18n");
-  // const [marksTranslateY, setMarksTranslateY] = useState(125);
   const [logoClassName, setLogoClassName] = useState(
     "animate__animated animate__fadeIn"
   );
+  const currentMarksTranslateY = useRef(100);
+  const isResetting = useRef(false);
 
   const [isModalOpen, setModalOpen] = useState(false);
+  const [reactorClasses, setReactorClasses] = useState({
+    ["animate__animated"]: true,
+    ["pt-[40px]"]: true,
+    ["animate__fadeIn"]: true,
+    ["is-resetting"]: false,
+  });
   const [currentNeuroEnergyAmount, setCurrentNeuroEnergyAmount] = useState(
     initialNeuroEnergyAmount
   );
@@ -55,27 +70,61 @@ export default function ReactorPage() {
     setCurrentNeuroEnergyAmount((prevVal) => {
       return prevVal + value;
     });
-    const rootEl = document.querySelector(":root");
-    if (rootEl) {
-      // const rootComputedStyle = getComputedStyle(rootEl);
-      (rootEl as any).style.setProperty(
-        "--marks-translate-y",
-        `${100 * getRandomArbitrary(1, 1.4)}px`
-      );
-    }
+    isResetting.current = true;
+    setReactorClasses((prev) => {
+      return {
+        ...prev,
+        ["is-resetting"]: true,
+      };
+    });
+    setTimeout(() => {
+      currentMarksTranslateY.current = 100;
+      updateVariable(currentMarksTranslateY.current);
+    }, 200);
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setLogoClassName("anim_pulsation");
     }, 500);
-    // const rootEl = document.querySelector(":root");
-    // if (rootEl) {
-    //   const rootComputedStyle = getComputedStyle(rootEl);
-    //   if(rootComputedStyle) {
-    //     const value = rootComputedStyle.getPropertyValue('--marks-translate-y')
-    //   }
-    // }
+
+    const intervalFunc = () => {
+      if (currentMarksTranslateY.current >= maxMarksTranslateY) {
+        return;
+      }
+      if (isResetting.current) {
+        clearInterval(intervalId);
+        setTimeout(() => {
+          isResetting.current = false;
+          setReactorClasses((prev) => {
+            return {
+              ...prev,
+              ["is-resetting"]: false,
+            };
+          });
+          intervalId = setInterval(intervalFunc, 1000);
+        }, 3000);
+        return;
+      }
+      currentMarksTranslateY.current += 1;
+      updateVariable(currentMarksTranslateY.current);
+      // const rootEl = document.querySelector(":root");
+      // if (rootEl) {
+      //   const rootComputedStyle = getComputedStyle(rootEl);
+      //   if (rootComputedStyle) {
+      //     const value = rootComputedStyle.getPropertyValue(
+      //       "--marks-translate-y"
+      //     );
+      //   }
+      // }
+    };
+
+    let intervalId = setInterval(intervalFunc, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
@@ -84,7 +133,7 @@ export default function ReactorPage() {
         <Section header="">
           <div>
             <div className="relative">
-              <ReactorLogoBackground className="animate__animated animate__fadeIn pt-[40px]">
+              <ReactorLogoBackground className={clsx(reactorClasses)}>
                 <NextImage
                   src="/logo.svg"
                   fill={true}

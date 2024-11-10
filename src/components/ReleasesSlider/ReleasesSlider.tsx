@@ -41,13 +41,17 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
       }}
       // slidesOffsetAfter={1}
       // centeredSlides={true}
-      autoplay={{
-        delay: 9000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      }}
+      autoplay={
+        isSelected
+          ? false
+          : {
+              delay: 9000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }
+      }
       navigation={true}
-      modules={[Pagination, Navigation /*Autoplay*/]}
+      modules={[Pagination, Navigation, Autoplay]}
       className={clsx(
         "releases releases--latest swiper--releases",
         "!px-5 !pb-10 mt-2 mb-5"

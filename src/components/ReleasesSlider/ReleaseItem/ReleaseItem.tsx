@@ -36,9 +36,9 @@ export const ReleaseItem = (props: ReleaseItemProps) => {
         //   openLink(url);
         // } else {
         // }
+        setLoading(true);
         router.push(url);
         triggerHapticFeedback();
-        setLoading(true);
       }}
       className={clsx("release-item", {
         ["is-loading"]: isLoading,
