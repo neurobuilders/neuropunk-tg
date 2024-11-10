@@ -1,3 +1,4 @@
+import { triggerHapticFeedback } from "@/helpers/telegram";
 import { captureException } from "@/helpers/utils";
 import {
   backButton,
@@ -25,6 +26,9 @@ export async function init(debug: boolean): Promise<void> {
   // Mount all components used in the project.
   if (backButton.isSupported()) {
     backButton.mount();
+    backButton.onClick(() => {
+      triggerHapticFeedback();
+    });
   }
 
   // Define components-related CSS variables.

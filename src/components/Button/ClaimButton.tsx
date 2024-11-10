@@ -22,9 +22,13 @@ interface ClaimButtonProps {
 
 const ClaimButton = (props: ClaimButtonProps) => {
   const { onClick, startValue, className, valuePerSecond } = props;
-  const [floatCount, setFloatCount] = useState(
-    parseFloat(`${startValue ?? 0}`)
-  ); // Initialize to a float value
+  const [floatCount, setFloatCount] = useState(startValue ?? 0); // Initialize to a float value
+  // Animation setup using react-spring
+  const springProps = useSpring({
+    value: floatCount,
+    from: { value: 0 },
+    config: { tension: 280, friction: 120 },
+  });
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
@@ -41,14 +45,9 @@ const ClaimButton = (props: ClaimButtonProps) => {
     [onClick]
   );
 
-  // Animation setup using react-spring
-  const springProps = useSpring({
-    value: floatCount,
-    from: { value: 0 },
-    config: { tension: 280, friction: 120 },
-  });
-
   useEffect(() => {
+    setFloatCount((prevCount) => prevCount + valuePerSecond);
+
     const interval = setInterval(() => {
       setFloatCount((prevCount) => prevCount + valuePerSecond); // Increment the float count
     }, 1000); // Update every second (1000 ms)
@@ -64,7 +63,10 @@ const ClaimButton = (props: ClaimButtonProps) => {
       <span>
         Claim <span className="icon icon-ne"></span>
         <animated.span>
-          {springProps.value.to((val) => formatNumber(val))}
+          {springProps.value.to((val) => {
+            console.log("formatNumber(val)", formatNumber(val));
+            return formatNumber(val);
+          })}
         </animated.span>
       </span>
     </button>

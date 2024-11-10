@@ -12,18 +12,23 @@ import "./styles.scss";
 
 interface ReleaseItemProps {
   release: Release;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  isDisabled?: boolean;
 }
 
 export const ReleaseItem = (props: ReleaseItemProps) => {
-  const { release } = props;
+  const { isDisabled, release, onClick } = props;
   const router = useRouter();
   const imageRef = useRef<HTMLImageElement>(null);
   const [isLoading, setLoading] = useState(false);
 
   return (
     <Card
-      onClick={() => {
-        if (isLoading) {
+      onClick={(e) => {
+        if (onClick) {
+          onClick(e);
+        }
+        if (isLoading || isDisabled) {
           return;
         }
         const url = `/release/${release.slug}`;
@@ -31,7 +36,7 @@ export const ReleaseItem = (props: ReleaseItemProps) => {
         //   openLink(url);
         // } else {
         // }
-        // router.push(url);
+        router.push(url);
         triggerHapticFeedback();
         setLoading(true);
       }}

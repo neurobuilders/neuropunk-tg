@@ -25,6 +25,7 @@ import clsx from "clsx";
 import ClaimButton from "@/components/Button/ClaimButton";
 import { formatNumber } from "@/helpers/utils";
 import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
@@ -108,7 +109,13 @@ export default function ReactorPage() {
                 open={isModalOpen}
                 onOpenChange={setModalOpen}
                 trigger={
-                  <button type="button" className="text-sky-500 mt-1">
+                  <button
+                    type="button"
+                    className="text-sky-500 mt-1"
+                    onClick={() => {
+                      triggerHapticFeedback("medium");
+                    }}
+                  >
                     How it works →
                   </button>
                 }
@@ -134,6 +141,7 @@ export default function ReactorPage() {
                     size="l"
                     stretched
                     onClick={() => {
+                      triggerHapticFeedback("medium");
                       setModalOpen(false);
                     }}
                   >

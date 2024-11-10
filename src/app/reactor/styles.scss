@@ -17,7 +17,7 @@
 
     &::before {
       content: "";
-      background: center/contain url("/logo.svg") no-repeat;
+      background: center/contain svg-load("./logo.svg") no-repeat;
       min-height: 100%;
       min-width: 100%;
       display: inline-block;

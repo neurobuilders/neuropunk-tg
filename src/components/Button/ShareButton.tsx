@@ -1,6 +1,7 @@
 "use client";
 
 import { Release } from "@/helpers/api/release";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 import { shareURL } from "@telegram-apps/sdk-react";
 import { Share2 } from "lucide-react";
 import { MouseEventHandler, useCallback } from "react";
@@ -17,6 +18,7 @@ export const ShareButton = (props: ShareButtonProps) => {
       if (!release) {
         return;
       }
+      triggerHapticFeedback();
       shareURL(window.location.href, `${release.artist} - ${release.title}`);
     },
     []

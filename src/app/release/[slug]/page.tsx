@@ -29,8 +29,6 @@ export default async function ReleasePage(props: ReleasePageProps) {
     return <div>${slug} - 404 NOT FOUND</div>;
   }
 
-  console.log("release", release);
-
   return (
     <Page id="release" back={true}>
       <NextImage
