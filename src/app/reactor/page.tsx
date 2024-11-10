@@ -130,7 +130,7 @@ export default function ReactorPage() {
   return (
     <Page back={true}>
       <List>
-        <Section header="">
+        <Section>
           <div>
             <div className="relative">
               <ReactorLogoBackground className={clsx(reactorClasses)}>

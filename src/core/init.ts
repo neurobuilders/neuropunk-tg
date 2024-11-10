@@ -69,13 +69,4 @@ export async function init(debug: boolean): Promise<void> {
   if (swipeBehavior.isVerticalEnabled()) {
     swipeBehavior.disableVertical();
   }
-
-  // mainButton.mount();
-  // mainButton.setParams({
-  //   isVisible: false,
-  //   isEnabled: false,
-  //   text: "TEST!!!",
-  //   isLoaderVisible: true,
-  //   hasShineEffect: true,
-  // });
 }
