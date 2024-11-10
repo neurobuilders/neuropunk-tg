@@ -17,6 +17,7 @@ import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card
 import { captureException } from "@/helpers/utils";
 import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 import { useRouter } from "next/navigation";
+import { ReleaseItem } from "./ReleaseItem/ReleaseItem";
 
 interface ReleasesSliderProps {
   releases: Release[];
@@ -24,9 +25,6 @@ interface ReleasesSliderProps {
 
 export default function ReleasesSlider(props: ReleasesSliderProps) {
   const { releases } = props;
-  const imageRefs = useRef<Record<number, HTMLImageElement | null>>({});
-  const t = useTranslations("i18n");
-  const router = useRouter();
 
   return (
     <Swiper
@@ -56,7 +54,7 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
         pauseOnMouseEnter: true,
       }}
       navigation={true}
-      modules={[Pagination, Navigation, Autoplay]}
+      modules={[Pagination, Navigation /*Autoplay*/]}
       className={clsx(
         "releases releases--latest swiper--releases",
         "!px-5 !pb-10 mt-2 mb-5"
@@ -65,60 +63,7 @@ export default function ReleasesSlider(props: ReleasesSliderProps) {
       {releases.map((v, i) => {
         return (
           <SwiperSlide key={v.url}>
-            <Card
-              onClick={() => {
-                const url = `/release/${v.slug}`;
-                // if (await isTMA()) {
-                //   openLink(url);
-                // } else {
-                // }
-                router.push(url);
-                triggerHapticFeedback();
-              }}
-            >
-              <>
-                <CardChip readOnly className="card-chip">
-                  {v.catalogNr}
-                </CardChip>
-                <Image
-                  ref={(ref) => {
-                    imageRefs.current[i] = ref;
-                  }}
-                  src={v.coverUrl}
-                  alt={v.title}
-                  width={v.width}
-                  height={v.height}
-                  priority={true}
-                />
-                {v.videoUrl && (
-                  <video
-                    playsInline
-                    muted
-                    autoPlay
-                    loop
-                    className="hidden"
-                    width="100%"
-                    preload=""
-                    onPlay={(e) => {
-                      (e.target as any)?.classList.remove("hidden");
-                      imageRefs.current[i]?.classList.add("hidden");
-                    }}
-                    onCanPlayThrough={async (e) => {
-                      try {
-                        await (e.target as any)?.play();
-                      } catch (err) {
-                        captureException(err);
-                      }
-                    }}
-                  >
-                    <source src={v.videoUrl} type="video/webm" />
-                  </video>
-                )}
-                <CardCell readOnly subtitle={v.artist} className="card-cell">
-                  {v.title}
-                </CardCell>
-              </>
-            </Card>
+            <ReleaseItem release={v} />
           </SwiperSlide>
         );
       })}

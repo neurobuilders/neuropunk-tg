@@ -2,7 +2,7 @@
 
 import RiveComponent from "@rive-app/react-canvas";
 
-export const LoadingRive = () => (
+export default () => (
   <RiveComponent
     src="/rives/loading.riv"
     stateMachines={"State Machine 1"}

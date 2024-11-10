@@ -8,23 +8,30 @@ import {
   Avatar,
   Banner,
 } from "@telegram-apps/telegram-ui";
-
 import { Page } from "@/components/Page";
-
-import { NeuroWave } from "@/components/NeuroWave/NeuroWave";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
-import React from "react";
+import React, { lazy, Suspense } from "react";
+
 import "./styles.scss";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
 import ArtistsSlider from "@/components/ArtistsSlider/ArtistsSlider";
 import EventsList from "@/components/EventsList/EventsList";
 import ReleasesSlider from "@/components/ReleasesSlider/ReleasesSlider";
 import { getReleases } from "@/helpers/api/release";
 import { getEvents } from "@/helpers/api/events";
 import { getArtists } from "@/helpers/api/artist";
-import { LoadingRive } from "@/components/LoadingRive";
+import dynamic from "next/dynamic";
+
+const NeuroWave = dynamic(() => import("@/components/NeuroWave/NeuroWave"), {
+  ssr: false,
+});
+
+const LoadingRive = dynamic(() => import("@/components/LoadingRive"), {
+  ssr: false,
+});
 
 export default async function HomePage() {
   const [releases, events, artists] = await Promise.all([
@@ -42,8 +49,10 @@ export default async function HomePage() {
               <div className="px-6 pt-4">
                 <NeuropunkRive />
               </div>
-              <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
-              <ReleasesSlider releases={releases} />
+              <div className="animate__animated animate__fadeIn">
+                <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
+                <ReleasesSlider releases={releases} />
+              </div>
             </div>
             <div className="row">
               <h2 className="text-lg mt-4 mx-5 pb-2">Events</h2>
@@ -78,9 +87,7 @@ export default async function HomePage() {
             header="Introducing Neuro Reactor"
             type="section"
           >
-            <React.Fragment key=".0">
-              <Button size="s">Claim</Button>
-            </React.Fragment>
+            <Button size="s">Claim</Button>
           </Banner>
         </Section>
         <div>
