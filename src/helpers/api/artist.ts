@@ -6,7 +6,7 @@ import { readJsonFile } from "@/helpers/mock";
 export interface Artist {
   name: string;
   country: string;
-  description: string;
+  description?: string;
   url: string;
   imageUrl: string;
   imageWidth: number;
