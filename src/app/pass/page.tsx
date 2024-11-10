@@ -31,8 +31,8 @@ export default function PassPage() {
             Level 5
           </Cell>
 
-          <Cell before="🎫" description="NeuroPass">
-            Access: Zone 3
+          <Cell before="🎫" description="">
+            Access: Phase 01
           </Cell>
 
           <Cell
