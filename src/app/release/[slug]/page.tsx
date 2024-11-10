@@ -7,7 +7,6 @@ import { getRelease } from "@/helpers/api/release";
 import NextImage from "next/image";
 import clsx from "clsx";
 import "./styles.scss";
-import { ShareButton } from "@/components/Button/ShareButton";
 import { ReleaseCover } from "@/components/Release/ReleaseCover/ReleaseCover";
 import { ReleaseLinks } from "@/components/Release/ReleaseLinks/ReleaseLinks";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
@@ -41,8 +40,8 @@ export default async function ReleasePage(props: ReleasePageProps) {
         alt={release.slug}
         priority={true}
       />
-      <List className="relative z-2 p-2">
-        <div className="mb-2 relative">
+      <List className="relative z-2 p-4">
+        <div className="mb-4 relative">
           <CardChip readOnly className="card-chip">
             {release.catalogNr}
           </CardChip>
@@ -51,19 +50,11 @@ export default async function ReleasePage(props: ReleasePageProps) {
             className="animate__animated animate__fadeIn"
           />
           <Section className="release__info">
-            <div
-              className={clsx(
-                "px-3 pt-2.5 pb-3",
-                "flex items-center justify-between gap-3"
-              )}
-            >
-              <div>
-                <h1 className="font-bold text-lg leading-none mb-2">
-                  {release.artist}
-                </h1>
-                <h2 className="text-sm">{release.title}</h2>
-              </div>
-              <ShareButton release={release} />
+            <div className={clsx("px-3 pt-3 pb-3", "flex flex-col gap-0")}>
+              <h1 className="font-bold text-lg leading-none mb-2">
+                {release.artist}
+              </h1>
+              <h2 className="text-sm">{release.title}</h2>
             </div>
           </Section>
           <ReleaseLinks release={release} />

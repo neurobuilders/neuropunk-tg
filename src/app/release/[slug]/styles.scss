@@ -4,7 +4,12 @@
     @apply fixed top-0 right-0 bottom-0 left-0 w-full h-full object-cover;
   }
   &__cover {
-    @apply w-full;
+    video,
+    img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      @apply w-full;
+    }
   }
   &__info {
     > div {
