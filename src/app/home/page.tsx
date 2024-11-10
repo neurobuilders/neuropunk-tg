@@ -99,7 +99,10 @@ export default async function HomePage() {
         </Section>
       </List>
       <div className="full-width">
-        <ArtistsSlider artists={artists} />
+        <div className="row">
+          <h2 className="text-lg mt-2 mx-5 pb-2">Artists</h2>
+          <ArtistsSlider artists={artists} />
+        </div>
       </div>
     </Page>
   );

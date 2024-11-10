@@ -55,13 +55,13 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
     >
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
-          <Card className="rounded-md">
+          <Card className="rounded-md" type="ambient">
             <Image
               src={v.imageUrl}
               alt={v.name}
               width={v.imageWidth}
               height={v.imageHeight}
-              className="min-w-[125px] h-[125px] object-cover"
+              className="min-w-[125px] h-[150px] object-cover"
             />
             <CardCell readOnly className="card-cell">
               {v.name}
