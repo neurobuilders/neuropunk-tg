@@ -4,12 +4,6 @@ $main-color: #fe1c1a;
   --marks-translate-y: 100px;
 }
 
-.is-resetting {
-  .marks li {
-    transition: transform 0.3s ease-out;
-  }
-}
-
 .core {
   // background: #cedce0;
   width: 100px;
@@ -646,4 +640,17 @@ $main-color: #fe1c1a;
 
 .marks li:nth-child(60) {
   transform: rotate(360deg) translateY(var(--marks-translate-y));
+}
+
+.is-resetting {
+  .marks li {
+    transition: transform 0.4s ease-in;
+  }
+  .e5_3,
+  .semi_arc {
+    animation-duration: 8s !important;
+  }
+  .e3 {
+    animation-duration: 12s !important;
+  }
 }

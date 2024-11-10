@@ -42,20 +42,18 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
       }
       speed={600}
       centeredSlides={true}
-      parallax={true}
       pagination={{
         clickable: true,
       }}
       slidesPerView={3}
       spaceBetween={15}
       loop={true}
-      navigation={false}
-      modules={[Pagination, Navigation, Autoplay]}
+      modules={[Pagination, Autoplay]}
       className="mt-3 !pb-[40px] mb-3"
     >
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
-          <Card className="rounded-md" type="ambient">
+          <Card type="ambient">
             <Image
               src={v.imageUrl}
               alt={v.name}
