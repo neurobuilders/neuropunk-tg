@@ -32,7 +32,9 @@ export default async function ReleasePage(props: ReleasePageProps) {
   return (
     <Page id="release" back={true}>
       <NextImage
-        className={clsx("release__background")}
+        className={clsx(
+          "release__background animate__animated animate__fadeIn"
+        )}
         src={release.coverUrl}
         width={release.width}
         height={release.height}
@@ -44,7 +46,10 @@ export default async function ReleasePage(props: ReleasePageProps) {
           <CardChip readOnly className="card-chip">
             {release.catalogNr}
           </CardChip>
-          <ReleaseCover release={release} />
+          <ReleaseCover
+            release={release}
+            className="animate__animated animate__fadeIn"
+          />
           <Section className="release__info">
             <div
               className={clsx(

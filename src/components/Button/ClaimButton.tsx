@@ -28,7 +28,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
   const springProps = useSpring({
     value: floatCount,
     from: { value: 0 },
-    config: { tension: 280, friction: 120 },
+    config: { tension: 280, friction: 120, duration: 500 },
   });
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
@@ -40,7 +40,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
           onClick(val, e);
         }
         triggerHapticFeedback();
-        springProps.value.set(0);
+        // springProps.value.set(0);
         setFloatCount(0);
 
         setTimeout(() => {

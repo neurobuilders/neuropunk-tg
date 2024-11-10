@@ -8,17 +8,18 @@ import clsx from "clsx";
 
 interface ReleaseCoverProps {
   release?: Release;
+  className?: string;
 }
 
 export const ReleaseCover = (props: ReleaseCoverProps) => {
   const [showVideo, setShowVideo] = useState(false);
-  const { release } = props;
+  const { release, className } = props;
   if (!release) {
     return;
   }
 
   return (
-    <>
+    <div className={clsx("release__cover", className)}>
       {!showVideo && (
         <Image
           className={clsx("release__cover")}
@@ -53,6 +54,6 @@ export const ReleaseCover = (props: ReleaseCoverProps) => {
           <source src={release.videoUrl} type="video/webm" />
         </video>
       )}
-    </>
+    </div>
   );
 };

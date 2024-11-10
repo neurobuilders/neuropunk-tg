@@ -6,8 +6,8 @@
         "artist": "TNTKLZ",
         "catalogNr": "NRPNK065",
         "url": "https://neuropunk.app/release/tntklz-synthesis-lp",
-        "width": 170,
-        "height": 170,
+        "width": 256,
+        "height": 256,
         "links": [
             {
                 "url": "https://www.beatport.com/release/synthesis-lp/4743288",
@@ -109,8 +109,8 @@
         "artist": "Various Artists",
         "catalogNr": "NRPNK063",
         "url": "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
-        "width": 170,
-        "height": 170,
+        "width": 256,
+        "height": 256,
         "links": [
             {
                 "url": "https://open.spotify.com/album/1PMSsvthQpBKMwtdd21JOB",
@@ -206,8 +206,8 @@
         "artist": "L 33",
         "catalogNr": "NRPNK064",
         "url": "https://neuropunk.app/release/l-33-get-busy-you-was-there",
-        "width": 170,
-        "height": 170,
+        "width": 256,
+        "height": 256,
         "links": [
             {
                 "url": "https://www.beatport.com/release/get-busy-you-was-there/4743283",
@@ -314,8 +314,8 @@
         "artist": "IJENTA",
         "catalogNr": "PPRFNK083",
         "url": "https://neuropunk.app/release/ijenta-vefa-part-2",
-        "width": 170,
-        "height": 170
+        "width": 256,
+        "height": 256
     },
     {
         "slug": "nerv3-humane-made-higrade-verzor-prosto-crazy",
@@ -324,7 +324,7 @@
         "artist": "NERV3, Humane Made, Higrade, Verzor",
         "catalogNr": "PPRFNK084",
         "url": "https://neuropunk.app/release/nerv3-humane-made-higrade-verzor-prosto-crazy",
-        "width": 170,
-        "height": 170
+        "width": 256,
+        "height": 256
     }
 ]
