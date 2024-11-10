@@ -28,6 +28,7 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
         const isDisabled = i === 0;
         return (
           <Cell
+            key={v.url}
             className={clsx("release-link", `release-link--${v.providerId}`)}
             disabled={isDisabled}
             before={<span className="release-link__image" role="image"></span>}
