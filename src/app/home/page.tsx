@@ -86,7 +86,7 @@ export default async function HomePage() {
               <div className="px-6 pt-7">
                 <NeuropunkRive />
               </div>
-              <div className="animate__animated animate__fadeIn mt-8 pb-2">
+              <div className="animate__animated animate__fadeIn mt-9 pb-2">
                 {/* <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2> */}
                 <ReleasesSlider releases={releases} />
               </div>

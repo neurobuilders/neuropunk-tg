@@ -28,7 +28,7 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
         triggerHapticFeedback("medium");
       }}
       autoplay={{
-        delay: 9000,
+        delay: 3000,
         disableOnInteraction: false,
       }}
       style={
@@ -42,38 +42,24 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
       pagination={{
         clickable: true,
       }}
-      navigation={true}
+      loop={true}
+      navigation={false}
       modules={[Parallax, Pagination, Navigation, Autoplay]}
       className="swiper--parallax"
     >
-      <div
-        slot="container-start"
-        className="parallax-bg"
-        style={{
-          backgroundImage:
-            "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
-        }}
-        data-swiper-parallax="-23%"
-      ></div>
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
-          <div className="flex pb-4 gap-6 items-center">
+          <div className="flex gap-8 items-center">
             <Image
               src={v.imageUrl}
               alt={v.name}
               width={v.imageWidth}
               height={v.imageHeight}
-              className="max-w-[80px]"
+              className="w-[125px] min-w-[125px] h-[125px] object-cover"
             />
-            <div className="title" data-swiper-parallax="-300">
+            <div className="title !mb-0" data-swiper-parallax="-300">
               {v.name}
             </div>
-          </div>
-          {/* <div className="subtitle" data-swiper-parallax="-200">
-          {v.country}
-        </div> */}
-          <div className="text" data-swiper-parallax="-100">
-            <p>{v.description}</p>
           </div>
         </SwiperSlide>
       ))}
