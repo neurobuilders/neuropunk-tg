@@ -10,6 +10,8 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { Artist } from "@/helpers/api/artist";
+import { Card } from "@telegram-apps/telegram-ui";
+import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 
 interface ArtistsSliderProps {
   artists: Artist[];
@@ -35,32 +37,36 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
         {
           "--swiper-navigation-color": "#fff",
           "--swiper-pagination-color": "#fff",
+          // "--swiper-pagination-bottom": "-30px",
         } as any
       }
       speed={600}
+      centeredSlides={true}
       parallax={true}
       pagination={{
         clickable: true,
       }}
+      slidesPerView={3}
+      spaceBetween={15}
       loop={true}
       navigation={false}
-      modules={[Parallax, Pagination, Navigation, Autoplay]}
-      className="swiper--parallax"
+      modules={[Pagination, Navigation, Autoplay]}
+      className="mt-3 !pb-[40px] mb-3"
     >
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
-          <div className="flex gap-8 items-center">
+          <Card className="rounded-md">
             <Image
               src={v.imageUrl}
               alt={v.name}
               width={v.imageWidth}
               height={v.imageHeight}
-              className="w-[125px] min-w-[125px] h-[125px] object-cover"
+              className="min-w-[125px] h-[125px] object-cover"
             />
-            <div className="title !mb-0" data-swiper-parallax="-300">
+            <CardCell readOnly className="card-cell">
               {v.name}
-            </div>
-          </div>
+            </CardCell>
+          </Card>
         </SwiperSlide>
       ))}
     </Swiper>
