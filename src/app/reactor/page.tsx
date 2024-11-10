@@ -30,7 +30,7 @@ import { triggerHapticFeedback } from "@/helpers/telegram";
 const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
 const neuroEnergyPerSecond = 0.0013;
-const maxMarksTranslateY = 150;
+const maxMarksTranslateY = 130;
 
 function getRandomArbitrary(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -130,7 +130,7 @@ export default function ReactorPage() {
   return (
     <Page back={true}>
       <List>
-        <Section header="">
+        <Section>
           <div>
             <div className="relative">
               <ReactorLogoBackground className={clsx(reactorClasses)}>
@@ -146,7 +146,7 @@ export default function ReactorPage() {
                 />
               </ReactorLogoBackground>
             </div>
-            <div className="flex flex-col items-center mt-[50px]">
+            <div className="flex flex-col items-center mt-10">
               <h3 className="text-2xl font-bold mb-1">
                 {formatNumber(currentNeuroEnergyAmount, 2)} NE
               </h3>
@@ -200,7 +200,7 @@ export default function ReactorPage() {
               </Modal>
               <div className="">
                 <ClaimButton
-                  className="mt-[40px] mb-[30px]"
+                  className="mt-6 mb-8"
                   onClick={claimButtonHandler}
                   valuePerSecond={neuroEnergyPerSecond}
                   startValue={claimButtonStartValue}

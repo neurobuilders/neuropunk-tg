@@ -10,6 +10,8 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { Artist } from "@/helpers/api/artist";
+import { Card } from "@telegram-apps/telegram-ui";
+import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 
 interface ArtistsSliderProps {
   artists: Artist[];
@@ -28,53 +30,41 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
         triggerHapticFeedback("medium");
       }}
       autoplay={{
-        delay: 9000,
+        delay: 3000,
         disableOnInteraction: false,
       }}
       style={
         {
           "--swiper-navigation-color": "#fff",
           "--swiper-pagination-color": "#fff",
+          // "--swiper-pagination-bottom": "-30px",
         } as any
       }
       speed={600}
-      parallax={true}
+      centeredSlides={true}
       pagination={{
         clickable: true,
       }}
-      navigation={true}
-      modules={[Parallax, Pagination, Navigation, Autoplay]}
-      className="swiper--parallax"
+      slidesPerView={3}
+      spaceBetween={10}
+      loop={true}
+      modules={[Pagination, Autoplay]}
+      className="mt-3 !pb-[40px] mb-3 !px-2"
     >
-      <div
-        slot="container-start"
-        className="parallax-bg"
-        style={{
-          backgroundImage:
-            "url(https://cdn.neurocdn.ru/CACHE/images/covers/bgg_artt/9a9488401193c637b18fe8ed7517859f.jpg)",
-        }}
-        data-swiper-parallax="-23%"
-      ></div>
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
-          <div className="flex pb-4 gap-6 items-center">
+          <Card type="ambient">
             <Image
               src={v.imageUrl}
               alt={v.name}
               width={v.imageWidth}
               height={v.imageHeight}
-              className="max-w-[80px]"
+              className="min-w-[110px] h-[150px] object-cover"
             />
-            <div className="title" data-swiper-parallax="-300">
+            <CardCell readOnly className="card-cell">
               {v.name}
-            </div>
-          </div>
-          {/* <div className="subtitle" data-swiper-parallax="-200">
-          {v.country}
-        </div> */}
-          <div className="text" data-swiper-parallax="-100">
-            <p>{v.description}</p>
-          </div>
+            </CardCell>
+          </Card>
         </SwiperSlide>
       ))}
     </Swiper>

@@ -22,7 +22,6 @@ export const ReleaseCover = (props: ReleaseCoverProps) => {
     <div className={clsx("release__cover", className)}>
       {!showVideo && (
         <Image
-          className={clsx("release__cover")}
           src={release.coverUrl}
           width={release.width}
           height={release.height}

@@ -113,6 +113,12 @@
         "height": 256,
         "links": [
             {
+                "url": "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
+                "providerId": "neuropunk",
+                "label": "Купить",
+                "providerName": "Neuropunk"
+            },
+            {
                 "url": "https://open.spotify.com/album/1PMSsvthQpBKMwtdd21JOB",
                 "providerId": "spotify",
                 "label": "Play",
@@ -147,12 +153,6 @@
                 "providerId": "apple-music",
                 "label": "Play",
                 "providerName": "Apple Music"
-            },
-            {
-                "url": "https://neuropunk.app/release/various-artists-neuropunks-lp-2",
-                "providerId": "neuropunk",
-                "label": "Купить",
-                "providerName": "Neuropunk"
             },
             {
                 "url": "https://www.youtube.com/watch?v=R3xS3uzgELM&list=OLAK5uy_m8uv6CYdlQFeuXBxLgFLnP7ruFPyug6Ik&index=2",
@@ -210,6 +210,12 @@
         "height": 256,
         "links": [
             {
+                "url": "https://neuropunk.app/release/l-33-get-busy-you-was-there",
+                "providerId": "neuropunk",
+                "label": "Купить",
+                "providerName": "Neuropunk"
+            },
+            {
                 "url": "https://www.beatport.com/release/get-busy-you-was-there/4743283",
                 "providerId": "beatport",
                 "label": "Buy",
@@ -250,12 +256,6 @@
                 "providerId": "vk-music",
                 "label": "Play",
                 "providerName": "VK Music"
-            },
-            {
-                "url": "https://neuropunk.app/release/l-33-get-busy-you-was-there",
-                "providerId": "neuropunk",
-                "label": "Купить",
-                "providerName": "Neuropunk"
             },
             {
                 "url": "https://www.youtube.com/watch?v=A-lk_KiJBt8&list=OLAK5uy_nzu7ndgs4U3CWUDc4PX6T8euf-Yx1VNQY&index=2",

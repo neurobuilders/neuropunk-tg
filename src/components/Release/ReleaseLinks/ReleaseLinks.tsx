@@ -2,11 +2,9 @@
 
 import { Release } from "@/helpers/api/release";
 import clsx from "clsx";
-import { Button, Cell, Section } from "@telegram-apps/telegram-ui";
-import { Link } from "@/components/Link/Link";
-import Image from "next/image";
+import { Badge, Button, Cell, Section } from "@telegram-apps/telegram-ui";
+import { Check } from "lucide-react";
 import "./styles.scss";
-import { triggerHapticFeedback } from "@/helpers/telegram";
 
 interface ReleaseLinksProps {
   release?: Release;
@@ -25,37 +23,56 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
   }
 
   return (
-    <Section className="release__links">
-      {links.map((v) => (
-        <Link
-          key={v.url}
-          href={v.url}
-          className={clsx("release__link", `release__link--${v.providerId}`)}
-          onClick={() => {
-            triggerHapticFeedback();
-          }}
-        >
+    <Section className="release-links tasks" header="Tasks">
+      {links.map((v, i) => {
+        const isDisabled = i === 0;
+        return (
           <Cell
-            className="px-3"
-            before={
-              <span className="release__link-image" role="image"></span>
-              // <Image
-              //   src={`/icons/providers/${v.providerId}.svg`}
-              //   height={28}
-              //   width={28}
-              //   alt={v.providerName}
-              // />
-            }
+            key={v.url}
+            className={clsx("release-link", `release-link--${v.providerId}`)}
+            disabled={isDisabled}
+            before={<span className="release-link__image" role="image"></span>}
             after={
-              <Button size="s" mode="gray" className="min-w-[80px] h-[32px]">
-                {v.label}
-              </Button>
+              <span className="release-link__after flex gap-4 items-center">
+                {isDisabled ? (
+                  <>
+                    <span className="text-sm">+50</span>
+                    <Button
+                      mode="outline"
+                      size="s"
+                      className="px-2 py-1.5 h-auto"
+                    >
+                      <Check color="#8BC34A" size={20} />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-sm">50</span>
+                    {/* <Badge
+                      className="badge badge--invisible text-gray-500"
+                      mode="gray"
+                      type="number"
+                      large={false}
+                    >
+                      50
+                    </Badge> */}
+                    <Button
+                      mode="outline"
+                      size="s"
+                      className="px-2 py-1.5 h-auto"
+                    >
+                      Start
+                    </Button>
+                  </>
+                )}
+              </span>
             }
           >
             {v.providerName}
           </Cell>
-        </Link>
-      ))}
+          // </Link>
+        );
+      })}
     </Section>
   );
 };

@@ -1,8 +1,8 @@
 .page {
-  height: calc(100% - 82px);
+  // height: calc(100% - 82px);
 
   > div {
-    padding-bottom: 82px;
+    padding-bottom: 82px + 15px;
   }
 
   &--start {

@@ -4,7 +4,7 @@
 
 body {
   background: var(--tg-theme-secondary-bg-color, white);
-  height: 100vh;
+  // height: 100vh;
 
   --tg-theme-accent-text-color: #6ab2f2;
   --tg-theme-bg-color: #17212b;
@@ -30,6 +30,13 @@ body {
 }
 
 .app-root {
+  height: 100%;
+}
+
+html,
+body,
+.app-root,
+.page {
   height: 100%;
 }
 

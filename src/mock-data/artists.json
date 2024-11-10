@@ -1,12 +1,28 @@
 [
     {
-        "name": "Gydra",
+        "name": "GYDRA",
         "country": "RU",
         "description": "Gydra is D&B duo formed by legend of Russian D&B scene, leader of Neuropunk\npodcast & Tamrecords Eugene Besman aka DJ Bes & outstanding Moscowbased\nproducer Nikolay Shilov aka Menfort.\nWith countless Beatport Drum & Bass TOP 10’s, releases on labels like Eatbrain,\nBlackout, Bad Taste, Renegade Hardware, Cause 4 Concern and others, Gydra is\none of the most exciting and fastest growing Drum&Bass acts coming from\nRussia.\nProject also was nominated as best newcomer on Drum&Bass Awards 2017.\nGuys are gaining regular DJ support from the likes of Noisia, Audio, Ed Rush &\nOptical, Prolix, BTK, Optiv, Bad Company, Black Sun Empire, Jade, Billain, DC\nBreaks (to name few!) as well as making appearances on huge music platforms\n& radio shows.\nAfter a huge two years of productions in Drum & Bass, Gydra looks to continue\nto build off that success throughout 2018.",
         "url": "https://neuropunk.ru/artist/gydra/",
         "imageUrl": "https://neuropunk.ru/wp-content/uploads/2018/06/6.jpg",
         "imageWidth": 1170,
         "imageHeight": 780
+    },
+    {
+        "name": "STONX",
+        "country": "LONDON [UK]",
+        "url": "https://neuropunk.ru/artist/stonx/",
+        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2024/10/stonx.jpg",
+        "imageWidth": 320,
+        "imageHeight": 210
+    },
+    {
+        "name": "PAPERCLIP",
+        "country": "Saint Peterburg [RU]",
+        "url": "https://neuropunk.ru/artist/paperclip/",
+        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2022/03/NsuZjnztZ-Y.jpg",
+        "imageWidth": 430,
+        "imageHeight": 645
     },
     {
         "name": "L 33",
@@ -18,7 +34,7 @@
         "imageHeight": 960
     },
     {
-        "name": "2Whales",
+        "name": "2WHALES",
         "country": "RU",
         "description": "2Whales is a highly promising drum & bass duo from Russia’s city of Vologda. Having been inspired by the material delivered by the native artists, Bogdan and Yaroslav joined forces to create their own neuro style. These masters of deep and heavy bass do know how to serve their fat meals properly. Over less than two years of activity, they managed to receive support from different monsters of drum & bass scene. They repeatedly popped up in top 100 DNB Beatport Releases and different drum and bass podcasts such as: Pirate Station, Neuropunk, Dnb France, BBC Radio 1xtra and etc.",
         "url": "https://neuropunk.ru/artist/2whales/",
@@ -27,12 +43,36 @@
         "imageHeight": 521
     },
     {
+        "name": "MIZO",
+        "country": "RU",
+        "url": "https://neuropunk.ru/artist/mizo/",
+        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2019/07/2GjlX0Qgi8c.jpg",
+        "imageWidth": 1170,
+        "imageHeight": 780
+    },
+    {
         "name": "KROT",
         "country": "RU",
         "description": "KROT has began his career as a DJ and producer in 2005. Originally from Saint Petersburg, Russia. The main direction in sound is old-school Neurofunk, but there are also releases in Soulful/Liquid funk d&b. Has been signed by many international labels, some of them: Eatbrain, Close2Death, Mindtech, High Resistance Greypost Audio, Live History, Modulate, Blu Saphir, KOS.MOS.MUSIC, Influenza Media, TAMP3CORDS and TILT.",
         "url": "https://neuropunk.ru/artist/krot/",
-        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2023/07/%D0%91%D0%B5%D0%B7-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg?w=1313&ssl=1",
+        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2023/07/%D0%91%D0%B5%D0%B7-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg",
         "imageWidth": 1170,
         "imageHeight": 1280
+    },
+    {
+        "name": "CHASER",
+        "country": "RU",
+        "url": "https://neuropunk.ru/artist/chaser/",
+        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2018/07/GpwFlyi9c00.jpg",
+        "imageWidth": 1170,
+        "imageHeight": 781
+    },
+    {
+        "name": "MAGNETUDE",
+        "country": "[RU / UK]",
+        "url": "https://neuropunk.ru/artist/magnetude/",
+        "imageUrl": "https://neuropunk.ru/wp-content/uploads/2022/04/159922583_170283634908805_79565924230199512_n.jpg",
+        "imageWidth": 430,
+        "imageHeight": 430
     }
 ]

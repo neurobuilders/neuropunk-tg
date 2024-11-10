@@ -33,6 +33,24 @@ const LoadingRive = dynamic(() => import("@/components/LoadingRive"), {
   ssr: false,
 });
 
+const CreateNeuropass = () => {
+  return (
+    <div>
+      <Placeholder
+        className="pt-4 px-7 pb-9"
+        action={
+          <Button Component="a" href="/start" size="l" stretched>
+            Create Neuro Pass
+          </Button>
+        }
+        description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
+      >
+        <NeuroWave />
+      </Placeholder>
+    </div>
+  );
+};
+
 export default async function HomePage() {
   const [releases, events, artists] = await Promise.all([
     getReleases(),
@@ -42,37 +60,7 @@ export default async function HomePage() {
 
   return (
     <Page back={false}>
-      <List>
-        <Section header="Welcome to Neuro Space">
-          <>
-            <div className="row">
-              <div className="px-6 pt-4">
-                <NeuropunkRive />
-              </div>
-              <div className="animate__animated animate__fadeIn">
-                <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2>
-                <ReleasesSlider releases={releases} />
-              </div>
-            </div>
-            <div className="row">
-              <h2 className="text-lg mt-4 mx-5 pb-2">Events</h2>
-              <EventsList events={events} />
-            </div>
-          </>
-          <div>
-            <Placeholder
-              className="pt-4 px-7 pb-9"
-              action={
-                <Button Component="a" href="/start" size="l" stretched>
-                  Create Neuro Pass
-                </Button>
-              }
-              description="The NeuroPass is not just a key; it’s a gateway to everything hidden beneath the surface"
-            >
-              <NeuroWave />
-            </Placeholder>
-          </div>
-        </Section>
+      <List className="!pb-2">
         <Section>
           <Banner
             before={
@@ -87,13 +75,35 @@ export default async function HomePage() {
             header="Introducing Neuro Reactor"
             type="section"
           >
-            <Button size="s">Claim</Button>
+            <Button size="s" stretched>
+              Claim
+            </Button>
           </Banner>
         </Section>
-        <div>
+        <Section>
+          <>
+            <div className="row">
+              <div className="px-6 pt-7">
+                <NeuropunkRive />
+              </div>
+              <div className="animate__animated animate__fadeIn mt-9 pb-2">
+                {/* <h2 className="text-lg mt-4 mx-5 pb-2">Latest Releases</h2> */}
+                <ReleasesSlider releases={releases} />
+              </div>
+            </div>
+            <div className="row">
+              <h2 className="text-lg mt-4 mx-5 pb-2">Events</h2>
+              <EventsList events={events} />
+            </div>
+          </>
+        </Section>
+      </List>
+      <div className="full-width">
+        <div className="row">
+          <h2 className="text-lg mt-2 mx-5 pb-2">Artists</h2>
           <ArtistsSlider artists={artists} />
         </div>
-      </List>
+      </div>
     </Page>
   );
 }
