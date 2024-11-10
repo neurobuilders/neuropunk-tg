@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { useSpring, animated } from "react-spring";
-import emitter, { Events } from "@/helpers/events";
+// import emitter, { Events } from "@/helpers/events";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import clsx from "clsx";
 
@@ -22,33 +22,39 @@ interface ClaimButtonProps {
 
 const ClaimButton = (props: ClaimButtonProps) => {
   const { onClick, startValue, className, valuePerSecond } = props;
-  const [floatCount, setFloatCount] = useState(
-    parseFloat(`${startValue ?? 0}`)
-  ); // Initialize to a float value
+  const [isDisabled, setDisabled] = useState(false);
+  const [floatCount, setFloatCount] = useState(startValue ?? 0); // Initialize to a float value
+  // Animation setup using react-spring
+  const springProps = useSpring({
+    value: floatCount,
+    from: { value: 0 },
+    config: { tension: 280, friction: 120, duration: 500 },
+  });
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
       setTimeout(() => {
+        setDisabled(true);
         const val = springProps.value.get();
         if (onClick) {
           onClick(val, e);
         }
         triggerHapticFeedback();
-        springProps.value.set(0);
+        // springProps.value.set(0);
         setFloatCount(0);
+
+        setTimeout(() => {
+          //cooldown
+          setDisabled(false);
+        }, 5000);
       }, 100);
     },
     [onClick]
   );
 
-  // Animation setup using react-spring
-  const springProps = useSpring({
-    value: floatCount,
-    from: { value: 0 },
-    config: { tension: 280, friction: 120 },
-  });
-
   useEffect(() => {
+    setFloatCount((prevCount) => prevCount + valuePerSecond);
+
     const interval = setInterval(() => {
       setFloatCount((prevCount) => prevCount + valuePerSecond); // Increment the float count
     }, 1000); // Update every second (1000 ms)
@@ -60,11 +66,14 @@ const ClaimButton = (props: ClaimButtonProps) => {
       className={clsx("btn btn__claim", className)}
       type="button"
       onClick={_onClick}
+      disabled={isDisabled}
     >
       <span>
         Claim <span className="icon icon-ne"></span>
         <animated.span>
-          {springProps.value.to((val) => formatNumber(val))}
+          {springProps.value.to((val) => {
+            return formatNumber(val);
+          })}
         </animated.span>
       </span>
     </button>

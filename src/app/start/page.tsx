@@ -7,7 +7,7 @@ import { Page } from "@/components/Page";
 import React from "react";
 import Rive from "@rive-app/react-canvas";
 
-export default function Tasks() {
+export default function StartPage() {
   const t = useTranslations("i18n");
 
   return (

@@ -7,7 +7,7 @@ import { Page } from "@/components/Page";
 import { useSession } from "next-auth/react";
 import { ExtendedUser } from "@/types/next-auth";
 
-export default function LaunchParamsPage() {
+export default function LaunchDataPage() {
   const { data: session, status } = useSession({ required: false });
   console.log("session", session);
 

@@ -14,15 +14,13 @@ export default function IndexPage() {
   const router = useRouter();
   const { initDataRaw } = retrieveLaunchParams();
   const isLoaded = useRef(false);
+  const isPreloaded = useRef(false);
 
-  useEffect(() => {
-    if (isLoaded.current) {
-      return;
-    }
-    isLoaded.current = true;
-
+  const preload = () => {
     try {
-      import("@rive-app/react-canvas");
+      if (isPreloaded.current) {
+        return;
+      }
       // router.prefetch("/neuropunk.riv");
       // trying to preload critical endpoints
       router.prefetch("/welcome", { kind: PrefetchKind.FULL });
@@ -30,9 +28,19 @@ export default function IndexPage() {
       router.prefetch("/reactor", { kind: PrefetchKind.FULL });
       router.prefetch("/pass", { kind: PrefetchKind.FULL });
       router.prefetch("/settings", { kind: PrefetchKind.FULL });
+      isPreloaded.current = true;
     } catch (err) {
       captureException(err);
     }
+  };
+
+  useEffect(() => {
+    if (isLoaded.current) {
+      return;
+    }
+    isLoaded.current = true;
+
+    preload();
 
     signIn("tg-miniapp", { redirect: false, initDataRaw }).then((res) => {
       if (!res) return;
@@ -42,7 +50,14 @@ export default function IndexPage() {
           router.replace("/welcome");
         }
       } else if (ok) {
-        router.replace("/home");
+        if (isPreloaded.current) {
+          router.replace("/home");
+        } else {
+          preload();
+          setTimeout(() => {
+            router.replace("/home");
+          }, 300);
+        }
       }
     });
   }, [initDataRaw, router]);

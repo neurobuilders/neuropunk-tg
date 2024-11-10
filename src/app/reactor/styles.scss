@@ -17,7 +17,7 @@
 
     &::before {
       content: "";
-      background: center/contain url("/logo.svg") no-repeat;
+      background: center/contain svg-load("./logo.svg") no-repeat;
       min-height: 100%;
       min-width: 100%;
       display: inline-block;
@@ -59,9 +59,34 @@
 
 // https://getcssscan.com/css-buttons-examples
 // button 63
+@property --btn-claim-color1 {
+  syntax: "<color>";
+  initial-value: #af40ff;
+  inherits: false;
+}
+
+@property --btn-claim-color2 {
+  syntax: "<color>";
+  initial-value: #5b42f3;
+  inherits: false;
+}
+
+@property --btn-claim-color3 {
+  syntax: "<color>";
+  initial-value: #00ddeb;
+  inherits: false;
+}
+
 .btn__claim {
   align-items: center;
-  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  background: linear-gradient(
+    144deg,
+    var(--btn-claim-color1),
+    var(--btn-claim-color2) 50%,
+    var(--btn-claim-color3)
+  );
+  transition: --btn-claim-color1 1.5s, --btn-claim-color2 2s,
+    --btn-claim-color2 1s;
   border: 0;
   border-radius: 8px;
   box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -80,6 +105,16 @@
   touch-action: manipulation;
   white-space: nowrap;
   cursor: pointer;
+  // transition: all 0.6s ease-out;
+
+  &[disabled] {
+    pointer-events: none;
+    --btn-claim-color1: #7b7b7b;
+    --btn-claim-color2: #4e4e4e;
+    --btn-claim-color3: #4e5253;
+
+    // background-image: linear-gradient(358deg, #7b7b7b, #4e4e4e 50%, #4e5253);
+  }
 }
 
 .btn__claim:active,

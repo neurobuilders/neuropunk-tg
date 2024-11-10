@@ -1,3 +1,4 @@
+import { triggerHapticFeedback } from "@/helpers/telegram";
 import { captureException } from "@/helpers/utils";
 import {
   backButton,
@@ -8,6 +9,7 @@ import {
   $debug,
   init as initSDK,
   swipeBehavior,
+  mainButton,
 } from "@telegram-apps/sdk-react";
 
 /**
@@ -24,6 +26,9 @@ export async function init(debug: boolean): Promise<void> {
   // Mount all components used in the project.
   if (backButton.isSupported()) {
     backButton.mount();
+    backButton.onClick(() => {
+      triggerHapticFeedback();
+    });
   }
 
   // Define components-related CSS variables.
@@ -64,4 +69,13 @@ export async function init(debug: boolean): Promise<void> {
   if (swipeBehavior.isVerticalEnabled()) {
     swipeBehavior.disableVertical();
   }
+
+  // mainButton.mount();
+  // mainButton.setParams({
+  //   isVisible: false,
+  //   isEnabled: false,
+  //   text: "TEST!!!",
+  //   isLoaderVisible: true,
+  //   hasShineEffect: true,
+  // });
 }

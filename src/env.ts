@@ -1,6 +1,13 @@
 const env = {
   env: process.env.NODE_ENV,
   isProduction: process.env.NODE_ENV === "production",
+  app: {
+    version: process.env.appVersion,
+  },
+  vercel: {
+    gitCommitRef: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF,
+    gitCommitSha: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+  },
   siteUrl:
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ""),

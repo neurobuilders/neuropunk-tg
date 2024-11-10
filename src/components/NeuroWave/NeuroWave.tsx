@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import { DotLottie, DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 
-export const NeuroWave = () => {
+const NeuroWave = () => {
   const [dotLottie, setDotLottie] = React.useState<DotLottie>(null as any);
   const timeoutIdRef = React.useRef<NodeJS.Timeout>();
 
@@ -44,3 +46,5 @@ export const NeuroWave = () => {
     />
   );
 };
+
+export default NeuroWave;

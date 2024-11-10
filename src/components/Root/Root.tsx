@@ -63,7 +63,6 @@ function RootInner({ children }: PropsWithChildren) {
     const pageClassName = `page-slug--${slugify(pathname)}`;
     let willAdd = true;
     for (const className of Array.from(document.body.classList.values())) {
-      console.log("className", className);
       if (className.startsWith("page-slug--")) {
         if (className === pageClassName) {
           willAdd = false;

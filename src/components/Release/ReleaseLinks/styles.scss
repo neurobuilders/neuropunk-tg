@@ -1,0 +1,37 @@
+@mixin providerStyle($name) {
+  &--#{$name} {
+    .release__link-image {
+      background-image: svg-load("./icons/#{$name}.svg");
+    }
+  }
+}
+
+.release {
+  &__link {
+    .release__link-image {
+      display: block;
+      height: 28px;
+      width: 28px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    @include providerStyle("beatport");
+    @include providerStyle("spotify");
+    @include providerStyle("apple-music");
+    @include providerStyle("junodownload");
+    @include providerStyle("yandex-music");
+    @include providerStyle("itunes");
+    @include providerStyle("vk-music");
+    @include providerStyle("neuropunk");
+    @include providerStyle("youtube");
+    @include providerStyle("youtube-music");
+    @include providerStyle("yandex-music");
+    @include providerStyle("soundcloud");
+    @include providerStyle("tidal");
+    @include providerStyle("deezer");
+    @include providerStyle("amazon");
+    @include providerStyle("mts-music");
+    @include providerStyle("zvuk");
+  }
+}
