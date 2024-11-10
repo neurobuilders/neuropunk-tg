@@ -13,7 +13,7 @@ export default function PassPage() {
       <List>
         <Section header="NEUROPUNK PASS">
           <Cell
-              before={<div className={"p-2"}><Image size={60} src="/neuropass-user.png" /></div>}
+              before={<div className={"pt-2 pb-2"}><Image size={48} src="/neuropass-user.png" /></div>}
               description="Neuro Builder"
           >
             Neuro Morpheuz
