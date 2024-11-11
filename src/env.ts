@@ -3,6 +3,7 @@ const env = {
   isProduction: process.env.NODE_ENV === "production",
   app: {
     version: process.env.appVersion,
+    erudaDisabled: process.env.NEXT_PUBLIC_ERUDA_DISABLED === "true",
   },
   vercel: {
     gitCommitRef: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF,

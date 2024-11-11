@@ -16,6 +16,7 @@ Neuropunk Beta
   - [Telegram Bot Configuration](#telegram-bot-configuration)
   - [Supabase Configuration](#supabase-configuration)
   - [Sentry Configuration](#sentry-configuration)
+  - [Eruda Debugging Configuration](#eruda-debugging-configuration)
   - [Notes](#notes)
 - [Example `.env` File](#example-env-file)
 - [Useful Links](#useful-links)
@@ -246,6 +247,13 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
 - **`SENTRY_AUTH_TOKEN`**  
   - **Description**: Authentication token for Sentry, used for deployment tracking and other integrations.
   - **Usage**: Stored securely and used when authenticating API calls to Sentry.
+
+### Eruda Debugging Configuration
+
+- **`NEXT_PUBLIC_ERUDA_DISABLED`**  
+  - **Description**: Controls whether the Eruda debugging tool is enabled. Eruda is typically used for debugging on mobile browsers.
+  Options: "true" to disable Eruda; any other value or absence defaults to Eruda being enabled.
+  - **Usage**: Can be used in development to toggle mobile debugging features on or off.
 
 ### Notes
 
