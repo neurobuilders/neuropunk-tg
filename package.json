@@ -19,6 +19,7 @@
     "@sentry/nextjs": "^8",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.46.1",
+    "@tabler/icons-react": "^3.21.0",
     "@telegram-apps/sdk": "^2.5.2",
     "@telegram-apps/sdk-react": "^2.0.5",
     "@telegram-apps/telegram-ui": "^2.1.5",
