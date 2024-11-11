@@ -8,6 +8,7 @@ import { BottomNavigation } from "./BottomNavigation/BottomNavigation";
 import Head from "next/head";
 // @ts-ignore
 import riveWASMResource from "@rive-app/canvas/rive.wasm";
+import { Navbar } from "@/components/Navbar/Navbar";
 
 interface PageProps {
   /**
@@ -47,6 +48,7 @@ export function Page({
 
   return (
     <>
+      <Navbar />
       <Head>
         <link
           key="preload-riveWASMResource"

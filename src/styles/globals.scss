@@ -31,6 +31,7 @@ body {
 
 .app-root {
   height: 100%;
+  padding-top: 60px; // because of fixed mobile navbar
 }
 
 html,
@@ -52,6 +53,7 @@ body,
   }
 }
 
+@import "icons";
 @import "loader";
 @import "page";
 @import "components";
