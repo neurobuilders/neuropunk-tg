@@ -17,6 +17,7 @@ import { Menu, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAppContext } from "@/context/AppContext";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 export function Navbar() {
   const router = useRouter();
@@ -28,7 +29,14 @@ export function Navbar() {
       className="fixed w-full z-20 top-0 start-0 px-2 drop-shadow-lg"
     >
       <div className="flex md:order-2 justify-between items-center w-full">
-        <Button color="gray" size="sm" onClick={openDrawer}>
+        <Button
+          color="gray"
+          size="sm"
+          onClick={() => {
+            openDrawer();
+            triggerHapticFeedback();
+          }}
+        >
           <Menu color="#ffffff" size={22} />
         </Button>
         <Button
@@ -38,6 +46,7 @@ export function Navbar() {
           className="px-2.5 py-1"
           onClick={() => {
             router.push("/reactor");
+            triggerHapticFeedback();
           }}
         >
           <span className="flex justify-center items-center">
@@ -45,7 +54,15 @@ export function Navbar() {
             <span>{formatNumber(2869, 2)}</span>
           </span>
         </Button>
-        <Button color="gray" size="sm" as={Link} href="/reactor">
+        <Button
+          color="gray"
+          size="sm"
+          as={Link}
+          href="/my/squad"
+          onClick={() => {
+            triggerHapticFeedback();
+          }}
+        >
           <UserPlus color="#ffffff" size={22} />
         </Button>
       </div>

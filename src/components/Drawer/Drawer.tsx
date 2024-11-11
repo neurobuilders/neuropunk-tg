@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { IconUsersGroup } from "@tabler/icons-react";
 import { useAppContext } from "@/context/AppContext";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 export const Drawer = () => {
   const { isDrawerOpen, closeDrawer } = useAppContext();
@@ -25,7 +26,10 @@ export const Drawer = () => {
           <Button
             color="gray"
             size="sm"
-            onClick={closeDrawer}
+            onClick={() => {
+              closeDrawer();
+              triggerHapticFeedback();
+            }}
             className="left-[-5px] border-0"
           >
             <X color="#ffffff" size={22} />

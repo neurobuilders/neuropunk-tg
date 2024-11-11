@@ -40,6 +40,10 @@ export async function init(debug: boolean): Promise<void> {
   if (!miniApp.isMounted()) {
     miniApp.mount();
     miniApp.bindCssVars();
+
+    miniApp.setBackgroundColor("#232e3c");
+    miniApp.setBottomBarColor("#171717");
+    miniApp.setHeaderColor("#1f2937");
   }
 
   initData.restore();
@@ -53,7 +57,9 @@ export async function init(debug: boolean): Promise<void> {
   }
 
   if (viewport.isMounted()) {
-    viewport.bindCssVars();
+    if (!viewport.isCssVarsBound()) {
+      viewport.bindCssVars();
+    }
 
     // Expand the TMA if it was launched in compact mode
     if (!viewport.isExpanded()) {
