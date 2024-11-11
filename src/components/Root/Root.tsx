@@ -6,9 +6,6 @@ import {
   miniApp,
   useLaunchParams,
   useSignal,
-  viewport,
-  expandViewport,
-  swipeBehavior,
 } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";

@@ -8,7 +8,7 @@ import { BottomNavigation } from "./BottomNavigation/BottomNavigation";
 import Head from "next/head";
 // @ts-ignore
 import riveWASMResource from "@rive-app/canvas/rive.wasm";
-import { Navbar } from "@/components/Navbar/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import { Drawer } from "@/components/Drawer/Drawer";
 
 interface PageProps {

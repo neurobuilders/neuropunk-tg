@@ -1,27 +1,28 @@
 import { formatNumber } from "@/helpers/utils";
 import {
-  Avatar,
-  Dropdown,
-  DropdownDivider,
-  DropdownHeader,
-  DropdownItem,
   Navbar as FlowbiteNavbar,
-  NavbarBrand,
   NavbarCollapse,
   NavbarLink,
-  NavbarToggle,
   Button,
 } from "flowbite-react";
-import { Button as TelegramButton } from "@telegram-apps/telegram-ui";
 import { Menu, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAppContext } from "@/context/AppContext";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import { useSpring, animated } from "react-spring";
+import { memo } from "react";
 
-export function Navbar() {
+const Navbar = memo(function Navbar() {
   const router = useRouter();
-  const { openDrawer } = useAppContext();
+  const { openDrawer, energyAmount } = useAppContext();
+
+  const springProps = useSpring({
+    value: energyAmount,
+    // from: { value: energyAmount },
+    from: { value: 0 },
+    config: { tension: 280, friction: 120, duration: 2500 },
+  });
 
   return (
     <FlowbiteNavbar
@@ -51,7 +52,11 @@ export function Navbar() {
         >
           <span className="flex justify-center items-center">
             <span className="icon icon-ne relative !ml-0 !top-0 !mr-[5px]"></span>
-            <span>{formatNumber(2869, 2)}</span>
+            <span>
+              <animated.span>
+                {springProps.value.to(formatNumber)}
+              </animated.span>
+            </span>
           </span>
         </Button>
         <Button
@@ -77,4 +82,6 @@ export function Navbar() {
       </NavbarCollapse>
     </FlowbiteNavbar>
   );
-}
+});
+
+export default Navbar;

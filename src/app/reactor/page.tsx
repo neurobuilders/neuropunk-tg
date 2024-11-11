@@ -26,10 +26,10 @@ import ClaimButton from "@/components/Button/ClaimButton";
 import { formatNumber } from "@/helpers/utils";
 import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import { useAppContext } from "@/context/AppContext";
 
 const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
-const neuroEnergyPerSecond = 0.0013;
 const maxMarksTranslateY = 130;
 
 function getRandomArbitrary(min: number, max: number) {
@@ -50,9 +50,11 @@ export default function ReactorPage() {
   );
   const currentMarksTranslateY = useRef(100);
   const isResetting = useRef(false);
-
+  const { setEnergyProductionEnabled, isEnergyProductionEnabled } =
+    useAppContext();
   const [isModalOpen, setModalOpen] = useState(false);
   const [reactorClasses, setReactorClasses] = useState({
+    ["stopped"]: !setEnergyProductionEnabled,
     ["animate__animated"]: true,
     ["pt-[40px]"]: true,
     ["animate__fadeIn"]: true,
@@ -61,6 +63,11 @@ export default function ReactorPage() {
   const [currentNeuroEnergyAmount, setCurrentNeuroEnergyAmount] = useState(
     initialNeuroEnergyAmount
   );
+
+  useEffect(() => {
+    // after page load starting to generate neuro energy
+    setEnergyProductionEnabled(true);
+  }, []);
 
   const claimButtonHandler: (
     value: number,
@@ -202,7 +209,6 @@ export default function ReactorPage() {
                 <ClaimButton
                   className="mt-6 mb-8"
                   onClick={claimButtonHandler}
-                  valuePerSecond={neuroEnergyPerSecond}
                   startValue={claimButtonStartValue}
                 />
               </div>

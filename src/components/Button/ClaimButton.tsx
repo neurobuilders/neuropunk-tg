@@ -17,11 +17,10 @@ interface ClaimButtonProps {
   ) => void;
   startValue?: number;
   className?: string;
-  valuePerSecond: number;
 }
 
 const ClaimButton = (props: ClaimButtonProps) => {
-  const { onClick, startValue, className, valuePerSecond } = props;
+  const { onClick, startValue, className } = props;
   const [isDisabled, setDisabled] = useState(false);
   const [floatCount, setFloatCount] = useState(startValue ?? 0); // Initialize to a float value
   // Animation setup using react-spring
@@ -51,16 +50,6 @@ const ClaimButton = (props: ClaimButtonProps) => {
     },
     [onClick]
   );
-
-  useEffect(() => {
-    setFloatCount((prevCount) => prevCount + valuePerSecond);
-
-    const interval = setInterval(() => {
-      setFloatCount((prevCount) => prevCount + valuePerSecond); // Increment the float count
-    }, 1000); // Update every second (1000 ms)
-
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
   return (
     <button
       className={clsx("btn btn__claim", className)}

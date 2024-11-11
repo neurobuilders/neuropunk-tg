@@ -655,3 +655,17 @@ $main-color: #fe1c1a;
     animation-duration: 12s !important;
   }
 }
+
+.stopped {
+  .marks li {
+    transition: transform 5s ease-in;
+  }
+  .e5_3,
+  .semi_arc {
+    animation-duration: 25s !important;
+  }
+  .semi_arc_3,
+  .e3 {
+    animation-duration: 40s !important;
+  }
+}
