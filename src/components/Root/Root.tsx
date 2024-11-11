@@ -27,6 +27,7 @@ import { Loader } from "@/components/Loader/Loader";
 import { usePathname } from "next/navigation";
 import slugify from "slugify";
 import { ToastProvider } from "@/context/ToastContext";
+import { AppProvider } from "@/context/AppContext";
 import env from "@/env";
 
 function RootInner({ children }: PropsWithChildren) {
@@ -89,7 +90,9 @@ function RootInner({ children }: PropsWithChildren) {
         className="app-root"
       >
         <ToastProvider>
-          <SessionProvider>{children}</SessionProvider>
+          <AppProvider>
+            <SessionProvider>{children}</SessionProvider>
+          </AppProvider>
         </ToastProvider>
       </AppRoot>
     </TonConnectUIProvider>

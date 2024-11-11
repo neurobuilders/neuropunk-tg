@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-  Button,
-  Drawer as FlowbiteDrawer,
-  Sidebar,
-  TextInput,
-} from "flowbite-react";
-import { useState } from "react";
+import { Drawer as FlowbiteDrawer, Sidebar } from "flowbite-react";
 import {
   Crown,
   SquareUserRound,
@@ -15,17 +9,13 @@ import {
   CircleHelp,
 } from "lucide-react";
 import { IconUsersGroup } from "@tabler/icons-react";
+import { useAppContext } from "@/context/AppContext";
 
 export const Drawer = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const handleClose = () => setIsOpen(false);
+  const { isDrawerOpen, closeDrawer } = useAppContext();
   return (
     <>
-      <div className="flex min-h-[50vh] items-center justify-center">
-        <Button onClick={() => setIsOpen(true)}>Show navigation</Button>
-      </div>
-      <FlowbiteDrawer open={isOpen} onClose={handleClose}>
+      <FlowbiteDrawer open={isDrawerOpen} onClose={closeDrawer}>
         <FlowbiteDrawer.Header title="MENU" titleIcon={() => <></>} />
         <FlowbiteDrawer.Items>
           <Sidebar

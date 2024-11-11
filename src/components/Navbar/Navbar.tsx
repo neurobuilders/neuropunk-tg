@@ -16,9 +16,12 @@ import { Button as TelegramButton } from "@telegram-apps/telegram-ui";
 import { Menu, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAppContext } from "@/context/AppContext";
 
 export function Navbar() {
   const router = useRouter();
+  const { isDrawerOpen, openDrawer } = useAppContext();
+
   return (
     <FlowbiteNavbar
       rounded
@@ -49,7 +52,7 @@ export function Navbar() {
           <DropdownItem>Sign out</DropdownItem>
         </Dropdown> */}
         {/* <NavbarToggle barIcon={Menu}  /> */}
-        <Button color="gray" size="sm">
+        <Button color="gray" size="sm" onClick={openDrawer}>
           <Menu color="#ffffff" size={22} />
         </Button>
         <Button
