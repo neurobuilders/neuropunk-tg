@@ -20,38 +20,14 @@ import { useAppContext } from "@/context/AppContext";
 
 export function Navbar() {
   const router = useRouter();
-  const { isDrawerOpen, openDrawer } = useAppContext();
+  const { openDrawer } = useAppContext();
 
   return (
     <FlowbiteNavbar
       rounded
-      className="fixed w-full z-20 top-0 start-0 px-3 drop-shadow-lg"
+      className="fixed w-full z-20 top-0 start-0 px-2 drop-shadow-lg"
     >
       <div className="flex md:order-2 justify-between items-center w-full">
-        {/* <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-              rounded
-            />
-          }
-        >
-          <DropdownHeader>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
-          </DropdownHeader>
-          <DropdownItem>Dashboard</DropdownItem>
-          <DropdownItem>Settings</DropdownItem>
-          <DropdownItem>Earnings</DropdownItem>
-          <DropdownDivider />
-          <DropdownItem>Sign out</DropdownItem>
-        </Dropdown> */}
-        {/* <NavbarToggle barIcon={Menu}  /> */}
         <Button color="gray" size="sm" onClick={openDrawer}>
           <Menu color="#ffffff" size={22} />
         </Button>

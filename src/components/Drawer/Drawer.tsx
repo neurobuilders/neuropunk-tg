@@ -1,12 +1,13 @@
 import React from "react";
 
-import { Drawer as FlowbiteDrawer, Sidebar } from "flowbite-react";
+import { Button, Drawer as FlowbiteDrawer, Sidebar } from "flowbite-react";
 import {
   Crown,
   SquareUserRound,
   History,
   BookOpenText,
   CircleHelp,
+  X,
 } from "lucide-react";
 import { IconUsersGroup } from "@tabler/icons-react";
 import { useAppContext } from "@/context/AppContext";
@@ -15,8 +16,21 @@ export const Drawer = () => {
   const { isDrawerOpen, closeDrawer } = useAppContext();
   return (
     <>
-      <FlowbiteDrawer open={isDrawerOpen} onClose={closeDrawer}>
-        <FlowbiteDrawer.Header title="MENU" titleIcon={() => <></>} />
+      <FlowbiteDrawer
+        open={isDrawerOpen}
+        onClose={closeDrawer}
+        className="!pt-2.5"
+      >
+        <div>
+          <Button
+            color="gray"
+            size="sm"
+            onClick={closeDrawer}
+            className="left-[-5px] border-0"
+          >
+            <X color="#ffffff" size={22} />
+          </Button>
+        </div>
         <FlowbiteDrawer.Items>
           <Sidebar
             aria-label="Sidebar with multi-level dropdown example"
