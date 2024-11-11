@@ -1,3 +1,8 @@
+import {
+  telegramBackgroundColor,
+  telegramBottomBarColor,
+  telegramHeaderColor,
+} from "@/helpers/constants";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { captureException } from "@/helpers/utils";
 import {
@@ -41,9 +46,9 @@ export async function init(debug: boolean): Promise<void> {
     miniApp.mount();
     miniApp.bindCssVars();
 
-    miniApp.setBackgroundColor("#232e3c");
-    miniApp.setBottomBarColor("#171717");
-    miniApp.setHeaderColor("#1f2937");
+    miniApp.setBackgroundColor(telegramBackgroundColor);
+    miniApp.setBottomBarColor(telegramBottomBarColor);
+    miniApp.setHeaderColor(telegramHeaderColor);
   }
 
   initData.restore();

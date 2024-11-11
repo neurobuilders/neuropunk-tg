@@ -2,6 +2,8 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type AppContextType = {
+  energyAmount: number;
+  setEnergyAmount: (amount: number) => void;
   isDrawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;

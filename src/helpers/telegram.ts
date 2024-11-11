@@ -2,6 +2,7 @@ import {
   hapticFeedback,
   ImpactHapticFeedbackStyle,
 } from "@telegram-apps/sdk-react";
+
 import { captureException } from "@/helpers/utils";
 
 export const triggerHapticFeedback = (
