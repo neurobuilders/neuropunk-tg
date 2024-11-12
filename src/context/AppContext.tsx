@@ -1,6 +1,7 @@
 // import { UserMapper } from "@/helpers/database";
 // import { DataLayer } from "@/helpers/database";
-import { User as DatabaseUser, userManager } from "@/helpers/database";
+import { userManager } from "@/helpers/database";
+import { User as DatabaseUser } from "@/helpers/database/models";
 import { User } from "@telegram-apps/sdk";
 import {
   createContext,
