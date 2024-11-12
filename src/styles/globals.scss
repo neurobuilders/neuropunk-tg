@@ -28,19 +28,20 @@ body {
 html,
 body {
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 .app-root {
   height: 100%;
-  // padding-top: 60px; // because of fixed mobile navbar
+  padding-top: 60px; // because of fixed mobile navbar
 }
 
-html,
-body,
-.app-root,
-.page {
-  height: 100%;
-}
+// html,
+// body,
+// .app-root,
+// .page {
+//   height: 100%;
+// }
 
 .badge {
   @apply py-3 px-2 m-0;

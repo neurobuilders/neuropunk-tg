@@ -27,7 +27,7 @@ const Navbar = memo(function Navbar() {
   return (
     <FlowbiteNavbar
       rounded
-      className="sticky w-full z-20 top-0 start-0 px-2 drop-shadow-lg"
+      className="fixed w-full z-20 top-0 start-0 px-2 drop-shadow-lg"
     >
       <div className="flex md:order-2 justify-between items-center w-full">
         <Button
