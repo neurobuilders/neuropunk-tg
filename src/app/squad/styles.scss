@@ -1,3 +1,7 @@
-.squad-cons {
-  //
+.squad-point {
+  > div {
+    > h6 {
+      color: var(--tgui--hint_color);
+    }
+  }
 }

@@ -63,7 +63,7 @@ const Navbar = memo(function Navbar() {
           color="gray"
           size="sm"
           as={Link}
-          href="/my/squad"
+          href="/squad"
           onClick={() => {
             triggerHapticFeedback();
           }}

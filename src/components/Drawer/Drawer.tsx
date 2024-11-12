@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { Button, Drawer as FlowbiteDrawer, Sidebar } from "flowbite-react";
 import {
-  Crown,
   SquareUserRound,
   History,
-  BookOpenText,
   CircleHelp,
   Settings,
   X,
@@ -13,9 +11,17 @@ import {
 import { IconUsersGroup } from "@tabler/icons-react";
 import { useAppContext } from "@/context/AppContext";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import Link from "next/link";
+import { ClickHandler } from "@telegram-apps/telegram-ui/dist/components/Service/Touch/Touch";
 
 export const Drawer = () => {
   const { isDrawerOpen, closeDrawer } = useAppContext();
+
+  const itemClickHandler: ClickHandler = useCallback(() => {
+    closeDrawer();
+    triggerHapticFeedback();
+  }, [closeDrawer]);
+
   return (
     <>
       <FlowbiteDrawer
@@ -27,10 +33,7 @@ export const Drawer = () => {
           <Button
             color="gray"
             size="sm"
-            onClick={() => {
-              closeDrawer();
-              triggerHapticFeedback();
-            }}
+            onClick={itemClickHandler}
             className="left-[-5px] border-0"
           >
             <X color="#ffffff" size={22} />
@@ -57,13 +60,27 @@ export const Drawer = () => {
                     {/* <Sidebar.Item href="/ratings" icon={Crown}>
                       Ratings
                     </Sidebar.Item> */}
-                    <Sidebar.Item href="/my/profile" icon={SquareUserRound}>
+                    <Sidebar.Item
+                      href="/pass"
+                      icon={SquareUserRound}
+                      as={Link}
+                      onClick={itemClickHandler}
+                    >
                       My Profile
                     </Sidebar.Item>
-                    <Sidebar.Item href="/my/squad" icon={IconUsersGroup}>
+                    <Sidebar.Item
+                      href="/squad"
+                      icon={IconUsersGroup}
+                      as={Link}
+                      onClick={itemClickHandler}
+                    >
                       Squad
                     </Sidebar.Item>
-                    <Sidebar.Item href="/my/history" icon={History}>
+                    <Sidebar.Item
+                      href="/my/history"
+                      icon={History}
+                      onClick={itemClickHandler}
+                    >
                       My History
                     </Sidebar.Item>
                   </Sidebar.ItemGroup>
@@ -74,10 +91,20 @@ export const Drawer = () => {
                     >
                       Docs
                     </Sidebar.Item> */}
-                    <Sidebar.Item href="/settings" icon={Settings}>
+                    <Sidebar.Item
+                      href="/settings"
+                      icon={Settings}
+                      as={Link}
+                      onClick={itemClickHandler}
+                    >
                       Settings
                     </Sidebar.Item>
-                    <Sidebar.Item href="/help" icon={CircleHelp}>
+                    <Sidebar.Item
+                      href="/help"
+                      icon={CircleHelp}
+                      as={Link}
+                      onClick={itemClickHandler}
+                    >
                       Help
                     </Sidebar.Item>
                   </Sidebar.ItemGroup>

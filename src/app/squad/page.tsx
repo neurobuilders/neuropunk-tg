@@ -97,8 +97,9 @@ export default function SquadPage() {
             </div>
           </div>
         </Section>
-        <Section className="squad-cons">
+        <Section>
           <Cell
+            className="squad-point"
             subtitle={
               <>
                 <strong className="text-white">8 NE</strong> for you and fren.
@@ -108,6 +109,7 @@ export default function SquadPage() {
             <strong>Invite fren</strong>
           </Cell>
           <Cell
+            className="squad-point"
             subtitle={
               <>
                 <strong className="text-white">64 NE</strong> for you and fren.
@@ -118,6 +120,7 @@ export default function SquadPage() {
             <strong className="text-telegram">Telegram Premium</strong>
           </Cell>
           <Cell
+            className="squad-point"
             subtitle={
               <>
                 <strong className="text-white">16%</strong> of all frens&apos;
@@ -128,6 +131,7 @@ export default function SquadPage() {
             <strong>Mining drop</strong>
           </Cell>
           <Cell
+            className="squad-point"
             subtitle={
               <>
                 <strong className="text-white">Mega Drop</strong> If your
