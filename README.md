@@ -201,7 +201,7 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
 
 - **`NEXT_PUBLIC_SITE_URL`**  
   - **Description**: Defines the base URL of the site.
-  - **Usage**: `env.siteUrl` uses this value. If not set, the app falls back to the `VERCEL_URL` environment variable (if available).
+  - **Usage**: `env.siteUrl` uses this value. If not set, the app falls back to the `NEXT_PUBLIC_VERCEL_URL` environment variable (if available).
 
 - **`VERCEL_URL`**  
   - **Description**: Automatically populated by Vercel deployments; provides the URL of the deployed application.
