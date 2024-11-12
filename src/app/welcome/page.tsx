@@ -7,6 +7,7 @@ import { Button, Placeholder } from "@telegram-apps/telegram-ui";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { useToast } from "@/context/ToastContext";
+import { captureException } from "@/helpers/utils";
 
 export default function WelcomePage() {
   const t = useTranslations("i18n");
@@ -40,6 +41,7 @@ export default function WelcomePage() {
           duration: 5000,
         });
       } else {
+        captureException(error);
         showToast({
           title: "Error occured",
           message: error,

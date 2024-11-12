@@ -201,7 +201,7 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
 
 - **`NEXT_PUBLIC_SITE_URL`**  
   - **Description**: Defines the base URL of the site.
-  - **Usage**: `env.siteUrl` uses this value. If not set, the app falls back to the `VERCEL_URL` environment variable (if available).
+  - **Usage**: `env.siteUrl` uses this value. If not set, the app falls back to the `NEXT_PUBLIC_VERCEL_URL` environment variable (if available).
 
 - **`VERCEL_URL`**  
   - **Description**: Automatically populated by Vercel deployments; provides the URL of the deployed application.
@@ -227,6 +227,11 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
   - **Description**: A flag to disable user validation within the Telegram bot.
   - **Options**: `"true"` to disable validation; any other value or absence defaults to validation being enabled.
   - **Usage**: Parsed as a boolean (`env.telegram.userValidationDisabled`) to control validation behavior.
+  - 
+
+- **`NEXT_PUBLIC_TG_BOT_USERNAME`**  
+  - **Description**: Specifies the username of the Telegram bot used in the application.
+  - **Usage**: Used to identify the bot in the Telegram interface or for user interactions. Since it is prefixed with `NEXT_PUBLIC_`, this variable can be accessed on both the client and server sides.
 
 ### Supabase Configuration
 
@@ -237,6 +242,10 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
 - **`NEXT_PUBLIC_SUPABASE_ANON_KEY`**  
   - **Description**: Public API key for Supabase, used for client-side connections.
   - **Usage**: Stored in `env.supabase.anonKey`.
+
+- **`SUPABASE_PROJECT_ID`**  
+  - **Description**: The unique identifier for your Supabase project. Used by the Supabase CLI to connect to your project and generate TypeScript types based on your database schema.
+  - **Usage**: Enables type-safe access to your Supabase data by generating types saved to `src/types/database-generated.types.ts`, simplifying development with strong typing.
 
 ### Sentry Configuration
 
@@ -260,18 +269,36 @@ This command uses the Supabase CLI to generate TypeScript types from your databa
 - Variables prefixed with `NEXT_PUBLIC_` are accessible on both the client and server. 
 - Secret keys such as `AUTH_SECRET` and `TG_BOT_TOKEN` should not be shared or exposed on the client side.
 - Ensure that sensitive environment variables are set in your server environment (e.g., Vercel, .env file in local development).
+- All env variables are mapped in [@/env](./src/env.ts)
 
 ## Example `.env` File
 
 ```dotenv
+# Core Configuration
 NODE_ENV=development
 NEXT_PUBLIC_SITE_URL=https://your-site-url.com
+VERCEL_URL=your-vercel-url.com
+
+# Authentication Configuration
 AUTH_URL=https://auth-service-url.com
 AUTH_SECRET=your-auth-secret
+
+# Telegram Bot Configuration
 TG_BOT_TOKEN=your-telegram-bot-token
+NEXT_PUBLIC_TG_BOT_USERNAME=your-telegram-bot-username
 TG_USER_VALIDATION_DISABLED=true
+
+# Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-url.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_PROJECT_ID=your-supabase-project-id
+
+# Sentry Configuration
+SENTRY_DSN=https://your-sentry-dsn-url
+SENTRY_AUTH_TOKEN=your-sentry-auth-token
+
+# Eruda Debugging Configuration
+NEXT_PUBLIC_ERUDA_DISABLED=true
 ```
 
 By setting up these environment variables correctly, you can configure the application to behave appropriately across different environments.
