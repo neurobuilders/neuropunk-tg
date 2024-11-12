@@ -26,15 +26,11 @@ import ClaimButton from "@/components/Button/ClaimButton";
 import { formatNumber } from "@/helpers/utils";
 import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import { useAppContext } from "@/context/AppContext";
 
 const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
-const neuroEnergyPerSecond = 0.0013;
-const maxMarksTranslateY = 130;
-
-function getRandomArbitrary(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
+const maxMarksTranslateY = 120;
 
 const updateVariable = (val: number) => {
   const rootEl = document.querySelector(":root");
@@ -50,26 +46,26 @@ export default function ReactorPage() {
   );
   const currentMarksTranslateY = useRef(100);
   const isResetting = useRef(false);
-
+  const { setEnergyProductionEnabled, energyAmount } = useAppContext();
   const [isModalOpen, setModalOpen] = useState(false);
   const [reactorClasses, setReactorClasses] = useState({
+    // ["stopped"]: !setEnergyProductionEnabled,
     ["animate__animated"]: true,
-    ["pt-[40px]"]: true,
+    ["pt-4 pb-3"]: true,
     ["animate__fadeIn"]: true,
     ["is-resetting"]: false,
   });
-  const [currentNeuroEnergyAmount, setCurrentNeuroEnergyAmount] = useState(
-    initialNeuroEnergyAmount
-  );
+
+  useEffect(() => {
+    // after page load starting to generate neuro energy
+    setEnergyProductionEnabled(true);
+  }, []);
 
   const claimButtonHandler: (
     value: number,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void = (value, e) => {
     e.preventDefault();
-    setCurrentNeuroEnergyAmount((prevVal) => {
-      return prevVal + value;
-    });
     isResetting.current = true;
     setReactorClasses((prev) => {
       return {
@@ -102,8 +98,8 @@ export default function ReactorPage() {
               ["is-resetting"]: false,
             };
           });
-          intervalId = setInterval(intervalFunc, 1000);
-        }, 3000);
+          intervalId = setInterval(intervalFunc, 1500);
+        }, 1500);
         return;
       }
       currentMarksTranslateY.current += 1;
@@ -119,7 +115,7 @@ export default function ReactorPage() {
       // }
     };
 
-    let intervalId = setInterval(intervalFunc, 1000);
+    let intervalId = setInterval(intervalFunc, 1500);
 
     return () => {
       clearTimeout(timeoutId);
@@ -146,11 +142,11 @@ export default function ReactorPage() {
                 />
               </ReactorLogoBackground>
             </div>
-            <div className="flex flex-col items-center mt-10">
-              <h3 className="text-2xl font-bold mb-1">
-                {formatNumber(currentNeuroEnergyAmount, 2)} NE
+            <div className="flex flex-col items-center">
+              <h3 className="text-2xl font-bold">
+                {formatNumber(energyAmount, 2)} NE
               </h3>
-              <h3 className="text-md mt-2">
+              <h3 className="text-md">
                 Complete tasks and mine <strong>Neuro Energy</strong>
               </h3>
               <Modal
@@ -160,7 +156,7 @@ export default function ReactorPage() {
                 trigger={
                   <button
                     type="button"
-                    className="text-sky-500 mt-1"
+                    className="text-sky-500"
                     onClick={() => {
                       triggerHapticFeedback("medium");
                     }}
@@ -200,10 +196,8 @@ export default function ReactorPage() {
               </Modal>
               <div className="">
                 <ClaimButton
-                  className="mt-6 mb-8"
+                  className="mt-4 mb-4"
                   onClick={claimButtonHandler}
-                  valuePerSecond={neuroEnergyPerSecond}
-                  startValue={claimButtonStartValue}
                 />
               </div>
             </div>

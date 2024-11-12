@@ -1,3 +1,8 @@
+import {
+  telegramBackgroundColor,
+  telegramBottomBarColor,
+  telegramHeaderColor,
+} from "@/helpers/constants";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { captureException } from "@/helpers/utils";
 import {
@@ -40,6 +45,10 @@ export async function init(debug: boolean): Promise<void> {
   if (!miniApp.isMounted()) {
     miniApp.mount();
     miniApp.bindCssVars();
+
+    miniApp.setBackgroundColor(telegramBackgroundColor);
+    miniApp.setBottomBarColor(telegramBottomBarColor);
+    miniApp.setHeaderColor(telegramHeaderColor);
   }
 
   initData.restore();
@@ -53,7 +62,9 @@ export async function init(debug: boolean): Promise<void> {
   }
 
   if (viewport.isMounted()) {
-    viewport.bindCssVars();
+    if (!viewport.isCssVarsBound()) {
+      viewport.bindCssVars();
+    }
 
     // Expand the TMA if it was launched in compact mode
     if (!viewport.isExpanded()) {

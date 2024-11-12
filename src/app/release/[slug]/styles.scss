@@ -11,7 +11,7 @@
     &::after {
       content: "";
       display: block;
-      background: var(--tg-theme-secondary-bg-color, white);
+      background: var(--tg-bg-color, white);
       opacity: 0.7;
     }
   }

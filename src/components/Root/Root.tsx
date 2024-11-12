@@ -6,9 +6,6 @@ import {
   miniApp,
   useLaunchParams,
   useSignal,
-  viewport,
-  expandViewport,
-  swipeBehavior,
 } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
@@ -27,6 +24,8 @@ import { Loader } from "@/components/Loader/Loader";
 import { usePathname } from "next/navigation";
 import slugify from "slugify";
 import { ToastProvider } from "@/context/ToastContext";
+import { AppProvider } from "@/context/AppContext";
+import env from "@/env";
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === "development";
@@ -56,6 +55,9 @@ function RootInner({ children }: PropsWithChildren) {
 
   // Enable debug mode to see all the methods sent and events received.
   useEffect(() => {
+    if (env.app.erudaDisabled) {
+      return;
+    }
     debug && import("eruda").then((lib) => lib.default.init());
   }, [debug]);
 
@@ -85,7 +87,9 @@ function RootInner({ children }: PropsWithChildren) {
         className="app-root"
       >
         <ToastProvider>
-          <SessionProvider>{children}</SessionProvider>
+          <AppProvider>
+            <SessionProvider>{children}</SessionProvider>
+          </AppProvider>
         </ToastProvider>
       </AppRoot>
     </TonConnectUIProvider>
