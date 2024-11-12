@@ -16,6 +16,7 @@ import { getBotUrl, triggerHapticFeedback } from "@/helpers/telegram";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/context/ToastContext";
 import { ExtendedUser } from "@/types/next-auth";
+import { captureException } from "@/helpers/utils";
 
 export default function SquadPage() {
   const { data: session } = useSession();
@@ -37,14 +38,15 @@ export default function SquadPage() {
     e.preventDefault();
     try {
       triggerHapticFeedback();
-      if (!session) {
-        throw new Error("Session is empty, can't get user ID");
+      console.log("session", session);
+      const tgId = (session?.user as ExtendedUser).tgId;
+      let shareUrl = getBotUrl(`invite_${tgId}`);
+      if (!tgId) {
+        throw new Error("Telegram ID is empty");
       }
-      const shareUrl = getBotUrl(
-        `invite_${(session.user as ExtendedUser).tgId}`
-      );
       shareURL(shareUrl, "You have been invited to Neuropunk Universe!");
     } catch (err) {
+      captureException(err);
       showToast({
         title: "Error occured",
         message: (err as Error).message,
@@ -81,14 +83,17 @@ export default function SquadPage() {
             </div>
             <div className="flex flex-col items-center justify-center w-full pb-5 px-5 mt-1">
               <h3 className="text-2xl font-bold mb-2">Invite punks</h3>
-              <h3 className="text-sm">Invite frens to get bonuses!</h3>
-              <h3 className="text-sm mb-2">
-                Your frens: <strong>3</strong>
+              <h3 className="text-sm text-hint">
+                Invite frens to get bonuses!
+              </h3>
+              <h3 className="text-sm text-hint mb-2">
+                Your frens: <strong className="text-white">0</strong>
               </h3>
               <div className="pt-2 w-full">
                 <Chip mode="mono" className="w-full mb-2 h-[42px]">
                   <span className="flex justify-center items-center gap-2 text-hint">
-                    <span>Copy referral link</span> <ClipboardCopy size={18} />
+                    <span>Copy referral link</span>{" "}
+                    <ClipboardCopy className="relative top-[-1px]" size={18} />
                   </span>
                 </Chip>
                 <Button stretched onClick={shareButtonHandler}>
