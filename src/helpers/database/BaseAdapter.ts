@@ -37,11 +37,15 @@ export abstract class BaseAdapter<T extends Model = Model> {
   async clear(): Promise<void> {}
 
   // Validate key format
-  protected isValidKey(key: string): boolean {
+  public isValidKey(key: string): boolean {
     throw new Error("'isValidKey' method not implemented");
   }
 
-  protected toJSON(str: string): any {}
+  public toJSON(str: string): any {
+    throw new Error("'fromJSON' method not implemented");
+  }
 
-  protected fromJSON(data: any): any {}
+  public fromJSON(data: any): any {
+    throw new Error("'fromJSON' method not implemented");
+  }
 }

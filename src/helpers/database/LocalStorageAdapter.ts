@@ -1,9 +1,7 @@
-import { IModel, Model } from "@/helpers/database/models";
+import { IModel, User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 
-export class LocalStorageAdapter<
-  T extends Model = Model
-> extends BaseAdapter<T> {
+export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
   constructor() {
     super();
     if (!globalThis.localStorage) {
@@ -56,7 +54,7 @@ export class LocalStorageAdapter<
     }
   }
 
-  protected isValidKey(key: string): boolean {
+  public isValidKey(key: string): boolean {
     // @todo
     return true;
   }

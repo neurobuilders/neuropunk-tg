@@ -4,11 +4,11 @@ import {
   getCloudStorageKeys,
   setCloudStorageItem,
 } from "@telegram-apps/sdk-react";
-import { IModel, Model } from "@/helpers/database/models";
+import { User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 
 export class TelegramCloudStorageAdapter<
-  T extends Model = Model
+  T extends User = User
 > extends BaseAdapter<T> {
   constructor() {
     super();
@@ -75,16 +75,16 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Validate key format
-  protected isValidKey(key: string): boolean {
+  public isValidKey(key: string): boolean {
     const regex = /^[A-Za-z0-9_-]{1,128}$/;
     return regex.test(key);
   }
 
-  protected toJSON(str: string): any {
+  public toJSON(str: string): any {
     return JSON.stringify(str);
   }
 
-  protected fromJSON(data: any): any {
+  public fromJSON(data: any): any {
     return JSON.parse(data);
   }
 }
