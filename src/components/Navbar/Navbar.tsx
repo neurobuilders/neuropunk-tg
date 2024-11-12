@@ -11,17 +11,17 @@ import Link from "next/link";
 import { useAppContext } from "@/context/AppContext";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { useSpring, animated } from "react-spring";
-import { memo } from "react";
+import { memo, useRef } from "react";
 
 const Navbar = memo(function Navbar() {
   const router = useRouter();
   const { openDrawer, energyAmount } = useAppContext();
+  const valueRef = useRef(energyAmount);
 
   const springProps = useSpring({
     value: energyAmount,
-    // from: { value: energyAmount },
-    from: { value: 0 },
-    config: { tension: 280, friction: 120, duration: 2500 },
+    from: { value: valueRef.current },
+    config: { tension: 280, friction: 120, duration: 500 },
   });
 
   return (
@@ -54,7 +54,7 @@ const Navbar = memo(function Navbar() {
             <span className="icon icon-ne relative !ml-0 !top-0 !mr-[5px]"></span>
             <span>
               <animated.span>
-                {springProps.value.to(formatNumber)}
+                {springProps.value.to((val) => formatNumber(val))}
               </animated.span>
             </span>
           </span>

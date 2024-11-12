@@ -32,10 +32,6 @@ const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
 const maxMarksTranslateY = 130;
 
-function getRandomArbitrary(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
-
 const updateVariable = (val: number) => {
   const rootEl = document.querySelector(":root");
   if (rootEl) {
@@ -50,8 +46,7 @@ export default function ReactorPage() {
   );
   const currentMarksTranslateY = useRef(100);
   const isResetting = useRef(false);
-  const { setEnergyProductionEnabled, isEnergyProductionEnabled } =
-    useAppContext();
+  const { setEnergyProductionEnabled, energyAmount } = useAppContext();
   const [isModalOpen, setModalOpen] = useState(false);
   const [reactorClasses, setReactorClasses] = useState({
     ["stopped"]: !setEnergyProductionEnabled,
@@ -60,9 +55,6 @@ export default function ReactorPage() {
     ["animate__fadeIn"]: true,
     ["is-resetting"]: false,
   });
-  const [currentNeuroEnergyAmount, setCurrentNeuroEnergyAmount] = useState(
-    initialNeuroEnergyAmount
-  );
 
   useEffect(() => {
     // after page load starting to generate neuro energy
@@ -74,9 +66,6 @@ export default function ReactorPage() {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void = (value, e) => {
     e.preventDefault();
-    setCurrentNeuroEnergyAmount((prevVal) => {
-      return prevVal + value;
-    });
     isResetting.current = true;
     setReactorClasses((prev) => {
       return {
@@ -109,8 +98,8 @@ export default function ReactorPage() {
               ["is-resetting"]: false,
             };
           });
-          intervalId = setInterval(intervalFunc, 1000);
-        }, 3000);
+          intervalId = setInterval(intervalFunc, 1500);
+        }, 1500);
         return;
       }
       currentMarksTranslateY.current += 1;
@@ -126,7 +115,7 @@ export default function ReactorPage() {
       // }
     };
 
-    let intervalId = setInterval(intervalFunc, 1000);
+    let intervalId = setInterval(intervalFunc, 1500);
 
     return () => {
       clearTimeout(timeoutId);
@@ -155,7 +144,7 @@ export default function ReactorPage() {
             </div>
             <div className="flex flex-col items-center mt-10">
               <h3 className="text-2xl font-bold mb-1">
-                {formatNumber(currentNeuroEnergyAmount, 2)} NE
+                {formatNumber(energyAmount, 2)} NE
               </h3>
               <h3 className="text-md mt-2">
                 Complete tasks and mine <strong>Neuro Energy</strong>
@@ -209,7 +198,6 @@ export default function ReactorPage() {
                 <ClaimButton
                   className="mt-6 mb-8"
                   onClick={claimButtonHandler}
-                  startValue={claimButtonStartValue}
                 />
               </div>
             </div>

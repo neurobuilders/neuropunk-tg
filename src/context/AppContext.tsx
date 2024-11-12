@@ -6,18 +6,24 @@ import {
   ReactNode,
   useEffect,
   useRef,
+  Dispatch,
+  SetStateAction,
 } from "react";
 
 // const neuroEnergyPerSecond = 0.0013;
-const neuroEnergyPerSecond = 10.0013;
+const neuroEnergyPerSecond = 0.0013;
 const startingAmount = 0;
 const neuroEnergyProductionStepMs = 1000;
 
 type AppContextType = {
   setEnergyProductionEnabled: (newVal: boolean) => void;
   isEnergyProductionEnabled: () => boolean;
+
   energyAmount: number;
-  setEnergyAmount: (amount: number) => void;
+  setEnergyAmount: Dispatch<SetStateAction<number>>;
+
+  unclaimedEnergyAmount: number;
+  setUnclaimedEnergyAmount: Dispatch<SetStateAction<number>>;
 
   isDrawerOpen: boolean;
   openDrawer: () => void;
@@ -34,6 +40,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const _isEnergyProductionEnabled = useRef<boolean>(false);
   const [energyAmount, setEnergyAmount] = useState<number>(startingAmount);
+  const [unclaimedEnergyAmount, setUnclaimedEnergyAmount] = useState<number>(0);
 
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
@@ -47,7 +54,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   };
 
   useEffect(() => {
-    setEnergyAmount((prevCount) => prevCount + neuroEnergyPerSecond);
+    setUnclaimedEnergyAmount((prevCount) => prevCount + neuroEnergyPerSecond);
 
     const interval = setInterval(() => {
       console.log(
@@ -59,7 +66,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       if (!_isEnergyProductionEnabled.current) {
         return;
       }
-      setEnergyAmount((prevCount) => prevCount + neuroEnergyPerSecond); // Increment the float count
+      setUnclaimedEnergyAmount((prevCount) => prevCount + neuroEnergyPerSecond); // Increment the float count
     }, neuroEnergyProductionStepMs); // Update every second (1000 ms)
 
     return () => clearInterval(interval); // Cleanup on unmount
@@ -75,6 +82,8 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         setEnergyAmount,
         isEnergyProductionEnabled,
         setEnergyProductionEnabled,
+        unclaimedEnergyAmount,
+        setUnclaimedEnergyAmount,
       }}
     >
       {children}

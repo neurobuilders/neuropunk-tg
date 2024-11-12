@@ -9,61 +9,73 @@ import { useSpring, animated } from "react-spring";
 // import emitter, { Events } from "@/helpers/events";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import clsx from "clsx";
+import { useAppContext } from "@/context/AppContext";
 
 interface ClaimButtonProps {
   onClick?: (
     value: number,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
-  startValue?: number;
+  // startValue?: number;
   className?: string;
 }
 
 const ClaimButton = (props: ClaimButtonProps) => {
-  const { onClick, startValue, className } = props;
-  const [isDisabled, setDisabled] = useState(false);
-  const [floatCount, setFloatCount] = useState(startValue ?? 0); // Initialize to a float value
+  const { onClick, className } = props;
+  const {
+    unclaimedEnergyAmount,
+    setEnergyProductionEnabled,
+    isEnergyProductionEnabled,
+    setUnclaimedEnergyAmount,
+    setEnergyAmount,
+  } = useAppContext();
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  // const [floatCount, setFloatCount] = useState(startValue ?? 0); // Initialize to a float value
   // Animation setup using react-spring
   const springProps = useSpring({
-    value: floatCount,
+    value: unclaimedEnergyAmount,
     from: { value: 0 },
-    config: { tension: 280, friction: 120, duration: 500 },
+    config: { tension: 280, friction: 120, duration: 400 },
+    // immediate: true,
   });
 
   const _onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
+      // setUnclaimedEnergyAmount(0);
+
       setTimeout(() => {
-        setDisabled(true);
-        const val = springProps.value.get();
+        setEnergyProductionEnabled(false);
+        setButtonDisabled(true);
+
         if (onClick) {
-          onClick(val, e);
+          onClick(springProps.value.get(), e);
         }
         triggerHapticFeedback();
-        // springProps.value.set(0);
-        setFloatCount(0);
+
+        setTimeout(() => {
+          setEnergyAmount((prev) => prev + springProps.value.get());
+          setUnclaimedEnergyAmount(0);
+        }, 100);
 
         setTimeout(() => {
           //cooldown
-          setDisabled(false);
-        }, 5000);
+          setButtonDisabled(false);
+          setEnergyProductionEnabled(true);
+        }, 2000);
       }, 100);
     },
-    [onClick]
+    [onClick, setEnergyProductionEnabled, springProps.value]
   );
   return (
     <button
       className={clsx("btn btn__claim", className)}
       type="button"
       onClick={_onClick}
-      disabled={isDisabled}
+      disabled={isButtonDisabled}
     >
       <span>
         Claim <span className="icon icon-ne"></span>
-        <animated.span>
-          {springProps.value.to((val) => {
-            return formatNumber(val);
-          })}
-        </animated.span>
+        <animated.span>{springProps.value.to(formatNumber)}</animated.span>
       </span>
     </button>
   );

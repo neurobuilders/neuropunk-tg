@@ -644,7 +644,7 @@ $main-color: #fe1c1a;
 
 .is-resetting {
   .marks li {
-    transition: transform 0.4s ease-in;
+    transition: transform 0.4s ease-in !important;
   }
   .e5_3,
   .semi_arc {
@@ -660,12 +660,21 @@ $main-color: #fe1c1a;
   .marks li {
     transition: transform 5s ease-in;
   }
-  .e5_3,
   .semi_arc {
     animation-duration: 25s !important;
   }
   .semi_arc_3,
   .e3 {
     animation-duration: 40s !important;
+  }
+  .e5_4,
+  .e5_3,
+  .e5_2,
+  .e5_1 {
+    animation-duration: 10s !important;
+  }
+
+  .e4_1 {
+    animation-duration: 5s !important;
   }
 }
