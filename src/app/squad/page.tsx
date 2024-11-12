@@ -11,12 +11,13 @@ import "./styles.scss";
 import clsx from "clsx";
 import { useAppContext } from "@/context/AppContext";
 import { ClipboardCopy, Copy } from "lucide-react";
-import { shareURL } from "@telegram-apps/sdk";
+import { initData, shareURL } from "@telegram-apps/sdk";
 import { getBotUrl, triggerHapticFeedback } from "@/helpers/telegram";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/context/ToastContext";
 import { ExtendedUser } from "@/types/next-auth";
 import { captureException } from "@/helpers/utils";
+import copy from "copy-to-clipboard";
 
 export default function SquadPage() {
   const { data: session } = useSession();
@@ -38,7 +39,6 @@ export default function SquadPage() {
     e.preventDefault();
     try {
       triggerHapticFeedback();
-      console.log("session", session);
       const tgId = (session?.user as ExtendedUser).tgId;
       let shareUrl = getBotUrl(`invite_${tgId}`);
       if (!tgId) {
@@ -46,6 +46,33 @@ export default function SquadPage() {
       }
       shareURL(shareUrl, "You have been invited to Neuropunk Universe!");
       // @todo increase frens counter
+    } catch (err) {
+      captureException(err);
+      showToast({
+        title: "Error occured",
+        message: (err as Error).message,
+        type: "error",
+        duration: 5000,
+      });
+    }
+  };
+
+  const copyButtonHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    try {
+      triggerHapticFeedback();
+      let tgId = (session?.user as ExtendedUser).tgId;
+      let shareUrl = getBotUrl(tgId ? `invite_${tgId}` : undefined);
+      const isSuccess = copy(shareUrl);
+      if (!isSuccess) {
+        throw new Error("Couldn't copy referral link to clipboard");
+      }
+      showToast({
+        title: "Success",
+        message: "Referral link copied to clipboard",
+        type: "success",
+        duration: 2000,
+      });
     } catch (err) {
       captureException(err);
       showToast({
@@ -91,7 +118,13 @@ export default function SquadPage() {
                 Your frens: <strong className="text-white">0</strong>
               </h3>
               <div className="pt-2 w-full">
-                <Chip mode="mono" className="w-full mb-2 h-[42px]">
+                <Chip
+                  mode="mono"
+                  className="w-full mb-2 h-[42px]"
+                  Component="button"
+                  type="button"
+                  onClick={copyButtonHandler as any}
+                >
                   <span className="flex justify-center items-center gap-2 text-hint">
                     <span>Copy referral link</span>{" "}
                     <Copy className="relative top-[-1px]" size={18} />
