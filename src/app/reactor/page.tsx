@@ -143,7 +143,7 @@ export default function ReactorPage() {
               </ReactorLogoBackground>
             </div>
             <div className="flex flex-col items-center">
-              <h3 className="text-2xl font-bol">
+              <h3 className="text-2xl font-bold">
                 {formatNumber(energyAmount, 2)} NE
               </h3>
               <h3 className="text-md">

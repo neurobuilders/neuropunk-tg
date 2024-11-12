@@ -7,6 +7,7 @@ import {
   History,
   BookOpenText,
   CircleHelp,
+  Settings,
   X,
 } from "lucide-react";
 import { IconUsersGroup } from "@tabler/icons-react";
@@ -53,22 +54,28 @@ export const Drawer = () => {
                 </form> */}
                 <Sidebar.Items>
                   <Sidebar.ItemGroup>
-                    <Sidebar.Item href="/ratings" icon={Crown}>
+                    {/* <Sidebar.Item href="/ratings" icon={Crown}>
                       Ratings
-                    </Sidebar.Item>
+                    </Sidebar.Item> */}
                     <Sidebar.Item href="/my/profile" icon={SquareUserRound}>
                       My Profile
                     </Sidebar.Item>
                     <Sidebar.Item href="/my/squad" icon={IconUsersGroup}>
-                      My Squad
+                      Squad
                     </Sidebar.Item>
                     <Sidebar.Item href="/my/history" icon={History}>
                       My History
                     </Sidebar.Item>
                   </Sidebar.ItemGroup>
                   <Sidebar.ItemGroup>
-                    <Sidebar.Item href="/docs" icon={BookOpenText}>
+                    {/* <Sidebar.Item
+                      href="/docs"
+                      icon={BookOpenText}
+                    >
                       Docs
+                    </Sidebar.Item> */}
+                    <Sidebar.Item href="/settings" icon={Settings}>
+                      Settings
                     </Sidebar.Item>
                     <Sidebar.Item href="/help" icon={CircleHelp}>
                       Help
