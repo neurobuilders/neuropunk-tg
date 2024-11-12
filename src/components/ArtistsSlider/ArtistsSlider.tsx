@@ -50,7 +50,7 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
       spaceBetween={10}
       loop={true}
       modules={[Pagination /*Autoplay*/]}
-      className="mt-3 !pb-[40px] mb-3 !px-2"
+      className="mt-3 !pb-[40px] !px-2"
     >
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
