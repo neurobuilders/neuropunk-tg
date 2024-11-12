@@ -7,6 +7,7 @@ import { Pagination, Navigation, Parallax, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "./styles.scss";
 import Image from "next/image";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { Artist } from "@/helpers/api/artist";
@@ -48,12 +49,12 @@ export default function ArtistsSlider(props: ArtistsSliderProps) {
       slidesPerView={3}
       spaceBetween={10}
       loop={true}
-      modules={[Pagination, Autoplay]}
+      modules={[Pagination /*Autoplay*/]}
       className="mt-3 !pb-[40px] mb-3 !px-2"
     >
       {artists.map((v) => (
         <SwiperSlide key={v.url}>
-          <Card type="ambient">
+          <Card type="ambient" className="artist-card">
             <Image
               src={v.imageUrl}
               alt={v.name}

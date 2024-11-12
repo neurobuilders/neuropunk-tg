@@ -19,7 +19,7 @@ function ReleaseCard(props: ReleaseCardProps) {
   }
 
   return (
-    <Card type="ambient" className="release-card w-full">
+    <Card type="ambient" className="release-card">
       <CardChip readOnly className="card-chip">
         {release.catalogNr}
       </CardChip>
