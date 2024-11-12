@@ -1,5 +1,3 @@
-// import { UserMapper } from "@/helpers/database";
-// import { DataLayer } from "@/helpers/database";
 import { userManager } from "@/helpers/database";
 import { User as DatabaseUser } from "@/helpers/database/models";
 import { User } from "@telegram-apps/sdk";
@@ -80,13 +78,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         return;
       }
 
-      let dbUserData = await userManager.getUserData();
+      const uManager = userManager();
+
+      let dbUserData = await uManager.getUserData();
       if (!dbUserData) {
         dbUserData = new DatabaseUser({
           id: userId,
           energyAmount: 0,
         });
-        await userManager.saveUserData(dbUserData);
+        await uManager.saveUserData(dbUserData);
         console.debug("creating new user");
       }
       if (dbUserData) {
@@ -102,6 +102,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   }, [initUserData]);
 
   useEffect(() => {
+    const uManager = userManager();
     const syncTelegramDb = async () => {
       if (!initUserData) {
         return;
@@ -114,7 +115,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         id: userId,
         energyAmount,
       });
-      const updateAnswer = await userManager.saveUserData(user);
+      const updateAnswer = await uManager.saveUserData(user);
       console.log("updateAnswer", updateAnswer);
     };
     syncTelegramDb();
@@ -159,6 +160,8 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         // initDatabase,
         initUserData,
         setInitUserData,
+        //
+        setUserData,
       }}
     >
       {children}

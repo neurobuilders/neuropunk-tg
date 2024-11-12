@@ -2,32 +2,32 @@ import { User } from "@/helpers/database/models";
 import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
 import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
 
-export class UserDataManager {
+export class UserDataManager<T extends User = User> {
   private storageAdapters: (
-    | LocalStorageAdapter
     | TelegramCloudStorageAdapter
+    | LocalStorageAdapter
   )[];
   private userKey: string;
 
   constructor(
-    storageAdapters: (LocalStorageAdapter | TelegramCloudStorageAdapter)[]
+    storageAdapters: (TelegramCloudStorageAdapter<T> | LocalStorageAdapter<T>)[]
   ) {
     this.storageAdapters = storageAdapters;
     this.userKey = "userData";
   }
 
   // Save user data to the storage
-  async saveUserData(user: User): Promise<void> {
+  async saveUserData(user: T): Promise<void> {
     for (const storage of this.storageAdapters) {
       try {
-        if (storage instanceof LocalStorageAdapter) {
-          storage.setItem(this.userKey, user);
-        } else {
+        if (storage instanceof TelegramCloudStorageAdapter) {
           const success = await storage.setItem(
             this.userKey,
             JSON.stringify(user.toJSON())
           );
           console.log("User data saved successfully:", success);
+        } else {
+          storage.setItem(this.userKey, user);
         }
       } catch (error) {
         console.error("Error saving user data:", error);
@@ -39,11 +39,11 @@ export class UserDataManager {
   async getUserData(): Promise<User | null> {
     for (const storage of this.storageAdapters) {
       try {
-        if (storage instanceof LocalStorageAdapter) {
-          return storage.getItem<User>(this.userKey, User);
-        } else {
+        if (storage instanceof TelegramCloudStorageAdapter) {
           const value = await storage.getItem(this.userKey);
-          return value ? User.fromJSON(JSON.parse(value)) : null;
+          return value ? User.fromJSON(JSON.parse(value as any)) : null;
+        } else {
+          return storage.getItem<User>(this.userKey);
         }
       } catch (error) {
         console.error("Error retrieving user data:", error);
@@ -56,11 +56,11 @@ export class UserDataManager {
   async clearUserData(): Promise<void> {
     for (const storage of this.storageAdapters) {
       try {
-        if (storage instanceof LocalStorageAdapter) {
-          storage.removeItem(this.userKey);
-        } else {
+        if (storage instanceof TelegramCloudStorageAdapter) {
           const success = await storage.removeItem(this.userKey);
           console.log("User data removed successfully:", success);
+        } else {
+          storage.removeItem(this.userKey);
         }
       } catch (error) {
         console.error("Error removing user data:", error);
@@ -72,10 +72,10 @@ export class UserDataManager {
   async getAllKeys(): Promise<string[]> {
     for (const storage of this.storageAdapters) {
       try {
-        if (storage instanceof LocalStorageAdapter) {
-          return Object.keys(localStorage);
-        } else {
+        if (storage instanceof TelegramCloudStorageAdapter) {
           return await storage.getKeys();
+        } else {
+          return Object.keys(localStorage);
         }
       } catch (error) {
         console.error("Error getting keys:", error);
@@ -84,8 +84,3 @@ export class UserDataManager {
     return [];
   }
 }
-
-export const userManager = new UserDataManager([
-  new LocalStorageAdapter(),
-  //   new TelegramCloudStorageAdapter(),
-]);
