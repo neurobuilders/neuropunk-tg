@@ -3,37 +3,15 @@
 import { useTranslations } from "next-intl";
 import { Page } from "@/components/Page";
 
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Cell,
-  IconButton,
-  Image,
-  List,
-  Modal,
-  Section,
-} from "@telegram-apps/telegram-ui";
-import { Link } from "@/components/Link/Link";
-import { Check } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Button, Cell, Chip, List, Section } from "@telegram-apps/telegram-ui";
 import NextImage from "next/image";
 
 import "./styles.scss";
-import { ReactorLogoBackground } from "@/components/ParticlesBackground/ReactorLogoBackground";
 import clsx from "clsx";
-import ClaimButton from "@/components/Button/ClaimButton";
-import { formatNumber } from "@/helpers/utils";
-import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays/Modal/components/ModalHeader/ModalHeader";
-import { triggerHapticFeedback } from "@/helpers/telegram";
 import { useAppContext } from "@/context/AppContext";
-
-const updateVariable = (val: number) => {
-  const rootEl = document.querySelector(":root");
-  if (rootEl) {
-    (rootEl as any).style.setProperty("--marks-translate-y", `${val}px`);
-  }
-};
+import { ClipboardCopy } from "lucide-react";
+import { shareURL } from "@telegram-apps/sdk";
 
 export default function SquadPage() {
   const t = useTranslations("i18n");
@@ -51,6 +29,11 @@ export default function SquadPage() {
     e
   ) => {
     e.preventDefault();
+    try {
+      shareURL("", "You have been invited to Neuropunk");
+    } catch (err) {
+      //
+    }
   };
 
   useEffect(() => {
@@ -85,6 +68,11 @@ export default function SquadPage() {
                 Your frens: <strong>3</strong>
               </h3>
               <div className="pt-2 w-full">
+                <Chip mode="mono" className="w-full mb-2 h-[42px]">
+                  <span className="flex justify-center items-center gap-2 text-hint">
+                    <span>Copy referral link</span> <ClipboardCopy size={18} />
+                  </span>
+                </Chip>
                 <Button stretched onClick={shareButtonHandler}>
                   Share
                 </Button>
