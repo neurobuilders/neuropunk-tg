@@ -45,6 +45,7 @@ export default function SquadPage() {
         throw new Error("Telegram ID is empty");
       }
       shareURL(shareUrl, "You have been invited to Neuropunk Universe!");
+      // @todo increase frens counter
     } catch (err) {
       captureException(err);
       showToast({

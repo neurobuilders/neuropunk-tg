@@ -7,6 +7,7 @@ import {
   CircleHelp,
   Settings,
   X,
+  Gamepad2,
 } from "lucide-react";
 import { IconUsersGroup } from "@tabler/icons-react";
 import { useAppContext } from "@/context/AppContext";
@@ -67,6 +68,14 @@ export const Drawer = () => {
                       onClick={itemClickHandler}
                     >
                       My Profile
+                    </Sidebar.Item>
+                    <Sidebar.Item
+                      href="/games"
+                      icon={Gamepad2}
+                      as={Link}
+                      onClick={itemClickHandler}
+                    >
+                      Games
                     </Sidebar.Item>
                     <Sidebar.Item
                       href="/squad"
