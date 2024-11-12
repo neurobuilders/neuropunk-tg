@@ -10,7 +10,7 @@ import NextImage from "next/image";
 import "./styles.scss";
 import clsx from "clsx";
 import { useAppContext } from "@/context/AppContext";
-import { ClipboardCopy } from "lucide-react";
+import { ClipboardCopy, Copy } from "lucide-react";
 import { shareURL } from "@telegram-apps/sdk";
 import { getBotUrl, triggerHapticFeedback } from "@/helpers/telegram";
 import { useSession } from "next-auth/react";
@@ -83,7 +83,7 @@ export default function SquadPage() {
               />
             </div>
             <div className="flex flex-col items-center justify-center w-full pb-5 px-5 mt-1">
-              <h3 className="text-2xl font-bold mb-2">Invite punks</h3>
+              <h3 className="text-2xl font-bold mb-2">Invite Neuropunks</h3>
               <h3 className="text-sm text-hint">
                 Invite frens to get bonuses!
               </h3>
@@ -94,7 +94,7 @@ export default function SquadPage() {
                 <Chip mode="mono" className="w-full mb-2 h-[42px]">
                   <span className="flex justify-center items-center gap-2 text-hint">
                     <span>Copy referral link</span>{" "}
-                    <ClipboardCopy className="relative top-[-1px]" size={18} />
+                    <Copy className="relative top-[-1px]" size={18} />
                   </span>
                 </Chip>
                 <Button stretched onClick={shareButtonHandler}>
@@ -105,49 +105,55 @@ export default function SquadPage() {
           </div>
         </Section>
         <Section>
-          <Cell
-            className="squad-point"
-            subtitle={
-              <>
-                <strong className="text-white">8 NE</strong> for you and fren.
-              </>
-            }
-          >
-            <strong>Invite fren</strong>
-          </Cell>
-          <Cell
-            className="squad-point"
-            subtitle={
-              <>
-                <strong className="text-white">64 NE</strong> for you and fren.
-              </>
-            }
-          >
-            Fren with{" "}
-            <strong className="text-telegram">Telegram Premium</strong>
-          </Cell>
-          <Cell
-            className="squad-point"
-            subtitle={
-              <>
-                <strong className="text-white">16%</strong> of all frens&apos;
-                mining
-              </>
-            }
-          >
-            <strong>Mining drop</strong>
-          </Cell>
-          <Cell
-            className="squad-point"
-            subtitle={
-              <>
-                <strong className="text-white">Mega Drop</strong> If your
-                referrals invite <strong>1000+</strong> frens.
-              </>
-            }
-          >
-            <strong>Rank &quot;Leader&quot;</strong>
-          </Cell>
+          <>
+            <Cell
+              className="squad-point"
+              subtitle={
+                <>
+                  <strong className="text-white">8 NE</strong> for you and fren.
+                </>
+              }
+            >
+              <strong>Invite fren</strong>
+            </Cell>
+            <Cell
+              hidden={true}
+              className="squad-point"
+              subtitle={
+                <>
+                  <strong className="text-white">64 NE</strong> for you and
+                  fren.
+                </>
+              }
+            >
+              Fren with{" "}
+              <strong className="text-telegram">Telegram Premium</strong>
+            </Cell>
+            <Cell
+              hidden={true}
+              className="squad-point"
+              subtitle={
+                <>
+                  <strong className="text-white">16%</strong> of all frens&apos;
+                  mining
+                </>
+              }
+            >
+              <strong>Mining drop</strong>
+            </Cell>
+            <Cell
+              hidden={true}
+              className="squad-point"
+              subtitle={
+                <>
+                  <strong className="text-white">Mega Drop</strong> If your
+                  referrals invite <strong>1000+</strong> frens.
+                </>
+              }
+            >
+              <strong>Rank &quot;Leader&quot;</strong>
+            </Cell>
+          </>
         </Section>
       </List>
     </Page>
