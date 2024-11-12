@@ -1,185 +1,129 @@
-// "use client";
+"use client";
 
-import {
-  getCloudStorageItem,
-  setCloudStorageItem,
-} from "@telegram-apps/sdk-react";
-import PouchDB from "pouchdb-core";
-import { DataStore, Mapper } from "js-data";
-import PouchDBIdbAdapter from "pouchdb-adapter-idb";
+export interface IModel {
+  toJSON(): any;
+}
 
-const databaseName = "neuropunk_v1";
+export interface IModelConstructor<T extends Model> {
+  new (data: any): T;
+  fromJSON(json: any): T;
+}
 
-PouchDB.plugin(PouchDBIdbAdapter);
-const database = new PouchDB(databaseName, {
-  adapter: "idb",
-  revs_limit: 1,
-  auto_compaction: true,
-});
+export class Model implements IModel {
+  protected data: any;
 
-database.info().then(async (info) => {
-  console.log("info database", info);
-  //   await database.destroy();
-});
+  constructor(data: any = {}) {
+    this.data = data;
+  }
 
-export const DataLayer = {
-  putUser: async (id: number, data: Record<string, any>) => {
-    const key = `user_${id}`;
-    let doc;
-    try {
-      doc = await database.get(key);
-    } catch (err) {
-      console.warn(err);
+  toJSON(): any {
+    return this.data;
+  }
+
+  static fromJSON<T extends Model>(this: new (data: any) => T, json: any): T {
+    return new this(json);
+  }
+}
+
+export interface IUser {
+  id: number;
+  energyAmount: number;
+}
+
+export class User extends Model implements IUser {
+  constructor(data: IUser) {
+    super(data);
+  }
+
+  get id(): number {
+    return this.data.id;
+  }
+
+  set id(value: number) {
+    this.data.id = value;
+  }
+
+  get energyAmount(): number {
+    return this.data.energyAmount;
+  }
+
+  set energyAmount(value: number) {
+    this.data.energyAmount = value;
+  }
+}
+
+export class LocalStorageAdapter {
+  constructor() {
+    if (!globalThis.localStorage) {
+      throw new Error("LocalStorage is not supported in this browser.");
     }
-    return database.put({
-      ...data,
-      _id: key,
-      ...(doc && {
-        _rev: doc._rev,
-      }),
-    });
-  },
-  getUser: (id: number) => {
+  }
+
+  // Set an item in localStorage
+  setItem<T extends IModel>(key: string, model: T): void {
     try {
-      const key = `user_${id}`;
-      return database.get(key);
-    } catch (err) {
-      console.error(err);
+      localStorage.setItem(key, JSON.stringify(model.toJSON()));
+    } catch (error) {
+      console.error("Error setting localStorage item:", error);
     }
-    return null;
-  },
-};
+  }
 
-const DatalayerAdapter = {
-  find: async (definition: Mapper, id: any, options: any) => {
-    console.log("findtest", definition, id, options);
-    const answer = await TelegramCloudStorage.get(`${definition.name}_${id}`);
-    // const instance = definition.createInstance({ ...answer });
-    // console.log("instance", instance);
-    return answer;
-  },
-  update: async (definition: Mapper, id: any, attrs: any, options: any) => {
-    console.log("updatetest", definition, id, attrs, options);
-    const key = `${definition.name}_${id}`;
-    const prevValue = await definition.find(key);
-    console.log("prevValue", prevValue);
-    const answer = await TelegramCloudStorage.put(key, {
-      ...prevValue.toJSON(),
-      ...attrs,
-    });
+  // Get an item from localStorage
+  getItem<T extends Model>(
+    key: string,
+    ModelClass: IModelConstructor<T>
+  ): T | null {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? ModelClass.fromJSON(JSON.parse(item)) : null;
+    } catch (error) {
+      console.error("Error getting localStorage item:", error);
+      return null;
+    }
+  }
 
-    return answer;
-  },
-  create: async (definition: Mapper, attrs: any, options: any) => {
-    console.log("createtest", definition, attrs, options);
-    const answer = await TelegramCloudStorage.put(
-      `${definition.name}_${id}`,
-      attrs
-    );
+  // Remove an item from localStorage
+  removeItem(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error("Error removing localStorage item:", error);
+    }
+  }
 
-    return answer;
-  },
-};
+  // Clear all items from localStorage
+  clear(): void {
+    try {
+      localStorage.clear();
+    } catch (error) {
+      console.error("Error clearing localStorage:", error);
+    }
+  }
+}
 
-// MyCustomAdapter.prototype.create = function (definition, attrs, options) {
-//   // Must return a promise that resolves with the created item
-// };
+export class UserDataManager {
+  private storage: LocalStorageAdapter;
+  private userKey: string;
 
-// MyCustomAdapter.prototype.find = function (definition, id, options) {
-//   // Must return a promise that resolves with the found item
-// };
+  constructor() {
+    this.storage = new LocalStorageAdapter();
+    this.userKey = "userData";
+  }
 
-// MyCustomAdapter.prototype.findAll = function (definition, params, options) {
-//   // Must return a promise that resolves with the found items
-// };
+  // Save user data to localStorage
+  saveUserData(user: User): void {
+    this.storage.setItem(this.userKey, user);
+  }
 
-// MyCustomAdapter.prototype.update = function (definition, id, attrs, options) {
-//   // Must return a promise that resolves with the updated item
-// };
+  // Retrieve user data from localStorage
+  getUserData(): User | null {
+    return this.storage.getItem(this.userKey, User) as User;
+  }
 
-// MyCustomAdapter.prototype.updateAll = function (
-//   definition,
-//   attrs,
-//   params,
-//   options
-// ) {
-//   // Must return a promise that resolves with the updated items
-// };
+  // Remove user data from localStorage
+  clearUserData(): void {
+    this.storage.removeItem(this.userKey);
+  }
+}
 
-// MyCustomAdapter.prototype.destroy = function (definition, id, options) {
-//   // Must return a promise
-// };
-
-// MyCustomAdapter.prototype.destroyAll = function (definition, params, options) {
-//   // Must return a promise
-// };
-
-// const store = new DataStore({ debug: true });
-// // console.log("LocalStorageAdapter", adapter);
-// // const adapter = new LocalStorageAdapter();
-// store.registerAdapter("custom", DatalayerAdapter, {
-//   default: true,
-//   debug: true,
-// });
-
-// export const UserMapper = store.defineMapper("user", {
-//   debug: true,
-// });
-// console.log("UserMapper", UserMapper);
-// const localStorageAdapter = new DSLocalStorageAdapter();
-// console.log("localStorageAdapter", DSLocalStorageAdapter);
-// store.registerAdapter("localstorage", localStorageAdapter, { default: true });
-
-// console.log("store", store);
-
-export const TelegramCloudStorage = {
-  // Method to set an item in cloud storage
-  put: (key: string, value: any) => {
-    console.debug("[TelegramCloudStorage] put", `key=${key}`, value);
-    return setCloudStorageItem(key, JSON.stringify(value));
-  },
-
-  // // Method to get an item from cloud storage
-  get: async (key: string) => {
-    const json = await getCloudStorageItem(key);
-    console.debug("[TelegramCloudStorage] get", `key=${key}`, json);
-    if (!json) return null;
-    return JSON.parse(json);
-  },
-
-  // // Method to get multiple items by their keys
-  // //   getItems(keys: string[]) {
-  // //     return new Promise((resolve, reject) => {
-  // //       this.storage.getItem(keys, (error, values) => {
-  // //         if (error) {
-  // //           reject(error);
-  // //         } else {
-  // //           resolve(values);
-  // //         }
-  // //       });
-  // //     });
-  // //   }
-
-  // // Method to remove an item from cloud storage
-  // remove(key: string) {
-  //   return deleteCloudStorageItem(key);
-  // }
-
-  // //   // Method to remove multiple items by their keys
-  // //   removeItems(keys) {
-  // //     return new Promise((resolve, reject) => {
-  // //       this.storage.removeItems(keys, (error, success) => {
-  // //         if (error) {
-  // //           reject(error);
-  // //         } else {
-  // //           resolve(success);
-  // //         }
-  // //       });
-  // //     });
-  // //   }
-
-  // // Method to get all keys in cloud storage
-  // getKeys: () => {
-  //   return getCloudStorageKeys();
-  // },
-};
+export const userManager = new UserDataManager();

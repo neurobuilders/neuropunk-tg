@@ -1,7 +1,7 @@
 // import { UserMapper } from "@/helpers/database";
-import { DataLayer } from "@/helpers/database";
+// import { DataLayer } from "@/helpers/database";
+import { User as DatabaseUser, userManager } from "@/helpers/database";
 import { User } from "@telegram-apps/sdk";
-import { Record } from "js-data";
 import {
   createContext,
   useContext,
@@ -78,17 +78,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       if (!userId) {
         return;
       }
-      let dbUserData;
-      try {
-        dbUserData = await DataLayer.getUser(userId);
-      } catch (err) {
-        console.error(err);
-        if ((err as Error).name === "not_found") {
-          dbUserData = await DataLayer.putUser(userId, {
-            energyAmount: 0,
-          });
-          console.debug("creating new user");
-        }
+
+      let dbUserData = await userManager.getUserData();
+      if (!dbUserData) {
+        dbUserData = new DatabaseUser({
+          id: userId,
+          energyAmount: 0,
+        });
+        await userManager.saveUserData(dbUserData);
+        console.debug("creating new user");
       }
       if (dbUserData) {
         setUserData(dbUserData);
@@ -111,9 +109,11 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       if (!userId) {
         return;
       }
-      const updateAnswer = await DataLayer.putUser(userId, {
+      const user = new DatabaseUser({
+        id: userId,
         energyAmount,
       });
+      const updateAnswer = await userManager.saveUserData(user);
       console.log("updateAnswer", updateAnswer);
     };
     syncTelegramDb();
