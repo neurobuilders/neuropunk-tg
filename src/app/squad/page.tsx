@@ -41,23 +41,15 @@ export default function SquadPage() {
     "animate__animated animate__fadeIn"
   );
   const { setEnergyProductionEnabled, energyAmount } = useAppContext();
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [reactorClasses, setReactorClasses] = useState({
-    // ["stopped"]: !setEnergyProductionEnabled,
-    ["animate__animated"]: true,
-    ["pt-4 pb-3"]: true,
-    ["animate__fadeIn"]: true,
-  });
 
   useEffect(() => {
     // after page load starting to generate neuro energy
     setEnergyProductionEnabled(true);
   }, []);
 
-  const claimButtonHandler: (
-    value: number,
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void = (value, e) => {
+  const shareButtonHandler: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
     e.preventDefault();
   };
 
@@ -76,23 +68,26 @@ export default function SquadPage() {
       <List>
         <Section>
           <div>
-            <div className="relative flex justify-center items-center py-3">
+            <div className="flex justify-center items-center py-3 !pt-5">
               <NextImage
-                src="/logo.svg"
-                fill={true}
-                alt="Reactor logo"
-                className={clsx(
-                  "!relative max-w-[50vw] max-h-full",
-                  logoClassName
-                )}
+                src="/images/invite-frens.jpg"
+                alt="Invite frens"
+                className={clsx("max-w-[50vw] max-h-full", logoClassName)}
                 priority={true}
+                width={1280}
+                height={847}
               />
             </div>
-            <div className="flex flex-col items-center">
-              <h3 className="text-2xl font-bold">Invite punks</h3>
-              <h3 className="text-md">Invite frens to get bonuses!</h3>
-              <div className="">
-                <Button stretched>Share</Button>
+            <div className="flex flex-col items-center justify-center w-full pb-5 px-5 mt-1">
+              <h3 className="text-2xl font-bold mb-2">Invite punks</h3>
+              <h3 className="text-sm">Invite frens to get bonuses!</h3>
+              <h3 className="text-sm mb-2">
+                Your frens: <strong>3</strong>
+              </h3>
+              <div className="pt-2 w-full">
+                <Button stretched onClick={shareButtonHandler}>
+                  Share
+                </Button>
               </div>
             </div>
           </div>
