@@ -54,6 +54,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
         setTimeout(() => {
           setEnergyAmount((prev) => prev + springProps.value.get());
+
           setUnclaimedEnergyAmount(0);
         }, 100);
 

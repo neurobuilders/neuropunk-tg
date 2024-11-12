@@ -1,6 +1,6 @@
 "use client";
 
-import { backButton } from "@telegram-apps/sdk-react";
+import { backButton, initData, useSignal } from "@telegram-apps/sdk-react";
 import { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
@@ -10,6 +10,7 @@ import Head from "next/head";
 import riveWASMResource from "@rive-app/canvas/rive.wasm";
 import Navbar from "@/components/Navbar/Navbar";
 import { Drawer } from "@/components/Drawer/Drawer";
+import { useAppContext } from "@/context/AppContext";
 
 interface PageProps {
   /**
@@ -26,6 +27,20 @@ export function Page({
   back = true,
 }: PropsWithChildren<PageProps>) {
   const router = useRouter();
+  const initDataState = useSignal(initData.state);
+  const { setUserData } = useAppContext();
+
+  useEffect(() => {
+    const initUser = async () => {
+      try {
+        console.log("initDataState", initDataState?.user);
+        setUserData(initDataState?.user);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    initUser();
+  }, [initDataState]);
 
   useEffect(() => {
     if (back) {
