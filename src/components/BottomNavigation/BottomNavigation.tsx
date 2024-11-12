@@ -5,6 +5,7 @@ import { House, Info, User, Settings, CircleCheck, Atom } from "lucide-react";
 import { FC, MouseEvent, useCallback, useEffect, useState } from "react";
 import { openLink, hapticFeedback } from "@telegram-apps/sdk-react";
 import { usePathname, useRouter } from "next/navigation";
+import { IconUsersGroup } from "@tabler/icons-react";
 
 import "./styles.scss";
 
@@ -12,7 +13,7 @@ interface Tab {
   id: string;
   text: string;
   href: string;
-  Icon: typeof House;
+  Icon: React.ReactNode;
 }
 
 const tabs: Tab[] = [
@@ -20,25 +21,25 @@ const tabs: Tab[] = [
     id: "home",
     text: "Home",
     href: "/home",
-    Icon: House,
+    Icon: <House />,
   },
   {
     id: "reactor",
     text: "Reactor",
     href: "/reactor",
-    Icon: Atom,
+    Icon: <Atom />,
   },
   {
     id: "pass",
     text: "NeuroPass",
     href: "/pass",
-    Icon: User,
+    Icon: <User />,
   },
   {
-    id: "settings",
-    text: "Settings",
-    href: "/settings",
-    Icon: Settings,
+    id: "squad",
+    text: "Squad",
+    href: "/squad",
+    Icon: <IconUsersGroup />,
   },
 ];
 
@@ -95,7 +96,7 @@ export const BottomNavigation: FC = () => {
             selected={id === currentTab}
             onClick={onClick.bind(this, props)}
           >
-            <Icon />
+            {Icon}
           </Tabbar.Item>
         );
       })}
