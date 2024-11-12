@@ -12,9 +12,15 @@ import clsx from "clsx";
 import { useAppContext } from "@/context/AppContext";
 import { ClipboardCopy } from "lucide-react";
 import { shareURL } from "@telegram-apps/sdk";
+import { getBotUrl, triggerHapticFeedback } from "@/helpers/telegram";
+import { useSession } from "next-auth/react";
+import { useToast } from "@/context/ToastContext";
+import { ExtendedUser } from "@/types/next-auth";
 
 export default function SquadPage() {
+  const { data: session } = useSession();
   const t = useTranslations("i18n");
+  const { showToast } = useToast();
   const [logoClassName, setLogoClassName] = useState(
     "animate__animated animate__fadeIn"
   );
@@ -30,9 +36,21 @@ export default function SquadPage() {
   ) => {
     e.preventDefault();
     try {
-      shareURL("", "You have been invited to Neuropunk");
+      triggerHapticFeedback();
+      if (!session) {
+        throw new Error("Session is empty, can't get user ID");
+      }
+      const shareUrl = getBotUrl(
+        `invite_${(session.user as ExtendedUser).tgId}`
+      );
+      shareURL(shareUrl, "You have been invited to Neuropunk Universe!");
     } catch (err) {
-      //
+      showToast({
+        title: "Error occured",
+        message: (err as Error).message,
+        type: "error",
+        duration: 5000,
+      });
     }
   };
 

@@ -18,6 +18,7 @@ const env = {
   },
   telegram: {
     botToken: process.env.TG_BOT_TOKEN,
+    botUsername: process.env.NEXT_PUBLIC_TG_BOT_USERNAME,
     userValidationDisabled: process.env.TG_USER_VALIDATION_DISABLED === "true",
   },
   supabase: {
