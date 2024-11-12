@@ -28,13 +28,13 @@ export function Page({
 }: PropsWithChildren<PageProps>) {
   const router = useRouter();
   const initDataState = useSignal(initData.state);
-  const { setUserData } = useAppContext();
+  const { setInitUserData } = useAppContext();
 
   useEffect(() => {
     const initUser = async () => {
       try {
         console.log("initDataState", initDataState?.user);
-        setUserData(initDataState?.user);
+        setInitUserData(initDataState?.user);
       } catch (err) {
         console.error(err);
       }

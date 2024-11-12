@@ -1,5 +1,7 @@
-import { TelegramCloudStorage } from "@/helpers/telegram";
+// import { UserMapper } from "@/helpers/database";
+import { DataLayer } from "@/helpers/database";
 import { User } from "@telegram-apps/sdk";
+import { Record } from "js-data";
 import {
   createContext,
   useContext,
@@ -16,6 +18,10 @@ const neuroEnergyPerSecond = 0.0013;
 const startingAmount = 0;
 const neuroEnergyProductionStepMs = 1000;
 
+interface UserData {
+  energyAmount: number;
+}
+
 type AppContextType = {
   setEnergyProductionEnabled: (newVal: boolean) => void;
   isEnergyProductionEnabled: () => boolean;
@@ -25,6 +31,9 @@ type AppContextType = {
 
   unclaimedEnergyAmount: number;
   setUnclaimedEnergyAmount: Dispatch<SetStateAction<number>>;
+
+  initUserData?: User;
+  setInitUserData: Dispatch<SetStateAction<User | undefined>>;
 
   userData?: User;
   setUserData: Dispatch<SetStateAction<User | undefined>>;
@@ -43,7 +52,8 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const [userData, setUserData] = useState<User | undefined>();
+  const [initUserData, setInitUserData] = useState<User | undefined>();
+  const [userData, setUserData] = useState<any | undefined>();
   const _isEnergyProductionEnabled = useRef<boolean>(false);
   const [energyAmount, setEnergyAmount] = useState<number>(startingAmount);
   const [unclaimedEnergyAmount, setUnclaimedEnergyAmount] = useState<number>(0);
@@ -59,70 +69,52 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     return _isEnergyProductionEnabled.current;
   };
 
-  // const initDatabase = async (userId?: number) => {
-  //   try {
-  //     // const db = new PouchDB(databaseName, {
-  //     //   revs_limit: 1,
-  //     //   adapter: "telegram",
-  //     // });
-  //     const db = new TelegramCloudStorage();
-  //     database.current = db;
-  //     console.log("cloudStorage.isSupported;", isCloudStorageSupported());
-  //     console.log("db", db);
-  //     const userDbKey = `user_${userId}`;
-  //     try {
-  //       const foundRecord = await db.get(userDbKey);
-  //       console.log("foundRecord", foundRecord);
-  //       if (foundRecord) {
-  //         const removeResult = await db.remove(userDbKey);
-  //         console.log("removeResult", removeResult);
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-
-  //     const savedData = await db.put(userDbKey, {
-  //       energyAmount: 0,
-  //       respectAmount: 0,
-  //     });
-  //     console.log("savedData", savedData);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   useEffect(() => {
-    const syncTelegramDb = async () => {
-      if (!userData) {
+    const updateContext = async () => {
+      if (!initUserData) {
         return;
       }
-      const userId = userData?.id;
+      const userId = initUserData?.id;
       if (!userId) {
         return;
       }
-      const userDbKey = `user_${userId}`;
-      const dbUserData = await TelegramCloudStorage.get(userDbKey);
-      console.log("dbUserData", dbUserData);
-      const { energyAmount } = dbUserData;
-      setEnergyAmount(energyAmount);
+      let dbUserData;
+      try {
+        dbUserData = await DataLayer.getUser(userId);
+      } catch (err) {
+        console.error(err);
+        if ((err as Error).name === "not_found") {
+          dbUserData = await DataLayer.putUser(userId, {
+            energyAmount: 0,
+          });
+          console.debug("creating new user");
+        }
+      }
+      if (dbUserData) {
+        setUserData(dbUserData);
+
+        const { energyAmount } = dbUserData as any;
+        if (energyAmount) {
+          setEnergyAmount(energyAmount);
+        }
+      }
     };
-    syncTelegramDb();
-  }, [userData]);
+    updateContext();
+  }, [initUserData]);
 
   useEffect(() => {
     const syncTelegramDb = async () => {
-      if (!userData) {
+      if (!initUserData) {
         return;
       }
-      const userId = userData?.id;
+      const userId = initUserData?.id;
       if (!userId) {
         return;
       }
-      const userDbKey = `user_${userId}`;
-      const answer = await TelegramCloudStorage.put(userDbKey, {
+      const updateAnswer = await DataLayer.putUser(userId, {
         energyAmount,
       });
-      console.log("answer", answer);
+      console.log("updateAnswer", updateAnswer);
     };
     syncTelegramDb();
   }, [energyAmount]);
@@ -164,8 +156,8 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         unclaimedEnergyAmount,
         setUnclaimedEnergyAmount,
         // initDatabase,
-        userData,
-        setUserData,
+        initUserData,
+        setInitUserData,
       }}
     >
       {children}
