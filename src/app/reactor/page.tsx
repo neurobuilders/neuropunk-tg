@@ -30,7 +30,7 @@ import { useAppContext } from "@/context/AppContext";
 
 const claimButtonStartValue = 0;
 const initialNeuroEnergyAmount = 2746;
-const maxMarksTranslateY = 130;
+const maxMarksTranslateY = 120;
 
 const updateVariable = (val: number) => {
   const rootEl = document.querySelector(":root");
@@ -49,9 +49,9 @@ export default function ReactorPage() {
   const { setEnergyProductionEnabled, energyAmount } = useAppContext();
   const [isModalOpen, setModalOpen] = useState(false);
   const [reactorClasses, setReactorClasses] = useState({
-    ["stopped"]: !setEnergyProductionEnabled,
+    // ["stopped"]: !setEnergyProductionEnabled,
     ["animate__animated"]: true,
-    ["pt-[40px]"]: true,
+    ["pt-4 pb-3"]: true,
     ["animate__fadeIn"]: true,
     ["is-resetting"]: false,
   });
@@ -142,11 +142,11 @@ export default function ReactorPage() {
                 />
               </ReactorLogoBackground>
             </div>
-            <div className="flex flex-col items-center mt-10">
-              <h3 className="text-2xl font-bold mb-1">
+            <div className="flex flex-col items-center">
+              <h3 className="text-2xl font-bol">
                 {formatNumber(energyAmount, 2)} NE
               </h3>
-              <h3 className="text-md mt-2">
+              <h3 className="text-md">
                 Complete tasks and mine <strong>Neuro Energy</strong>
               </h3>
               <Modal
@@ -156,7 +156,7 @@ export default function ReactorPage() {
                 trigger={
                   <button
                     type="button"
-                    className="text-sky-500 mt-1"
+                    className="text-sky-500"
                     onClick={() => {
                       triggerHapticFeedback("medium");
                     }}
@@ -196,7 +196,7 @@ export default function ReactorPage() {
               </Modal>
               <div className="">
                 <ClaimButton
-                  className="mt-6 mb-8"
+                  className="mt-4 mb-4"
                   onClick={claimButtonHandler}
                 />
               </div>
