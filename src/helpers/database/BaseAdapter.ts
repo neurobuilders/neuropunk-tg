@@ -69,7 +69,7 @@ export abstract class BaseAdapter<T extends Model = Model> {
    * @returns {boolean} - Returns `true` if the feature is supported, otherwise throws an error.
    * @throws {Error} - Throws an error with the message "'isSupported' method not implemented".
    */
-  protected isSupported(): boolean {
+  protected isSupported(): Promise<boolean> {
     throw new Error("'isSupported' method not implemented");
   }
 }

@@ -1,6 +1,7 @@
 import { Model, User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 import { captureException, isStorageAvailable } from "@/helpers/utils";
+import { LogMethod } from "@/helpers/decorators";
 
 export class LocalStorageAdapter<
   T extends Model = User
@@ -20,6 +21,7 @@ export class LocalStorageAdapter<
     }
   }
 
+  @LogMethod
   async getKeys(): Promise<string[]> {
     if (!globalThis.localStorage) {
       return [];
@@ -28,6 +30,7 @@ export class LocalStorageAdapter<
   }
 
   // Set an item in localStorage
+  @LogMethod
   async setItem(key: string, model: T): Promise<boolean> {
     try {
       localStorage.setItem(key, JSON.stringify(model.toJSON()));
@@ -39,6 +42,7 @@ export class LocalStorageAdapter<
   }
 
   // Get an item from localStorage
+  @LogMethod
   async getItem(key: string): Promise<unknown | null> {
     try {
       const value = localStorage.getItem(key);
@@ -50,6 +54,7 @@ export class LocalStorageAdapter<
   }
 
   // Remove an item from localStorage
+  @LogMethod
   async removeItem(key: string): Promise<boolean> {
     try {
       localStorage.removeItem(key);
@@ -61,6 +66,7 @@ export class LocalStorageAdapter<
   }
 
   // Clear all items from localStorage
+  @LogMethod
   async clear(): Promise<void> {
     try {
       localStorage.clear();
@@ -69,12 +75,14 @@ export class LocalStorageAdapter<
     }
   }
 
+  @LogMethod
   isValidKey(key: string): boolean {
     // @todo
     return true;
   }
 
-  isSupported(): boolean {
+  @LogMethod
+  async isSupported(): Promise<boolean> {
     return this.isEnabled;
   }
 }

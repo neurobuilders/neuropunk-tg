@@ -3,11 +3,12 @@ import {
   getCloudStorageItem,
   getCloudStorageKeys,
   setCloudStorageItem,
-  isCloudStorageSupported,
 } from "@telegram-apps/sdk-react";
 import { Model, User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
-import { captureException } from "../utils";
+import { captureException } from "@/helpers/utils";
+import { LogMethod } from "@/helpers/decorators";
+import { isTelegramMiniApp } from "@/helpers/telegram";
 
 export class TelegramCloudStorageAdapter<
   T extends Model = User
@@ -17,6 +18,7 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Set an item in the cloud storage
+  @LogMethod
   async setItem(key: string, model: T): Promise<boolean> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
@@ -35,6 +37,7 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Get an item from the cloud storage
+  @LogMethod
   async getItem(key: string): Promise<unknown | null> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
@@ -49,6 +52,7 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Remove an item from the cloud storage
+  @LogMethod
   async removeItem(key: string): Promise<boolean> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
@@ -63,6 +67,7 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Remove multiple items from the cloud storage
+  @LogMethod
   async removeItems(keys: string[]): Promise<void> {
     keys.forEach((key) => {
       if (!this.isValidKey(key)) {
@@ -73,23 +78,30 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Get all keys from the cloud storage
+  @LogMethod
   async getKeys(): Promise<string[]> {
     return await getCloudStorageKeys();
   }
 
   // Clear all items from localStorage
+  @LogMethod
   async clear(): Promise<void> {
     const keys = await this.getKeys();
     await this.removeItems(keys);
   }
 
   // Validate key format
+  @LogMethod
   isValidKey(key: string): boolean {
     const regex = /^[A-Za-z0-9_-]{1,128}$/;
     return regex.test(key);
   }
 
-  isSupported(): boolean {
-    return isCloudStorageSupported();
+  @LogMethod
+  async isSupported(): Promise<boolean> {
+    if (isTelegramMiniApp()) {
+      return true;
+    }
+    return false;
   }
 }
