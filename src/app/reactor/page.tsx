@@ -156,7 +156,7 @@ export default function ReactorPage() {
                 trigger={
                   <button
                     type="button"
-                    className="text-sky-500"
+                    className="text-hint"
                     onClick={() => {
                       triggerHapticFeedback("medium");
                     }}

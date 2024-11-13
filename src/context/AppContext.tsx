@@ -102,6 +102,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   }, [initUserData]);
 
   useEffect(() => {
+    console.log("useEffect energyAmount-update");
     const uManager = userManager();
     const syncTelegramDb = async () => {
       if (!initUserData) {
@@ -116,7 +117,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         energyAmount,
       });
       const updateAnswer = await uManager.saveUserData(user);
-      console.log("updateAnswer", updateAnswer);
     };
     syncTelegramDb();
   }, [energyAmount]);
