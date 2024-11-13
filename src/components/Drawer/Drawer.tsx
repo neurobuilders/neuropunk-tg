@@ -123,7 +123,7 @@ export const Drawer = () => {
             </div>
           </Sidebar>
         </FlowbiteDrawer.Items>
-        <div className="text-hint px-3 mt-3 fixed bottom-2 text-[13px] font-bold">
+        <div className="text-hint px-3 mt-3 fixed bottom-2 text-[13px] font-bold pr-8 w-80">
           {getVersionString()}
         </div>
       </FlowbiteDrawer>
