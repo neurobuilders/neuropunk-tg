@@ -11,13 +11,15 @@ export const formatNumber = (num: number, minimumFractionDigits = 3) => {
     .replace(/,/g, " ");
 };
 
-export const captureException = (err: any) => {
+export const captureException = (err: any, message?: string) => {
   try {
-    console.error(err);
-    Sentry.captureException(err);
+    console.error(`${message}: `, err);
+    Sentry.captureException(err, {
+      ...(message && { originalException: new Error(message) }),
+    });
   } catch (err2) {
-    console.error(err2);
-    Sentry.captureException(err2);
+    console.error("captureException error: ", err2);
+    Sentry.captureException(err2, { originalException: err });
   }
 };
 
@@ -33,4 +35,16 @@ export function getUrl(urlPart?: string, toString = true): string | URL {
     return url.toString();
   }
   return url as URL;
+}
+
+export function isStorageAvailable(storage = globalThis.localStorage) {
+  try {
+    const key = "__storage_test__";
+    storage.setItem(key, key);
+    storage.removeItem(key);
+    return true;
+  } catch (err) {
+    captureException(err);
+    return false;
+  }
 }

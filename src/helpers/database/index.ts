@@ -11,7 +11,7 @@ export * from "./TelegramCloudStorageAdapter";
 export const userManager = () => {
   const adapters = [
     new TelegramCloudStorageAdapter(),
-    // new LocalStorageAdapter(),
+    new LocalStorageAdapter(),
   ];
   //   adapters.push();
   return new UserDataManager(adapters);

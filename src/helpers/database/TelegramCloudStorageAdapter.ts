@@ -3,6 +3,7 @@ import {
   getCloudStorageItem,
   getCloudStorageKeys,
   setCloudStorageItem,
+  isCloudStorageSupported,
 } from "@telegram-apps/sdk-react";
 import { User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
@@ -46,11 +47,17 @@ export class TelegramCloudStorageAdapter<
   //   }
 
   // Remove an item from the cloud storage
-  async removeItem(key: string): Promise<void> {
+  async removeItem(key: string): Promise<boolean> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
     }
-    await deleteCloudStorageItem(key);
+    try {
+      await deleteCloudStorageItem(key);
+      return true;
+    } catch (err) {
+      console.error("Error removing TelegramCloudStorage item:", err);
+    }
+    return false;
   }
 
   // Remove multiple items from the cloud storage
@@ -86,5 +93,9 @@ export class TelegramCloudStorageAdapter<
 
   public fromJSON(data: any): any {
     return JSON.parse(data);
+  }
+
+  public isSupported(): boolean {
+    return isCloudStorageSupported();
   }
 }

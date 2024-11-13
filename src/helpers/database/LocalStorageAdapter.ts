@@ -1,11 +1,19 @@
 import { IModel, User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
+import { captureException, isStorageAvailable } from "@/helpers/utils";
 
 export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
+  isEnabled = true;
   constructor() {
     super();
-    if (!globalThis.localStorage) {
-      throw new Error("LocalStorage is not supported in this browser.");
+
+    try {
+      if (!isStorageAvailable()) {
+        throw new Error("LocalStorage is not supported in this browser.");
+      }
+    } catch (err) {
+      captureException(err);
+      this.isEnabled = false;
     }
   }
 
@@ -37,12 +45,14 @@ export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
   }
 
   // Remove an item from localStorage
-  async removeItem(key: string): Promise<void> {
+  async removeItem(key: string): Promise<boolean> {
     try {
       localStorage.removeItem(key);
+      return true;
     } catch (error) {
       console.error("Error removing localStorage item:", error);
     }
+    return false;
   }
 
   // Clear all items from localStorage
@@ -57,5 +67,9 @@ export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
   public isValidKey(key: string): boolean {
     // @todo
     return true;
+  }
+
+  public isSupported(): boolean {
+    return this.isEnabled;
   }
 }
