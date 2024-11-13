@@ -1,7 +1,6 @@
 import { isTelegramMiniApp } from "@/helpers/telegram";
 import { useClientOnce } from "@/hooks/useClientOnce";
 import {
-  isTMA,
   type LaunchParams,
   mockTelegramEnv,
   parseInitData,
