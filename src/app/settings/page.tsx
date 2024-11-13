@@ -8,13 +8,12 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
-import env from "@/env";
-import { getDefaultUser, userManager } from "@/helpers/database";
+import { getUserManager } from "@/helpers/database";
 import { useCallback } from "react";
 import { ClickHandler } from "@telegram-apps/telegram-ui/dist/components/Service/Touch/Touch";
 import { useToast } from "@/context/ToastContext";
 import { useAppContext } from "@/context/AppContext";
-import { captureException } from "@/helpers/utils";
+import { getVersionString } from "@/helpers/utils";
 import { uniqueId } from "lodash";
 
 export default function SettingsPage() {
@@ -23,7 +22,7 @@ export default function SettingsPage() {
   const { initUserData, setInitUserData, setEnergyAmount } = useAppContext();
 
   const clearUserDataHandler: ClickHandler = useCallback(async (e) => {
-    const uManager = userManager();
+    const uManager = getUserManager();
     await uManager.clearUserData();
     setEnergyAmount(0);
     setInitUserData({
@@ -99,7 +98,8 @@ export default function SettingsPage() {
 
         <Section header="Actions">
           <Cell
-            subtitle="This will clear the database with all balances and transactions"
+            multiline={true}
+            subtitle="This will clear the database with all balances, transactions and then set the default values"
             onClick={clearUserDataHandler}
           >
             Clear user data storage
@@ -107,11 +107,7 @@ export default function SettingsPage() {
         </Section>
 
         <Section>
-          <Cell
-            subtitle={`v${env.app.version} - #${env.vercel.gitCommitRef} (${env.vercel.gitCommitSha})`}
-          >
-            Version
-          </Cell>
+          <Cell subtitle={getVersionString()}>Version</Cell>
         </Section>
       </List>
     </Page>

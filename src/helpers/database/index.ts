@@ -6,13 +6,10 @@ export * from "./models";
 export * from "./LocalStorageAdapter";
 export * from "./UserDataManager";
 export * from "./TelegramCloudStorageAdapter";
-// import { isCloudStorageSupported } from "@telegram-apps/sdk";
 
-export const userManager = () => {
-  const adapters = [
+export const getUserManager = () => {
+  return new UserDataManager([
     new TelegramCloudStorageAdapter(),
     new LocalStorageAdapter(),
-  ];
-  //   adapters.push();
-  return new UserDataManager(adapters);
+  ]);
 };

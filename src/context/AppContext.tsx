@@ -1,4 +1,4 @@
-import { userManager } from "@/helpers/database";
+import { getUserManager } from "@/helpers/database";
 import {
   User as DatabaseUser,
   getDefaultUser,
@@ -82,7 +82,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         return;
       }
 
-      const uManager = userManager();
+      const uManager = getUserManager();
 
       let dbUserData = await uManager.getUserData();
       if (!dbUserData) {
@@ -106,7 +106,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   useEffect(() => {
     console.log("useEffect energyAmount-update");
-    const uManager = userManager();
+    const uManager = getUserManager();
     const syncTelegramDb = async () => {
       if (!initUserData) {
         return;

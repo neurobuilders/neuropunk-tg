@@ -48,3 +48,12 @@ export function isStorageAvailable(storage = globalThis.localStorage) {
     return false;
   }
 }
+
+export const getVersionString = () => {
+  const parts = [
+    `v${env.app.version}`,
+    env.vercel.gitCommitRef && `#${env.vercel.gitCommitRef}`,
+    env.vercel.gitCommitSha && `(${env.vercel.gitCommitSha})`,
+  ];
+  return parts.join(" ");
+};
