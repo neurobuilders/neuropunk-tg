@@ -82,12 +82,13 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
       let dbUserData = await uManager.getUserData();
       if (!dbUserData) {
-        dbUserData = new DatabaseUser({
+        const defaultUser = new DatabaseUser({
           id: userId,
           energyAmount: 0,
         });
-        await uManager.saveUserData(dbUserData);
-        console.debug("creating new user");
+        await uManager.saveUserData(defaultUser);
+        console.debug("creating new user", defaultUser);
+        dbUserData = defaultUser;
       }
       if (dbUserData) {
         setUserData(dbUserData);

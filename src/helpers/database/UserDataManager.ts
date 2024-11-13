@@ -5,8 +5,8 @@ import { captureException } from "../utils";
 
 export class UserDataManager<T extends User = User> {
   private storageAdapters: (
-    | TelegramCloudStorageAdapter
-    | LocalStorageAdapter
+    | TelegramCloudStorageAdapter<T>
+    | LocalStorageAdapter<T>
   )[];
   private userKey: string;
 
@@ -17,63 +17,48 @@ export class UserDataManager<T extends User = User> {
     this.userKey = "userData";
   }
 
-  getSupportedAdapters(): (
-    | TelegramCloudStorageAdapter
-    | LocalStorageAdapter
-  )[] {
+  getSupportedAdapters(): typeof this.storageAdapters {
     return this.storageAdapters.filter((adapter) => adapter.isSupported());
   }
 
   // Save user data to the storage
-  async saveUserData(user: T): Promise<void> {
+  async saveUserData(user: T): Promise<boolean> {
     for (const storage of this.getSupportedAdapters()) {
       try {
-        if (storage instanceof TelegramCloudStorageAdapter) {
-          const success = await storage.setItem(
-            this.userKey,
-            JSON.stringify(user.toJSON())
-          );
-          console.log("User data saved successfully:", success);
-        } else {
-          storage.setItem(this.userKey, user);
-        }
-      } catch (error) {
-        console.error("Error saving user data:", error);
+        return await storage.setItem(this.userKey, user);
+      } catch (err) {
+        captureException(err, "Error saving user data");
       }
     }
+    return false;
   }
 
   // Retrieve user data from the storage
-  async getUserData(): Promise<User | null> {
+  async getUserData() {
     for (const storage of this.getSupportedAdapters()) {
       try {
-        if (storage instanceof TelegramCloudStorageAdapter) {
-          const value = await storage.getItem(this.userKey);
-          return value ? User.fromJSON(JSON.parse(value as any)) : null;
-        } else {
-          return storage.getItem<User>(this.userKey);
-        }
-      } catch (error) {
-        console.error("Error retrieving user data:", error);
+        return await storage.getItem(this.userKey);
+      } catch (err) {
+        captureException(err, "Error retrieving user data");
       }
     }
     return null;
   }
 
   // Remove user data from the storage
-  async clearUserData(): Promise<void> {
+  async clearUserData() {
     for (const storage of this.getSupportedAdapters()) {
       try {
-        const success = await storage.removeItem(this.userKey);
-        console.log("User data removed successfully:", success);
-      } catch (error) {
-        console.error("Error removing user data:", error);
+        return await storage.removeItem(this.userKey);
+      } catch (err) {
+        captureException(err, "Error removing user data");
       }
     }
+    return false;
   }
 
   // Get all keys from the storage
-  async getAllKeys(): Promise<string[]> {
+  async getAllKeys() {
     for (const storage of this.getSupportedAdapters()) {
       try {
         return await storage.getKeys();

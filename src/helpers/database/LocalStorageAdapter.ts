@@ -1,9 +1,12 @@
-import { IModel, User } from "@/helpers/database/models";
+import { Model, User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 import { captureException, isStorageAvailable } from "@/helpers/utils";
 
-export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
-  isEnabled = true;
+export class LocalStorageAdapter<
+  T extends Model = User
+> extends BaseAdapter<T> {
+  private isEnabled = true;
+
   constructor() {
     super();
 
@@ -21,27 +24,29 @@ export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
     if (!globalThis.localStorage) {
       return [];
     }
-    return await Object.keys(globalThis.localStorage);
+    return Object.keys(globalThis.localStorage);
   }
 
   // Set an item in localStorage
-  async setItem<T extends IModel>(key: string, model: T): Promise<void> {
+  async setItem(key: string, model: T): Promise<boolean> {
     try {
       localStorage.setItem(key, JSON.stringify(model.toJSON()));
-    } catch (error) {
-      console.error("Error setting localStorage item:", error);
+      return true;
+    } catch (err) {
+      captureException(err, "Error setting localStorage item");
     }
+    return false;
   }
 
   // Get an item from localStorage
-  async getItem<T>(key: string): Promise<T | null> {
+  async getItem(key: string): Promise<unknown | null> {
     try {
       const value = localStorage.getItem(key);
       return value ? JSON.parse(value) : null;
-    } catch (error) {
-      console.error("Error getting localStorage item:", error);
-      return null;
+    } catch (err) {
+      captureException(err, "Error getting localStorage item");
     }
+    return null;
   }
 
   // Remove an item from localStorage
@@ -49,8 +54,8 @@ export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
     try {
       localStorage.removeItem(key);
       return true;
-    } catch (error) {
-      console.error("Error removing localStorage item:", error);
+    } catch (err) {
+      captureException(err, "Error removing localStorage item");
     }
     return false;
   }
@@ -59,17 +64,17 @@ export class LocalStorageAdapter<T extends User = User> extends BaseAdapter<T> {
   async clear(): Promise<void> {
     try {
       localStorage.clear();
-    } catch (error) {
-      console.error("Error clearing localStorage:", error);
+    } catch (err) {
+      captureException(err, "Error clearing localStorage");
     }
   }
 
-  public isValidKey(key: string): boolean {
+  isValidKey(key: string): boolean {
     // @todo
     return true;
   }
 
-  public isSupported(): boolean {
+  isSupported(): boolean {
     return this.isEnabled;
   }
 }

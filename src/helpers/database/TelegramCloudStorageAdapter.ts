@@ -5,46 +5,48 @@ import {
   setCloudStorageItem,
   isCloudStorageSupported,
 } from "@telegram-apps/sdk-react";
-import { User } from "@/helpers/database/models";
+import { Model, User } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
+import { captureException } from "../utils";
 
 export class TelegramCloudStorageAdapter<
-  T extends User = User
+  T extends Model = User
 > extends BaseAdapter<T> {
   constructor() {
     super();
   }
 
   // Set an item in the cloud storage
-  async setItem(key: string, value: any): Promise<void> {
+  async setItem(key: string, model: T): Promise<boolean> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
     }
-    const valueJson = this.fromJSON(value);
+    const valueJson = this.toJSON(model.toJSON());
     if (valueJson.length > 4096) {
       throw new Error("Value exceeds the maximum length of 4096 characters.");
     }
-    return await setCloudStorageItem(key, valueJson);
+    try {
+      await setCloudStorageItem(key, valueJson);
+      return true;
+    } catch (err) {
+      captureException(err, "Error setting TelegramCloudStorage item");
+    }
+    return false;
   }
 
   // Get an item from the cloud storage
-  async getItem(key: string): Promise<T | null> {
+  async getItem(key: string): Promise<unknown | null> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
     }
-    const str = await getCloudStorageItem(key);
-    return this.toJSON(str);
+    try {
+      const str = await getCloudStorageItem(key);
+      return this.fromJSON(str);
+    } catch (err) {
+      captureException(err, "Error getting TelegramCloudStorage item");
+    }
+    return null;
   }
-
-  // Get multiple items from the cloud storage
-  //   async getItems(keys: string[]): Promise<Record<string, string>> {
-  //     keys.forEach((key) => {
-  //       if (!this.isValidKey(key)) {
-  //         throw new Error("Invalid key format.");
-  //       }
-  //     });
-  //     return await getCloudStorageItem(keys);
-  //   }
 
   // Remove an item from the cloud storage
   async removeItem(key: string): Promise<boolean> {
@@ -55,7 +57,7 @@ export class TelegramCloudStorageAdapter<
       await deleteCloudStorageItem(key);
       return true;
     } catch (err) {
-      console.error("Error removing TelegramCloudStorage item:", err);
+      captureException(err, "Error removing TelegramCloudStorage item");
     }
     return false;
   }
@@ -82,20 +84,12 @@ export class TelegramCloudStorageAdapter<
   }
 
   // Validate key format
-  public isValidKey(key: string): boolean {
+  isValidKey(key: string): boolean {
     const regex = /^[A-Za-z0-9_-]{1,128}$/;
     return regex.test(key);
   }
 
-  public toJSON(str: string): any {
-    return JSON.stringify(str);
-  }
-
-  public fromJSON(data: any): any {
-    return JSON.parse(data);
-  }
-
-  public isSupported(): boolean {
+  isSupported(): boolean {
     return isCloudStorageSupported();
   }
 }
