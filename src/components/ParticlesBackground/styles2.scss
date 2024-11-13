@@ -35,18 +35,22 @@ $main-color: #fe1c1a;
   border-radius: 50%;
   border: 10px rgba($main-color, 0.15) solid;
   animation: big_flicker 0.2s infinite;
+  animation-fill-mode: forwards;
 }
 
 .c_ease {
   animation: colour_ease 3s infinite ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .counterspin5 {
   animation: rotate_anti 5s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .counterspin4 {
   animation: rotate_anti 4s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .semi_arc {
@@ -92,6 +96,7 @@ $main-color: #fe1c1a;
   border-radius: 50%;
   box-sizing: border-box;
   animation: rotate_anti 2s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .semi_arc_3 {
@@ -105,6 +110,7 @@ $main-color: #fe1c1a;
   border-radius: 50%;
   box-sizing: border-box;
   animation: rotate 4s linear infinite;
+  animation-fill-mode: forwards;
   text-align: center;
   // line-height: 129px;
 }
@@ -138,6 +144,7 @@ $main-color: #fe1c1a;
   border-radius: 50%;
   box-sizing: border-box;
   animation: rotate 4s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .e1:after {
@@ -157,6 +164,7 @@ $main-color: #fe1c1a;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   animation: rotate 5s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .e3:after {
@@ -192,6 +200,7 @@ $main-color: #fe1c1a;
   border: 2px solid;
   border-left: 2px solid transparent;
   animation: rotate 5s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .e5_2 {
@@ -200,6 +209,7 @@ $main-color: #fe1c1a;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   animation: rotate_anti 4s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .e5_3 {
@@ -208,6 +218,7 @@ $main-color: #fe1c1a;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
   animation: rotate 3s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .e5_4 {
@@ -217,6 +228,7 @@ $main-color: #fe1c1a;
   border-right: 4px solid transparent;
   border-bottom: 4px solid transparent;
   animation: rotate_anti 2s linear infinite;
+  animation-fill-mode: forwards;
 }
 
 .e6 {
@@ -346,6 +358,7 @@ $main-color: #fe1c1a;
   border-radius: 50%;
   border: 5px solid rgba($main-color, 0.55);
   animation: flicker2 0.2s infinite;
+  animation-fill-mode: forwards;
   margin-left: auto;
   margin-right: auto;
   // margin-top: 50px;
@@ -385,6 +398,7 @@ $main-color: #fe1c1a;
   margin-left: 50%;
   margin-top: calc(-50% - 5px);
   animation: colour_ease2 3s infinite ease-in-out;
+  animation-fill-mode: forwards;
   transition: transform 1.2s ease-in-out;
   // --marks-translate-y: 125px;
 }
@@ -645,55 +659,29 @@ $main-color: #fe1c1a;
 
 .is-resetting {
   .marks li {
-    transition: transform 0.4s ease-in !important;
-    animation-name: none !important;
+    animation-play-state: paused;
     background: #cccccc44 !important;
   }
   .semi_arc {
-    animation-duration: 25s !important;
+    animation-play-state: paused;
   }
   .semi_arc_3,
   .e3 {
-    animation-duration: 40s !important;
+    animation-play-state: paused;
   }
   .e5_4,
   .e5_3,
   .e5_2,
   .e5_1 {
-    animation-duration: 10s !important;
+    animation-play-state: paused;
   }
 
   .e7,
   .e4_1 {
-    animation-duration: 5s !important;
+    animation-play-state: paused;
   }
 
   .arc_reactor {
     box-shadow: none;
   }
 }
-
-// .stopped {
-//   .marks li {
-//     transition: transform 5s ease-in !important;
-//     animation-name: none !important;
-//     background: #ccc !important;
-//   }
-//   .semi_arc {
-//     animation-duration: 25s !important;
-//   }
-//   .semi_arc_3,
-//   .e3 {
-//     animation-duration: 40s !important;
-//   }
-//   .e5_4,
-//   .e5_3,
-//   .e5_2,
-//   .e5_1 {
-//     animation-duration: 10s !important;
-//   }
-
-//   .e4_1 {
-//     animation-duration: 5s !important;
-//   }
-// }

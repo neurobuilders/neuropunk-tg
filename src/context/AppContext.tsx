@@ -79,7 +79,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       }
 
       const uManager = userManager();
-      debugger;
 
       let dbUserData = await uManager.getUserData();
       if (!dbUserData) {
