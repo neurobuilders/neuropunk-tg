@@ -682,6 +682,7 @@ $main-color: #fe1c1a;
   }
 
   .arc_reactor {
-    box-shadow: none;
+    box-shadow: 0px 0px 50px 15px rgb(41 41 41 / 30%),
+      inset 0px 0px 50px 15px rgb(27 27 27 / 30%);
   }
 }

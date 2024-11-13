@@ -49,3 +49,10 @@ export class User extends Model implements IUser {
     this.data.energyAmount = value;
   }
 }
+
+export const getDefaultUser = (userId: number) => {
+  return new User({
+    id: userId,
+    energyAmount: 0,
+  });
+};

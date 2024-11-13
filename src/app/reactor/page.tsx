@@ -154,7 +154,7 @@ export default function ReactorPage() {
                 trigger={
                   <button
                     type="button"
-                    className=" text-gray-400"
+                    className="text-link"
                     onClick={() => {
                       triggerHapticFeedback("medium");
                     }}

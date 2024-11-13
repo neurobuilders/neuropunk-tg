@@ -1,5 +1,9 @@
 import { userManager } from "@/helpers/database";
-import { User as DatabaseUser, IUser } from "@/helpers/database/models";
+import {
+  User as DatabaseUser,
+  getDefaultUser,
+  IUser,
+} from "@/helpers/database/models";
 import { User } from "@telegram-apps/sdk";
 import {
   createContext,
@@ -82,10 +86,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
       let dbUserData = await uManager.getUserData();
       if (!dbUserData) {
-        const defaultUser = new DatabaseUser({
-          id: userId,
-          energyAmount: 0,
-        });
+        const defaultUser = getDefaultUser(userId);
         await uManager.saveUserData(defaultUser);
         console.debug("creating new user", defaultUser);
         dbUserData = defaultUser.toJSON();

@@ -25,7 +25,6 @@ const ClaimButton = (props: ClaimButtonProps) => {
   const {
     unclaimedEnergyAmount,
     setEnergyProductionEnabled,
-    isEnergyProductionEnabled,
     setUnclaimedEnergyAmount,
     setEnergyAmount,
   } = useAppContext();

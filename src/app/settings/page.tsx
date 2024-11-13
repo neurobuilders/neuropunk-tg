@@ -9,9 +9,43 @@ import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
 import env from "@/env";
+import { getDefaultUser, userManager } from "@/helpers/database";
+import { useCallback } from "react";
+import { ClickHandler } from "@telegram-apps/telegram-ui/dist/components/Service/Touch/Touch";
+import { useToast } from "@/context/ToastContext";
+import { useAppContext } from "@/context/AppContext";
+import { captureException } from "@/helpers/utils";
+import { uniqueId } from "lodash";
 
 export default function SettingsPage() {
   const t = useTranslations("i18n");
+  const { showToast } = useToast();
+  const { initUserData, setInitUserData, setEnergyAmount } = useAppContext();
+
+  const clearUserDataHandler: ClickHandler = useCallback(async (e) => {
+    const uManager = userManager();
+    await uManager.clearUserData();
+    setEnergyAmount(0);
+    setInitUserData({
+      ...initUserData,
+      ver: uniqueId("ver_"),
+    } as any);
+    // try {
+    //   if (!initUserData?.id) {
+    //     return;
+    //   }
+    //   const defaultUser = getDefaultUser(initUserData?.id);
+    // } catch (err) {
+    //   captureException(err);
+    // }
+
+    showToast({
+      title: "Success",
+      message: "User data has been cleared successfully.",
+      type: "success",
+      duration: 2000,
+    });
+  }, []);
 
   return (
     <Page id="settings" back={false}>
@@ -61,6 +95,18 @@ export default function SettingsPage() {
           <Cell subtitle="Access exclusive content and rewards through a membership program">
             NeuroPass Membership (Coming Soon)
           </Cell>
+        </Section>
+
+        <Section header="Actions">
+          <Cell
+            subtitle="This will clear the database with all balances and transactions"
+            onClick={clearUserDataHandler}
+          >
+            Clear user data storage
+          </Cell>
+        </Section>
+
+        <Section>
           <Cell
             subtitle={`v${env.app.version} - #${env.vercel.gitCommitRef} (${env.vercel.gitCommitSha})`}
           >
