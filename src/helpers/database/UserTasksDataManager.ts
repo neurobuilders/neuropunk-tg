@@ -43,7 +43,7 @@ export class UserTasksDataManager<T extends UserTasks = UserTasks> {
           return await storage.setItem(this.dbKey, userTasks.toJSON());
         }
       } catch (err) {
-        captureException(err, "Error saving user data");
+        captureException(err, "Error updating task status");
       }
     }
     return false;

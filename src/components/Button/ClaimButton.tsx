@@ -66,6 +66,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
     },
     [onClick, setEnergyProductionEnabled, springProps.value]
   );
+
   return (
     <button
       className={clsx("btn btn__claim", className)}

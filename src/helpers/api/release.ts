@@ -2,6 +2,15 @@
 
 import "server-only";
 
+export interface ReleaseLink {
+  url: string;
+  providerId: string;
+  isCompleted?: boolean;
+  label: string;
+  providerName: string;
+  neAmount?: number;
+}
+
 export interface Release {
   slug: string;
   title: string;
@@ -12,13 +21,7 @@ export interface Release {
   url: string;
   width: number;
   height: number;
-  links?: {
-    url: string;
-    providerId: string;
-    isCompleted?: boolean;
-    label: string;
-    providerName: string;
-  }[];
+  links?: ReleaseLink[];
 }
 
 export const getReleases = async () => {
