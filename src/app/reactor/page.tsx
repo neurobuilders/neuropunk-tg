@@ -142,7 +142,7 @@ export default function ReactorPage() {
             </div>
             <div className="flex flex-col items-center">
               <h3 className="text-2xl font-bold">
-                {formatNumber(energyAmount, 2)} NE
+                {formatNumber(energyAmount)} NE
               </h3>
               <h3 className="text-md text-gray-300">
                 Complete tasks and mine <strong>Neuro Energy</strong>
