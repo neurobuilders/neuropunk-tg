@@ -4,14 +4,14 @@ import {
   getCloudStorageKeys,
   setCloudStorageItem,
 } from "@telegram-apps/sdk-react";
-import { Model, User } from "@/helpers/database/models";
+import { Model } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 import { captureException } from "@/helpers/utils";
 import { LogMethod } from "@/helpers/decorators";
 import { isTelegramMiniApp } from "@/helpers/telegram";
 
 export class TelegramCloudStorageAdapter<
-  T extends Model = User
+  T extends Model = Model
 > extends BaseAdapter<T> {
   constructor() {
     super();

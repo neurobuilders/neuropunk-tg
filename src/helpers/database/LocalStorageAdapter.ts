@@ -1,10 +1,10 @@
-import { Model, User } from "@/helpers/database/models";
+import { Model } from "@/helpers/database/models";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 import { captureException, isStorageAvailable } from "@/helpers/utils";
 import { LogMethod } from "@/helpers/decorators";
 
 export class LocalStorageAdapter<
-  T extends Model = User
+  T extends Model = Model
 > extends BaseAdapter<T> {
   private isEnabled = true;
 

@@ -1,4 +1,4 @@
-import { UserTransactions } from "@/helpers/database/models";
+import { Transaction, UserTransactions } from "@/helpers/database/models";
 import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
 import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
 import { captureException } from "@/helpers/utils";
@@ -33,13 +33,13 @@ export class UserTransactionsDataManager<
   }
 
   @LogMethod
-  async addTransaction(transaction: UserTransactions): Promise<boolean> {
+  async addTransaction(transaction: Transaction): Promise<boolean> {
     for (const storage of await this.getSupportedAdapters()) {
       try {
         const transactionsModel = await this.getTransactions();
         const transactions = transactionsModel.toJSON();
 
-        const newTransactions = [...transactions, transaction];
+        const newTransactions = [...transactions, transaction.toJSON()];
         const newTransactionsModel = UserTransactions.fromJSON(newTransactions);
 
         return await storage.setItem(this.dbKey, newTransactionsModel as T);

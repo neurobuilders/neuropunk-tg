@@ -1,3 +1,5 @@
+import { uniqueId } from "lodash";
+
 export interface IModel {
   toJSON(): any;
 }
@@ -51,20 +53,21 @@ export class User extends Model implements IUser {
 }
 
 export interface ITransaction {
-  id: number;
+  id?: string;
   amount: number;
 }
 
 export class Transaction extends Model implements ITransaction {
   constructor(data: ITransaction) {
     super(data);
+    this.id = uniqueId("transaction");
   }
 
-  get id(): number {
+  get id(): string {
     return this.data.id;
   }
 
-  set id(value: number) {
+  private set id(value: string) {
     this.data.id = value;
   }
 

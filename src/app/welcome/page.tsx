@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Placeholder } from "@telegram-apps/telegram-ui";
 import { NeuropunkRive } from "@/components/NeuropunkRive";
@@ -9,13 +9,23 @@ import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { useToast } from "@/context/ToastContext";
 import { captureException } from "@/helpers/utils";
 import { triggerHapticFeedback } from "@/helpers/telegram";
+import {
+  getUserManager,
+  getUserTransactionsManager,
+  Transaction,
+  User,
+} from "@/helpers/database";
+import { useAppContext } from "@/context/AppContext";
+import { neuroEnergyWelcomeAmount } from "@/helpers/constants";
 
 export default function WelcomePage() {
   const t = useTranslations("i18n");
   const router = useRouter();
-  const { showToast } = useToast();
+  const { showToast, hideToast } = useToast();
   const { initDataRaw } = retrieveLaunchParams();
   const isLoaded = useRef(false);
+  const { setEnergyAmount } = useAppContext();
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isLoaded.current) {
@@ -26,6 +36,8 @@ export default function WelcomePage() {
 
   const clickHandler = () => {
     triggerHapticFeedback();
+    setLoading(true);
+
     fetch("/api/auth/sign-up", {
       method: "post",
       headers: {
@@ -37,17 +49,51 @@ export default function WelcomePage() {
       if (ok) {
         router.replace("/");
 
-        showToast({
-          title: "Welcome to the Neuropunk Space",
-          message: (
-            <>
-              We have awarded you <strong>2 Neuro Energy</strong>. For more
-              information, visit <Button size="s">Reactor</Button>.
-            </>
-          ),
-          type: "success",
-          duration: 7000,
+        const transactionsManager = getUserTransactionsManager();
+        const transaction = new Transaction({
+          amount: neuroEnergyWelcomeAmount,
         });
+        const isChanged = await transactionsManager.addTransaction(transaction);
+        if (isChanged) {
+          const uManager = getUserManager();
+          let dbUserData = await uManager.getUserData();
+
+          const currentUser = User.fromJSON(dbUserData);
+          currentUser.energyAmount = neuroEnergyWelcomeAmount;
+
+          await uManager.saveUserData(currentUser);
+          setEnergyAmount(neuroEnergyWelcomeAmount);
+
+          const toastId = "welcome-toast";
+
+          showToast({
+            id: toastId,
+            title: "Welcome to the Neuropunk Space",
+            message: (
+              <>
+                We have awarded you <strong>2 Neuro Energy</strong>.<br />
+                For more information, visit Reactor
+                <div className="flex justify-end mt-1">
+                  <Button
+                    size="s"
+                    mode="white"
+                    className="px-2 py-0 h-auto text-black !leading-none"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      triggerHapticFeedback("light");
+                      router.push("/reactor");
+                      hideToast(toastId);
+                    }}
+                  >
+                    <span className="leading-none">Reactor</span>
+                  </Button>
+                </div>
+              </>
+            ),
+            type: "success",
+            duration: 7000 * 100,
+          });
+        }
       } else {
         captureException(error);
         showToast({
@@ -63,7 +109,7 @@ export default function WelcomePage() {
   return (
     <Placeholder
       action={
-        <Button size="l" stretched onClick={clickHandler} loading={true}>
+        <Button size="l" stretched onClick={clickHandler} loading={isLoading}>
           Step into the Future
         </Button>
       }
