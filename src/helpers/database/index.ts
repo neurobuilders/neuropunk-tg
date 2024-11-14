@@ -1,11 +1,11 @@
-import { LocalStorageAdapter } from "./LocalStorageAdapter";
-import { TelegramCloudStorageAdapter } from "./TelegramCloudStorageAdapter";
-import { UserDataManager } from "./UserDataManager";
+import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
+import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
+import { UserDataManager } from "@/helpers/database/UserDataManager";
 
-export * from "./models";
-export * from "./LocalStorageAdapter";
-export * from "./UserDataManager";
-export * from "./TelegramCloudStorageAdapter";
+export * from "@/helpers/database/models";
+export * from "@/helpers/database/LocalStorageAdapter";
+export * from "@/helpers/database/UserDataManager";
+export * from "@/helpers/database/TelegramCloudStorageAdapter";
 
 export const getUserManager = () => {
   return new UserDataManager([

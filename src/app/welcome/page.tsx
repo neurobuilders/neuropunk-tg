@@ -8,6 +8,7 @@ import { NeuropunkRive } from "@/components/NeuropunkRive";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { useToast } from "@/context/ToastContext";
 import { captureException } from "@/helpers/utils";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 export default function WelcomePage() {
   const t = useTranslations("i18n");
@@ -24,6 +25,7 @@ export default function WelcomePage() {
   }, [router]);
 
   const clickHandler = () => {
+    triggerHapticFeedback();
     fetch("/api/auth/sign-up", {
       method: "post",
       headers: {
@@ -34,11 +36,17 @@ export default function WelcomePage() {
       const { ok, error } = json;
       if (ok) {
         router.replace("/");
+
         showToast({
-          title: "Yesss!",
-          message: "Welcome to the Neuropunk Space",
+          title: "Welcome to the Neuropunk Space",
+          message: (
+            <>
+              We have awarded you <strong>2 Neuro Energy</strong>. For more
+              information, visit <Button size="s">Reactor</Button>.
+            </>
+          ),
           type: "success",
-          duration: 5000,
+          duration: 7000,
         });
       } else {
         captureException(error);
@@ -55,7 +63,7 @@ export default function WelcomePage() {
   return (
     <Placeholder
       action={
-        <Button size="l" stretched onClick={clickHandler}>
+        <Button size="l" stretched onClick={clickHandler} loading={true}>
           Step into the Future
         </Button>
       }

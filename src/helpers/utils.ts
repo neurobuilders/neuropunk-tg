@@ -68,7 +68,7 @@ export const getVersionString = () => {
  */
 export function shortenCommitHash(
   commitHash: string,
-  length: number = 4
+  length: number = 5
 ): string {
   if (commitHash.length <= length * 2) {
     return commitHash; // If hash is too short, return as is.

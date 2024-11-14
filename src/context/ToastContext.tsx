@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 interface Toast {
   id: number;
   title: string;
-  message: string;
+  message: React.ReactNode;
   duration?: number;
   type: "success" | "error" | "warning" | "info";
 }

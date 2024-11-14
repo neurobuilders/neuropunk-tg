@@ -1,21 +1,23 @@
-import { User } from "@/helpers/database/models";
+import { UserTransactions } from "@/helpers/database/models";
 import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
 import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
 import { captureException } from "@/helpers/utils";
 import { LogMethod } from "@/helpers/decorators";
 
-export class UserDataManager<T extends User = User> {
+export class UserTransactionsDataManager<
+  T extends UserTransactions = UserTransactions
+> {
   private storageAdapters: (
     | TelegramCloudStorageAdapter<T>
     | LocalStorageAdapter<T>
   )[];
-  private userKey: string;
+  private dbKey: string;
 
   constructor(
     storageAdapters: (TelegramCloudStorageAdapter<T> | LocalStorageAdapter<T>)[]
   ) {
     this.storageAdapters = storageAdapters;
-    this.userKey = "userData";
+    this.dbKey = "userTransactions";
   }
 
   @LogMethod
@@ -30,12 +32,17 @@ export class UserDataManager<T extends User = User> {
     return adapters;
   }
 
-  // Save user data to the storage
   @LogMethod
-  async saveUserData(user: T): Promise<boolean> {
+  async addTransaction(transaction: UserTransactions): Promise<boolean> {
     for (const storage of await this.getSupportedAdapters()) {
       try {
-        return await storage.setItem(this.userKey, user);
+        const transactionsModel = await this.getTransactions();
+        const transactions = transactionsModel.toJSON();
+
+        const newTransactions = [...transactions, transaction];
+        const newTransactionsModel = UserTransactions.fromJSON(newTransactions);
+
+        return await storage.setItem(this.dbKey, newTransactionsModel as T);
       } catch (err) {
         captureException(err, "Error saving user data");
       }
@@ -43,25 +50,24 @@ export class UserDataManager<T extends User = User> {
     return false;
   }
 
-  // Retrieve user data from the storage
   @LogMethod
-  async getUserData() {
+  async getTransactions(): Promise<UserTransactions> {
     for (const storage of await this.getSupportedAdapters()) {
       try {
-        return await storage.getItem(this.userKey);
+        const data = await storage.getItem(this.dbKey);
+        return new UserTransactions((data as any[]) || []);
       } catch (err) {
         captureException(err, "Error retrieving user data");
       }
     }
-    return null;
+    return new UserTransactions([]);
   }
 
-  // Remove user data from the storage
   @LogMethod
-  async clearUserData() {
+  async clearTransactions() {
     for (const storage of await this.getSupportedAdapters()) {
       try {
-        return await storage.removeItem(this.userKey);
+        return await storage.removeItem(this.dbKey);
       } catch (err) {
         captureException(err, "Error removing user data");
       }

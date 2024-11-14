@@ -8,7 +8,7 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
-import { getUserManager } from "@/helpers/database";
+import { getDefaultUser, getUserManager } from "@/helpers/database";
 import { useCallback } from "react";
 import { ClickHandler } from "@telegram-apps/telegram-ui/dist/components/Service/Touch/Touch";
 import { useToast } from "@/context/ToastContext";
@@ -24,19 +24,18 @@ export default function SettingsPage() {
   const clearUserDataHandler: ClickHandler = useCallback(async (e) => {
     const uManager = getUserManager();
     await uManager.clearUserData();
+    const userId = initUserData?.id;
+    if (!userId) {
+      return;
+    }
+    const defaultUser = getDefaultUser(userId);
+    await uManager.saveUserData(defaultUser);
+    console.debug("creating new user", defaultUser);
     setEnergyAmount(0);
     setInitUserData({
       ...initUserData,
-      ver: uniqueId("ver_"),
+      ver: uniqueId("ver_"), // by adding new property rerender will be runned
     } as any);
-    // try {
-    //   if (!initUserData?.id) {
-    //     return;
-    //   }
-    //   const defaultUser = getDefaultUser(initUserData?.id);
-    // } catch (err) {
-    //   captureException(err);
-    // }
 
     showToast({
       title: "Success",

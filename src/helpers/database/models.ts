@@ -50,6 +50,51 @@ export class User extends Model implements IUser {
   }
 }
 
+export interface ITransaction {
+  id: number;
+  amount: number;
+}
+
+export class Transaction extends Model implements ITransaction {
+  constructor(data: ITransaction) {
+    super(data);
+  }
+
+  get id(): number {
+    return this.data.id;
+  }
+
+  set id(value: number) {
+    this.data.id = value;
+  }
+
+  get amount(): number {
+    return this.data.amount;
+  }
+
+  set amount(value: number) {
+    this.data.amount = value;
+  }
+}
+
+export interface ITransactions {
+  transactions: ITransaction[];
+}
+
+export class UserTransactions extends Model implements ITransactions {
+  constructor(data: ITransaction[]) {
+    super(data);
+  }
+
+  get transactions(): ITransaction[] {
+    return this.data.transactions;
+  }
+
+  set transactions(transactions: ITransaction[]) {
+    this.data.transactions = transactions;
+  }
+}
+
 export const getDefaultUser = (userId: number) => {
   return new User({
     id: userId,
