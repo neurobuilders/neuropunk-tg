@@ -1,15 +1,10 @@
-import {
-  Transaction,
-  UserTransactions,
-} from "@/helpers/database/models/transaction";
 import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
 import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
 import { captureException } from "@/helpers/utils";
 import { LogMethod } from "@/helpers/decorators";
+import { ITask, TaskStatus, UserTasks } from "@/helpers/database/models/tasks";
 
-export class UserTransactionsDataManager<
-  T extends UserTransactions = UserTransactions
-> {
+export class UserTasksDataManager<T extends UserTasks = UserTasks> {
   private storageAdapters: (
     | TelegramCloudStorageAdapter<T>
     | LocalStorageAdapter<T>
@@ -20,7 +15,7 @@ export class UserTransactionsDataManager<
     storageAdapters: (TelegramCloudStorageAdapter<T> | LocalStorageAdapter<T>)[]
   ) {
     this.storageAdapters = storageAdapters;
-    this.dbKey = "userTransactions";
+    this.dbKey = "userTasks";
   }
 
   @LogMethod
@@ -36,16 +31,17 @@ export class UserTransactionsDataManager<
   }
 
   @LogMethod
-  async addTransaction(transaction: Transaction): Promise<boolean> {
+  async updateTaskStatus(id: string, status: TaskStatus): Promise<boolean> {
     for (const storage of await this.getSupportedAdapters()) {
       try {
-        const transactionsModel = await this.getTransactions();
-        const transactions = transactionsModel.toJSON();
-
-        const newTransactions = [...transactions, transaction.toJSON()];
-        const newTransactionsModel = UserTransactions.fromJSON(newTransactions);
-
-        return await storage.setItem(this.dbKey, newTransactionsModel as T);
+        const db = await storage.getItem<Record<string, ITask>>(this.dbKey);
+        if (db) {
+          db[id] = {
+            status,
+          };
+          const userTasks = new UserTasks(db as any);
+          return await storage.setItem(this.dbKey, userTasks.toJSON());
+        }
       } catch (err) {
         captureException(err, "Error saving user data");
       }
@@ -54,25 +50,29 @@ export class UserTransactionsDataManager<
   }
 
   @LogMethod
-  async getTransactions(): Promise<UserTransactions> {
+  async getTaskStatus(id: string): Promise<ITask> {
     for (const storage of await this.getSupportedAdapters()) {
       try {
-        const data = await storage.getItem(this.dbKey);
-        return new UserTransactions((data as any[]) || []);
+        const db = await storage.getItem<Record<string, ITask>>(this.dbKey);
+        if (db) {
+          return db[id];
+        }
       } catch (err) {
-        captureException(err, "Error retrieving user data");
+        captureException(err, "Error retrieving user task status");
       }
     }
-    return new UserTransactions([]);
+    return {
+      status: TaskStatus.Default,
+    };
   }
 
   @LogMethod
-  async clearTransactions() {
+  async clearTasks() {
     for (const storage of await this.getSupportedAdapters()) {
       try {
         return await storage.removeItem(this.dbKey);
       } catch (err) {
-        captureException(err, "Error removing user transactions data");
+        captureException(err, "Error removing user tasks data");
       }
     }
     return false;

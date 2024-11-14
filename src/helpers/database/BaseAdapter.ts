@@ -9,7 +9,7 @@ export abstract class BaseAdapter<T extends Model = Model> {
   }
 
   // Get an item from the storage
-  async getItem(key: string): Promise<unknown | null> {
+  async getItem<T>(key: string): Promise<T | null> {
     throw new Error("'getItem' method not implemented");
   }
 

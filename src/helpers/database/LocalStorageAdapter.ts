@@ -43,7 +43,7 @@ export class LocalStorageAdapter<
 
   // Get an item from localStorage
   @LogMethod
-  async getItem(key: string): Promise<unknown | null> {
+  async getItem<T>(key: string): Promise<T | null> {
     try {
       const value = localStorage.getItem(key);
       return value ? JSON.parse(value) : null;

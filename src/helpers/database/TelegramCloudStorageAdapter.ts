@@ -38,7 +38,7 @@ export class TelegramCloudStorageAdapter<
 
   // Get an item from the cloud storage
   @LogMethod
-  async getItem(key: string): Promise<unknown | null> {
+  async getItem<T>(key: string): Promise<T | null> {
     if (!this.isValidKey(key)) {
       throw new Error("Invalid key format.");
     }

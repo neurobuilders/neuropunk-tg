@@ -25,16 +25,16 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
   return (
     <Section className="release-links tasks" header="Tasks">
       {links.map((v, i) => {
-        const isDisabled = i === 0;
+        const isCompleted = false;
         return (
           <Cell
             key={v.url}
             className={clsx("release-link", `release-link--${v.providerId}`)}
-            disabled={isDisabled}
+            disabled={isCompleted}
             before={<span className="release-link__image" role="image"></span>}
             after={
               <span className="release-link__after flex gap-4 items-center">
-                {isDisabled ? (
+                {isCompleted ? (
                   <>
                     <span className="text-sm">+50</span>
                     <Button
@@ -48,14 +48,6 @@ export const ReleaseLinks = (props: ReleaseLinksProps) => {
                 ) : (
                   <>
                     <span className="text-sm">50</span>
-                    {/* <Badge
-                      className="badge badge--invisible text-gray-500"
-                      mode="gray"
-                      type="number"
-                      large={false}
-                    >
-                      50
-                    </Badge> */}
                     <Button
                       mode="outline"
                       size="s"

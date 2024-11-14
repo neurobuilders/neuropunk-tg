@@ -1,7 +1,6 @@
 "use server";
 
 import "server-only";
-import { readJsonFile } from "@/helpers/mock";
 
 export interface Release {
   slug: string;
@@ -16,6 +15,7 @@ export interface Release {
   links?: {
     url: string;
     providerId: string;
+    isCompleted?: boolean;
     label: string;
     providerName: string;
   }[];
