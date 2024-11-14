@@ -1,4 +1,4 @@
-import { Model } from "@/helpers/database/models";
+import { Model } from "@/helpers/database/models/Model";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 import { captureException, isStorageAvailable } from "@/helpers/utils";
 import { LogMethod } from "@/helpers/decorators";

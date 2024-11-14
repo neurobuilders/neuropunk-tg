@@ -4,7 +4,7 @@ import {
   getCloudStorageKeys,
   setCloudStorageItem,
 } from "@telegram-apps/sdk-react";
-import { Model } from "@/helpers/database/models";
+import { Model } from "@/helpers/database/models/Model";
 import { BaseAdapter } from "@/helpers/database/BaseAdapter";
 import { captureException } from "@/helpers/utils";
 import { LogMethod } from "@/helpers/decorators";

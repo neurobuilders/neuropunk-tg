@@ -1,9 +1,6 @@
 import { getUserManager } from "@/helpers/database";
-import {
-  User as DatabaseUser,
-  getDefaultUser,
-  IUser,
-} from "@/helpers/database/models";
+import { getDefaultUser } from "@/helpers/database/models";
+import { User as DatabaseUser, IUser } from "@/helpers/database/models/user";
 import { User } from "@telegram-apps/sdk";
 import {
   createContext,

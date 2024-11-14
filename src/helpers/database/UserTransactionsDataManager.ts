@@ -1,4 +1,7 @@
-import { Transaction, UserTransactions } from "@/helpers/database/models";
+import {
+  Transaction,
+  UserTransactions,
+} from "@/helpers/database/models/transaction";
 import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
 import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
 import { captureException } from "@/helpers/utils";

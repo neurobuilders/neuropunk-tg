@@ -1,4 +1,4 @@
-import { Model } from "@/helpers/database/models";
+import { Model } from "@/helpers/database/models/Model";
 
 export abstract class BaseAdapter<T extends Model = Model> {
   constructor() {}

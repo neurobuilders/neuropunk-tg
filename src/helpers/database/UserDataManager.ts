@@ -1,4 +1,4 @@
-import { User } from "@/helpers/database/models";
+import { User } from "@/helpers/database/models/user";
 import { LocalStorageAdapter } from "@/helpers/database/LocalStorageAdapter";
 import { TelegramCloudStorageAdapter } from "@/helpers/database/TelegramCloudStorageAdapter";
 import { captureException } from "@/helpers/utils";

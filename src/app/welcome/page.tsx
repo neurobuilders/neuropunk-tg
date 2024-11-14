@@ -9,12 +9,9 @@ import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { useToast } from "@/context/ToastContext";
 import { captureException } from "@/helpers/utils";
 import { triggerHapticFeedback } from "@/helpers/telegram";
-import {
-  getUserManager,
-  getUserTransactionsManager,
-  Transaction,
-  User,
-} from "@/helpers/database";
+import { getUserManager, getUserTransactionsManager } from "@/helpers/database";
+import { Transaction } from "@/helpers/database/models/transaction";
+import { User } from "@/helpers/database/models/user";
 import { useAppContext } from "@/context/AppContext";
 import { neuroEnergyWelcomeAmount } from "@/helpers/constants";
 
