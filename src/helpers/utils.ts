@@ -1,10 +1,10 @@
 import env from "@/env";
 import * as Sentry from "@sentry/nextjs";
 
-export const formatNumber = (num: number, minimumFractionDigits = 3) => {
-  return num
+export const formatNumber = (num: number) => {
+  return Number(num.toFixed(3))
     .toLocaleString("en", {
-      minimumFractionDigits,
+      minimumFractionDigits: 3,
       maximumFractionDigits: 3,
       useGrouping: true,
     })

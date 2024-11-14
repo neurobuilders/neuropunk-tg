@@ -71,7 +71,9 @@ export default function WelcomePage() {
             title: "Welcome to the Neuropunk Space",
             message: (
               <>
-                We have awarded you <strong>2 Neuro Energy</strong>.<br />
+                We have awarded you <strong>2 Neuro Energy</strong> as a welcome
+                bonus.
+                <br />
                 For more information, visit Reactor
                 <div className="flex justify-end mt-1">
                   <Button
@@ -91,7 +93,7 @@ export default function WelcomePage() {
               </>
             ),
             type: "success",
-            duration: 7000 * 100,
+            duration: 7000,
           });
         }
       } else {
