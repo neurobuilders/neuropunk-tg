@@ -1,6 +1,6 @@
+import { isTelegramMiniApp } from "@/helpers/telegram";
 import { useClientOnce } from "@/hooks/useClientOnce";
 import {
-  isTMA,
   type LaunchParams,
   mockTelegramEnv,
   parseInitData,
@@ -12,7 +12,7 @@ import {
  */
 export function useTelegramMock(): void {
   useClientOnce(() => {
-    if (!sessionStorage.getItem("env-mocked") && isTMA("simple")) {
+    if (isTelegramMiniApp()) {
       return;
     }
 

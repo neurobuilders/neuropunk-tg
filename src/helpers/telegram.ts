@@ -1,6 +1,7 @@
 import {
   hapticFeedback,
   ImpactHapticFeedbackStyle,
+  isTMA,
 } from "@telegram-apps/sdk-react";
 
 import { captureException, getUrl } from "@/helpers/utils";
@@ -22,4 +23,8 @@ export const getBotUrl = (startappArg?: string) => {
     url.searchParams.append("startapp", startappArg);
   }
   return url.toString();
+};
+
+export const isTelegramMiniApp = () => {
+  return !sessionStorage.getItem("env-mocked") && isTMA("simple");
 };

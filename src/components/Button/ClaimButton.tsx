@@ -25,7 +25,6 @@ const ClaimButton = (props: ClaimButtonProps) => {
   const {
     unclaimedEnergyAmount,
     setEnergyProductionEnabled,
-    isEnergyProductionEnabled,
     setUnclaimedEnergyAmount,
     setEnergyAmount,
   } = useAppContext();
@@ -54,6 +53,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
 
         setTimeout(() => {
           setEnergyAmount((prev) => prev + springProps.value.get());
+
           setUnclaimedEnergyAmount(0);
         }, 100);
 
@@ -66,6 +66,7 @@ const ClaimButton = (props: ClaimButtonProps) => {
     },
     [onClick, setEnergyProductionEnabled, springProps.value]
   );
+
   return (
     <button
       className={clsx("btn btn__claim", className)}

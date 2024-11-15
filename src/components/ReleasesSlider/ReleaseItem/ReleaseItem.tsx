@@ -32,16 +32,13 @@ export const ReleaseItem = (props: ReleaseItemProps) => {
           return;
         }
         const url = `/release/${release.slug}`;
-        // if (await isTMA()) {
-        //   openLink(url);
-        // } else {
-        // }
         setLoading(true);
         router.push(url);
         triggerHapticFeedback();
       }}
       className={clsx("release-item", {
         ["is-loading"]: isLoading,
+        // ["is-loading"]: true,
       })}
     >
       <CardChip readOnly className="card-chip">
@@ -87,11 +84,11 @@ export const ReleaseItem = (props: ReleaseItemProps) => {
       <div
         className={clsx(
           "loading",
-          "absolute z-1 top-0 right-0 bottom-0 left-0",
+          "absolute z-10 top-0 right-0 bottom-0 left-0 pb-10",
           "flex justify-center items-center"
         )}
       >
-        <Spinner className="relative z-2" size="l" />
+        <Spinner className="relative z-20" size="l" />
       </div>
     </Card>
   );

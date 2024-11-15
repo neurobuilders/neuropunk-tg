@@ -14,6 +14,7 @@ import { useAppContext } from "@/context/AppContext";
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import Link from "next/link";
 import { ClickHandler } from "@telegram-apps/telegram-ui/dist/components/Service/Touch/Touch";
+import { getVersionString } from "@/helpers/utils";
 
 export const Drawer = () => {
   const { isDrawerOpen, closeDrawer } = useAppContext();
@@ -43,7 +44,7 @@ export const Drawer = () => {
         <FlowbiteDrawer.Items>
           <Sidebar
             aria-label="Sidebar with multi-level dropdown example"
-            className="[&>div]:bg-transparent [&>div]:p-0"
+            className="[&>div]:bg-transparent [&>div]:p-0 w-full"
           >
             <div className="flex h-full flex-col justify-between py-2">
               <div>
@@ -122,6 +123,9 @@ export const Drawer = () => {
             </div>
           </Sidebar>
         </FlowbiteDrawer.Items>
+        <div className="text-hint px-3 mt-3 fixed bottom-2 text-[13px] font-bold pr-8 w-80">
+          {getVersionString()}
+        </div>
       </FlowbiteDrawer>
     </>
   );

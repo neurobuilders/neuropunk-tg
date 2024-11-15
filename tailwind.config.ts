@@ -18,6 +18,7 @@ const config: Config = {
       },
       colors: {
         hint: "var(--tg-theme-hint-color)",
+        link: "var(--tg-theme-link-color)",
       },
     },
   },

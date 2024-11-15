@@ -8,10 +8,42 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher/LocaleSwitcher";
 import { Page } from "@/components/Page";
 
 import tonSvg from "@/app/_assets/ton.svg";
-import env from "@/env";
+import { getDefaultUser, getUserManager } from "@/helpers/database";
+import { useCallback } from "react";
+import { ClickHandler } from "@telegram-apps/telegram-ui/dist/components/Service/Touch/Touch";
+import { useToast } from "@/context/ToastContext";
+import { useAppContext } from "@/context/AppContext";
+import { getVersionString } from "@/helpers/utils";
+import { uniqueId } from "lodash";
 
 export default function SettingsPage() {
   const t = useTranslations("i18n");
+  const { showToast } = useToast();
+  const { initUserData, setInitUserData, setEnergyAmount } = useAppContext();
+
+  const clearUserDataHandler: ClickHandler = useCallback(async (e) => {
+    const uManager = getUserManager();
+    await uManager.clearUserData();
+    const userId = initUserData?.id;
+    if (!userId) {
+      return;
+    }
+    const defaultUser = getDefaultUser(userId);
+    await uManager.saveUserData(defaultUser);
+    console.debug("creating new user", defaultUser);
+    setEnergyAmount(0);
+    setInitUserData({
+      ...initUserData,
+      ver: uniqueId("ver_"), // by adding new property rerender will be runned
+    } as any);
+
+    showToast({
+      title: "Success",
+      message: "User data has been cleared successfully.",
+      type: "success",
+      duration: 2000,
+    });
+  }, []);
 
   return (
     <Page id="settings" back={false}>
@@ -61,11 +93,20 @@ export default function SettingsPage() {
           <Cell subtitle="Access exclusive content and rewards through a membership program">
             NeuroPass Membership (Coming Soon)
           </Cell>
+        </Section>
+
+        <Section header="Actions">
           <Cell
-            subtitle={`v${env.app.version} - #${env.vercel.gitCommitRef} (${env.vercel.gitCommitSha})`}
+            multiline={true}
+            subtitle="This will clear the database with all balances, transactions and then set the default values"
+            onClick={clearUserDataHandler}
           >
-            Version
+            Clear user data storage
           </Cell>
+        </Section>
+
+        <Section>
+          <Cell subtitle={getVersionString()}>Version</Cell>
         </Section>
       </List>
     </Page>

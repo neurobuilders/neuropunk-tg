@@ -1,4 +1,7 @@
-// AppContext.tsx
+import { getUserManager } from "@/helpers/database";
+import { getDefaultUser } from "@/helpers/database/models";
+import { User as DatabaseUser, IUser } from "@/helpers/database/models/user";
+import { User } from "@telegram-apps/sdk";
 import {
   createContext,
   useContext,
@@ -15,6 +18,10 @@ const neuroEnergyPerSecond = 0.0013;
 const startingAmount = 0;
 const neuroEnergyProductionStepMs = 1000;
 
+interface UserData {
+  energyAmount: number;
+}
+
 type AppContextType = {
   setEnergyProductionEnabled: (newVal: boolean) => void;
   isEnergyProductionEnabled: () => boolean;
@@ -25,9 +32,16 @@ type AppContextType = {
   unclaimedEnergyAmount: number;
   setUnclaimedEnergyAmount: Dispatch<SetStateAction<number>>;
 
+  initUserData?: User;
+  setInitUserData: Dispatch<SetStateAction<User | undefined>>;
+
+  userData?: User;
+  setUserData: Dispatch<SetStateAction<User | undefined>>;
+
   isDrawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
+  // initDatabase: (userId?: number) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -38,6 +52,8 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [initUserData, setInitUserData] = useState<User | undefined>();
+  const [userData, setUserData] = useState<any | undefined>();
   const _isEnergyProductionEnabled = useRef<boolean>(false);
   const [energyAmount, setEnergyAmount] = useState<number>(startingAmount);
   const [unclaimedEnergyAmount, setUnclaimedEnergyAmount] = useState<number>(0);
@@ -54,7 +70,64 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   };
 
   useEffect(() => {
-    setUnclaimedEnergyAmount((prevCount) => prevCount + neuroEnergyPerSecond);
+    const updateContext = async () => {
+      if (!initUserData) {
+        return;
+      }
+      const userId = initUserData?.id;
+      if (!userId) {
+        return;
+      }
+
+      const uManager = getUserManager();
+
+      let dbUserData = await uManager.getUserData();
+      if (!dbUserData) {
+        const defaultUser = getDefaultUser(userId);
+        await uManager.saveUserData(defaultUser);
+        console.debug("creating new user", defaultUser);
+        dbUserData = defaultUser.toJSON();
+      }
+      console.log("dbUserData", dbUserData);
+      if (dbUserData) {
+        setUserData(dbUserData);
+
+        const { energyAmount } = dbUserData as IUser;
+        if (energyAmount) {
+          setEnergyAmount(energyAmount);
+        }
+      }
+    };
+    updateContext();
+  }, [initUserData]);
+
+  useEffect(() => {
+    console.log("useEffect energyAmount-update");
+    const uManager = getUserManager();
+    const syncTelegramDb = async () => {
+      if (!initUserData) {
+        return;
+      }
+      const userId = initUserData?.id;
+      if (!userId) {
+        return;
+      }
+      const user = new DatabaseUser({
+        id: userId,
+        energyAmount,
+      });
+      const updateAnswer = await uManager.saveUserData(user);
+    };
+    syncTelegramDb();
+  }, [energyAmount]);
+
+  useEffect(() => {
+    // setTimeout(() => {
+    //   console.log("initDataState", initDataState?.user);
+    // }, 2000);
+    // const userDbKey = `user_${userId}`;
+    // console.log("TelegramCloudStorage", TelegramCloudStorage.get(userDbKey))
+    // setUnclaimedEnergyAmount((prevCount) => prevCount + neuroEnergyPerSecond);
 
     const interval = setInterval(() => {
       console.log(
@@ -84,6 +157,11 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         setEnergyProductionEnabled,
         unclaimedEnergyAmount,
         setUnclaimedEnergyAmount,
+        // initDatabase,
+        initUserData,
+        setInitUserData,
+        //
+        setUserData,
       }}
     >
       {children}

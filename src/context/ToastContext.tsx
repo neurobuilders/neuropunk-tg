@@ -1,16 +1,20 @@
 import { Snackbar } from "@telegram-apps/telegram-ui";
+import { uniqueId } from "lodash";
 import React, { createContext, useContext, useState, useCallback } from "react";
 
 interface Toast {
-  id: number;
+  id: string;
   title: string;
-  message: string;
+  message: React.ReactNode;
   duration?: number;
   type: "success" | "error" | "warning" | "info";
 }
 
 interface ToastContextType {
-  showToast: (toast: Omit<Toast, "id"> & { duration?: number }) => void;
+  showToast: (
+    toast: Omit<Toast, "id"> & { duration?: number; id?: string }
+  ) => void;
+  hideToast: (toastId: string) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -30,13 +34,17 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const showToast = useCallback(
     ({
+      id,
       title,
       message,
       type = "success",
       duration = 3000,
-    }: Omit<Toast, "id"> & { duration?: number }) => {
-      const id = Date.now();
-      setToasts((prev) => [...prev, { id, title, message, type, duration }]);
+    }: Omit<Toast, "id"> & { duration?: number; id?: string }) => {
+      const generatedId = uniqueId("generated");
+      setToasts((prev) => [
+        ...prev,
+        { id: id || generatedId, title, message, type, duration },
+      ]);
 
       setTimeout(() => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
@@ -45,8 +53,12 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
     []
   );
 
+  const hideToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  }, []);
+
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
       <ToastsContainer toasts={toasts} />
     </ToastContext.Provider>
@@ -64,7 +76,7 @@ const ToastsContainer: React.FC<{ toasts: Toast[] }> = ({ toasts }) => {
           duration={duration}
           description={message}
         >
-          {title}
+          <span className="text-lg">{title}</span>
         </Snackbar>
       ))}
     </div>

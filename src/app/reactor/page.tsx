@@ -28,9 +28,7 @@ import { ModalHeader } from "@telegram-apps/telegram-ui/dist/components/Overlays
 import { triggerHapticFeedback } from "@/helpers/telegram";
 import { useAppContext } from "@/context/AppContext";
 
-const claimButtonStartValue = 0;
-const initialNeuroEnergyAmount = 2746;
-const maxMarksTranslateY = 120;
+const maxMarksTranslateY = 115;
 
 const updateVariable = (val: number) => {
   const rootEl = document.querySelector(":root");
@@ -144,9 +142,9 @@ export default function ReactorPage() {
             </div>
             <div className="flex flex-col items-center">
               <h3 className="text-2xl font-bold">
-                {formatNumber(energyAmount, 2)} NE
+                {formatNumber(energyAmount)} NE
               </h3>
-              <h3 className="text-md">
+              <h3 className="text-md text-gray-300">
                 Complete tasks and mine <strong>Neuro Energy</strong>
               </h3>
               <Modal
@@ -156,7 +154,7 @@ export default function ReactorPage() {
                 trigger={
                   <button
                     type="button"
-                    className="text-sky-500"
+                    className="text-link"
                     onClick={() => {
                       triggerHapticFeedback("medium");
                     }}

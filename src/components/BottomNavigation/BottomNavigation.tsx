@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { IconUsersGroup } from "@tabler/icons-react";
 
 import "./styles.scss";
+import { triggerHapticFeedback } from "@/helpers/telegram";
 
 interface Tab {
   id: string;
@@ -68,7 +69,7 @@ export const BottomNavigation: FC = () => {
         targetUrl.host !== currentUrl.host;
 
       e.preventDefault();
-      hapticFeedback.impactOccurred("light");
+      triggerHapticFeedback("light")
       if (isExternal) {
         openLink(targetUrl.toString());
       } else {
