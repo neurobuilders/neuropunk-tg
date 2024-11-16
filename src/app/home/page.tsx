@@ -62,25 +62,6 @@ export default async function HomePage() {
     <Page back={false}>
       <List className="!pb-2">
         <Section>
-          <Banner
-            before={
-              <Avatar size={96}>
-                <div style={{ width: "70px", height: "70px" }}>
-                  <LoadingRive />
-                </div>
-              </Avatar>
-            }
-            callout="Welcome Neuropunkers!"
-            description="NeuroSpace is a unique digital ecosystem that unites drum and bass and tech enthusiasts within a dynamic virtual world"
-            header="Introducing Neuro Reactor"
-            type="section"
-          >
-            <Button size="s" stretched>
-              Claim
-            </Button>
-          </Banner>
-        </Section>
-        <Section>
           <>
             <div className="row">
               <div className="px-6 pt-7">

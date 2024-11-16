@@ -201,52 +201,6 @@ export default function ReactorPage() {
             </div>
           </div>
         </Section>
-        <Section className="tasks" header="⚡ Reactor Tasks">
-          <Cell
-            before={<Avatar size={40}>⚖️</Avatar>}
-            after={
-              <Badge className="badge" type="number">
-                +250
-              </Badge>
-            }
-            subtitle="Balance energy flows."
-          >
-            Stabilize the Reactor
-          </Cell>
-          <Cell
-            before={<Avatar size={40}>🔐</Avatar>}
-            after={
-              <Badge className="badge" type="number">
-                +500
-              </Badge>
-            }
-            subtitle="Unlock hidden energy by solving puzzles."
-          >
-            Activate the Core
-          </Cell>
-          <Cell
-            before={<Avatar size={40}>🛡️</Avatar>}
-            after={
-              <Badge className="badge" type="number">
-                +300
-              </Badge>
-            }
-            subtitle="Protect the reactor from external threats."
-          >
-            Shield the Reactor
-          </Cell>
-          <Cell
-            before={<Avatar size={40}>⚫</Avatar>}
-            after={
-              <Badge className="badge" type="number">
-                +1000
-              </Badge>
-            }
-            subtitle="Control dark energy to unlock new abilities."
-          >
-            Harness Dark Energy
-          </Cell>
-        </Section>
 
         <Section className="tasks" header="Tasks">
           <Link href="/tasks">
@@ -258,7 +212,7 @@ export default function ReactorPage() {
               }
               after={
                 <Badge className="badge" type="number">
-                  +100
+                  +16
                 </Badge>
               }
             >
@@ -266,20 +220,19 @@ export default function ReactorPage() {
             </Cell>
           </Link>
 
-          <Link href="">
+          <Link href="https://neuropunk.app/">
             <Cell
               before={
                 <Avatar
                   className="task__avatar"
                   size={40}
-                  style={{ backgroundColor: "#007AFF" }}
                 >
                   <Image src={"/logo.png"} size={24} alt="Neuropunk App" />
                 </Avatar>
               }
               after={
                 <Badge className="badge" type="number">
-                  +100
+                  +16
                 </Badge>
               }
               subtitle="Get Official App"
@@ -300,6 +253,7 @@ export default function ReactorPage() {
                   <Check className="mx-1.5" />
                 </IconButton>
               }
+              subtitle="Get Premium In App"
             >
               Neuropunk Premium
             </Cell>
@@ -318,9 +272,10 @@ export default function ReactorPage() {
               }
               after={
                 <Badge className="badge" type="number">
-                  +100
+                  +16
                 </Badge>
               }
+              subtitle="Join the official channel"
             >
               Neuropunk Channel
             </Cell>
@@ -338,7 +293,7 @@ export default function ReactorPage() {
               subtitle="Check our app in appstore and google play"
               after={
                 <Badge className="badge" type="number">
-                  +100
+                  +16
                 </Badge>
               }
             >
@@ -356,7 +311,7 @@ export default function ReactorPage() {
               subtitle="Learn and co-create with us"
               after={
                 <Badge className="badge" type="number">
-                  +100
+                  +32
                 </Badge>
               }
             >
@@ -377,7 +332,7 @@ export default function ReactorPage() {
               }
               after={
                 <Badge className="badge" type="number">
-                  +100
+                  +32
                 </Badge>
               }
               subtitle="Subscribe"
@@ -429,6 +384,53 @@ export default function ReactorPage() {
               Neuropunk Marketplace
             </Cell>
           </Link>
+        </Section>
+
+        <Section className="tasks" header="⚡ Reactor Boosts">
+          <Cell
+              before={<Avatar size={40}>⚖️</Avatar>}
+              after={
+                <Badge className="badge" type="number">
+                  -32
+                </Badge>
+              }
+              subtitle="Balance energy flows."
+          >
+            Stabilize the Reactor
+          </Cell>
+          <Cell
+              before={<Avatar size={40}>🔐</Avatar>}
+              after={
+                <Badge className="badge" type="number">
+                  -32
+                </Badge>
+              }
+              subtitle="Unlock hidden energy by solving puzzles."
+          >
+            Activate the Core
+          </Cell>
+          <Cell
+              before={<Avatar size={40}>🛡️</Avatar>}
+              after={
+                <Badge className="badge" type="number">
+                  -32
+                </Badge>
+              }
+              subtitle="Protect the reactor from external threats."
+          >
+            Shield the Reactor
+          </Cell>
+          <Cell
+              before={<Avatar size={40}>⚫</Avatar>}
+              after={
+                <Badge className="badge" type="number">
+                  -32
+                </Badge>
+              }
+              subtitle="Control dark energy to unlock new abilities."
+          >
+            Harness Dark Energy
+          </Cell>
         </Section>
       </List>
     </Page>
